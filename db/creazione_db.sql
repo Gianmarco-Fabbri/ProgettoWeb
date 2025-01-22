@@ -34,6 +34,7 @@ create table CATEGORIA (
 create table CLIENTE (
      nome varchar(30) not null,
      cognome varchar(30) not null,
+     username varchar(30) not null,
      email char(50) not null,
      password varchar(64) not null,
      telefono char(15) not null,
@@ -47,10 +48,12 @@ create table COMPOSIZIONE_CARRELLO (
      constraint ID_COMPOSIZIONE_CARRELLO_ID primary key (codiceCarrello, codiceProdotto));
 
 create table COMPOSIZIONE_KIT (
-     codiceProdotto char(10) not null,
+     codiceProdotto1 char(10) not null,
+     codiceProdotto2 char(10) not null,
      codiceKit char(10) not null,
-     quantita int not null,
-     constraint ID_COMPOSIZIONE_KIT_ID primary key (codiceProdotto, codiceKit));
+     quantitaProdotto1 int not null,
+     quantitaProdotto2 int not null,
+     constraint ID_COMPOSIZIONE_KIT_ID primary key (codiceProdotto1, codiceProdotto2, codiceKit));
 
 create table COMPOSIZIONE_ORDINE (
      codiceOrdine char(10) not null,
@@ -137,8 +140,12 @@ alter table COMPOSIZIONE_CARRELLO add constraint REF_COMPO_PRODO_1_FK
      foreign key (codiceProdotto)
      references PRODOTTO (codiceProdotto);
 
+alter table COMPOSIZIONE_KIT add constraint REF_COMPO_PRODO_1
+     foreign key (codiceProdotto1)
+     references PRODOTTO (codiceProdotto);
+
 alter table COMPOSIZIONE_KIT add constraint REF_COMPO_PRODO_2
-     foreign key (codiceProdotto)
+     foreign key (codiceProdotto2)
      references PRODOTTO (codiceProdotto);
 
 alter table COMPOSIZIONE_KIT add constraint REF_COMPO_KIT_FK
