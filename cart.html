@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benessere Market - Carrello</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#">Salute</a></li>
+                <li><a href="#">Bellezza</a></li>
+                <li><a href="#">Profumi</a></li>
+                <li><a href="#">Casa & Green</a></li>
+            </ul>
+            <div>
+                <button>Tracking</button>
+                <button>Notifiche</button>
+                <button>Carrello</button>
+                <button>Profilo</button>
+            </div>
+        </nav>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="salute.html">Salute |</a></li>
+            <li><a href="bellezza.html">Bellezza |</a></li>
+            <li><a href="profumi.html">Profumi |</a></li>
+            <li><a href="casa_green.html">Casa & Green</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section>
+            <p>Home / Carrello</p>
+        </section>
+        <section>
+            <h1>Il tuo carrello</h1>
+            <div>
+                <!-- Ripetere per ogni prodotto nel carrello -->
+                <article>
+                    <img src="placeholder.jpg" alt="Immagine prodotto" style="width: 150px; height: 150px;"/>
+                    <h2>Prodotto 1</h2>
+                    <p>A paragraph of <span style="color: red;">Name</span> and <span style="color: red;">Description</span></p>
+                    <p>Quantità</p>
+                    <input type="number" value="1" min="1"/>
+                    <p>Prezzo totale: $21,42</p>
+                </article>
+                <article>
+                    <img src="placeholder.jpg" alt="Immagine prodotto" style="width: 150px; height: 150px;"/>
+                    <h2>Prodotto 1</h2>
+                    <p>A paragraph of <span style="color: red;">Name</span> and <span style="color: red;">Description</span></p>
+                    <p>Quantità</p>
+                    <input type="number" value="1" min="1"/>
+                    <p>Prezzo totale: $21,42</p>
+                </article>
+                <!-- Aggiungere altri prodotti -->
+            </div>
+        </section>
+        <aside>
+            <h2>Riepilogo ordine</h2>
+            <form>
+                <label for="points">Punti da applicare</label>
+                <input type="text" id="points" name="points" placeholder="Inserisci punti"/>
+                <button type="submit">Applica</button>
+            </form>
+            <p>Subtotal: $42,58</p>
+            <p>Sconto punti: $1,52</p>
+            <p><strong>Totale ordine: $41,06</strong></p>
+            <button>Continua acquisti</button>
+            <button>Svuota carrello</button>
+            <button>Procedi al pagamento</button>
+        </aside>
+        <section>
+            <h2>Dicono di noi</h2>
+            <blockquote>
+                <p>Monia: "Il pacco è arrivato in 2 giorni e in ottime condizioni!!"</p>
+            </blockquote>
+            <blockquote>
+                <p>Andrea: "I prodotti sono di una qualità unica, stra consigliati!"</p>
+            </blockquote>
+            <blockquote>
+                <p>Marco: "Dopo aver utilizzato il prodotto di Benessere Market la mia pelle è decisamente migliorata!!"</p>
+            </blockquote>
+            <blockquote>
+                <p>Mattia: "Il kit consigliato per le pelli grasse mi ha aiutato decisamente nella mia skin care routine, lo consiglio!"</p>
+            </blockquote>
+            <form>
+                <label for="review">La tua opinione conta! Lascia una recensione:</label><br/>
+                <textarea id="review" name="review" rows="4" cols="50" placeholder="Condividi la tua esperienza con noi"></textarea><br/>
+                <button type="submit">Invia recensione</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <div>
+            <h3>BENESSERE MARKET</h3>
+            <ul>
+                <li><a href="#">Chi siamo</a></li>
+                <li><a href="#">Contatti</a></li>
+                <li><a href="#">Brand</a></li>
+            </ul>
+        </div>
+        <div>
+            <h3>AREA CLIENTE</h3>
+            <ul>
+                <li><a href="#">Accedi</a></li>
+                <li><a href="#">Il mio carrello</a></li>
+                <li><a href="#">I miei ordini</a></li>
+            </ul>
+        </div>
+        <div>
+            <h3>INFORMAZIONI</h3>
+            <ul>
+                <li><a href="#">Come acquistare</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Cookie Policy</a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>
