@@ -1,0 +1,102 @@
+/**STILE COMUNE**/
+/* Colori principali */
+:root {
+    --background-color: #F4FBF8; /* Colore di sfondo */
+    --text-color: #0A5738; /* Colore del testo */
+    --link-hover-color: #064526; /* Colore link hover */
+}
+
+/* Stile comune per header, nav e footer */
+header, nav, footer {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    padding: 10px 20px;
+    border-bottom: 2px solid var(--text-color);
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header > img {
+    max-height: 50px;
+}
+
+header > nav > ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 15px;
+}
+
+header > nav > ul > li > a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: bold;
+}
+
+header > nav > ul > li > a:hover {
+    color: var(--link-hover-color);
+}
+
+/* Nav (sotto l'header) */
+nav > ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    border-bottom: 2px solid var(--text-color);
+}
+
+nav > ul > li > a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 1.1rem;
+}
+
+nav > ul > li > a:hover {
+    color: var(--link-hover-color);
+}
+
+/* Footer */
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+    border-top: 2px solid var(--text-color);
+}
+
+footer > section {
+    width: 30%;
+}
+
+footer > section:nth-child(1) > h5,
+footer > section:nth-child(2) > h5,
+footer > section:nth-child(3) > h5 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+footer > section > ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+footer > section > ul > li > a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 0.9rem;
+}
+
+footer > section > ul > li > a:hover {
+    color: var(--link-hover-color);
+}
