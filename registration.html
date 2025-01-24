@@ -28,43 +28,64 @@
         </ul>
     </nav>
 
-    <main>
-        <nav>
-            <a href="index.html">Home</a> / 
-            <a href="registration.html">Registrazione</a>
-        </nav>
+    <nav>
+        <a href="index.html">Home</a> / 
+        <a href="registration.html">Registrazione</a>
+    </nav>
 
-        <section>
-            <h1>Crea un account</h1>
-            <form>
-                <label for="username">Username</label><br>
-                <input type="email" id="username" name="username" placeholder="esempio@email.com" value="marco.bianchi@gmail.com" required/><br><br>
-
-                <label for="password">Password</label><br>
-                <input type="password" id="password" name="password" required/><br><br>
-
-                <label for="confirm-password">Conferma password</label><br>
-                <input type="password" id="confirm-password" name="confirm-password" required/><br><br>
-
-                <button type="submit">Registrati</button>
-            </form>
-        </section>
-        <aside>
-            <h2>NEWSLETTER</h2>
-            <p>
-                <input type="checkbox" id="newsletter" name="newsletter" checked>
-                <label for="newsletter">Iscrizione alla newsletter per ricevere novità sui prodotti</label>
-            </p>
-            <h3>Vantaggi di essere registrati:</h3>
-            <ul>
-                <li>Tracking</li>
-                <li>Recensioni</li>
-                <li>Punti accumulati</li>
-            </ul>
-        </aside>
-        
+    <main class="px-5 py-4">
+        <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+            <section style="flex: 1; min-width: 300px;">
+                <form action="#" method="post" style="background-color: var(--background-color); padding: 20px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);">
+                    <h1 class="text-center my-4" style="font-size: 1.8rem; color: var(--text-color);">Crea un account</h1>
+                    <ul style="list-style: none; padding: 0; font-size: 1.1rem;">
+                        <li class="mb-3">
+                            <label for="username" style="font-weight: bold; color: var(--text-color);">Email</label><br>
+                            <input type="email" id="username" name="username" class="form-control" placeholder="esempio@email.com" required style="border: 2px solid var(--text-color); padding: 10px;">
+                        </li>
+                        <li class="mb-3">
+                            <label for="password" style="font-weight: bold; color: var(--text-color);">Password</label><br>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <input type="password" id="password" name="password" placeholder="Inserisci la tua password" style="border: 2px solid var(--text-color); padding: 10px; flex: 1;" required>
+                                <button type="button" onclick="toggleVisibility('password')">👁️</button>
+                            </div>
+                        </li>
+                        <li class="mb-3">
+                            <label for="confirm-password" style="font-weight: bold; color: var(--text-color);">Conferma Password</label><br>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <input type="password" id="confirm-password" name="confirm-password" placeholder="Conferma la tua password" style="border: 2px solid var(--text-color); padding: 10px; flex: 1;" required>
+                                <button type="button" onclick="toggleVisibility('confirm-password')">👁️</button>
+                            </div>
+                        </li>
+                        <li>
+                            <input name="submit" type="submit" value="Registrati" class="btn w-100">
+                        </li>
+                    </ul>
+                </form>
+            </section>
+    
+            <aside>
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+                    <img src="newsletter-icon.png" alt="Icona Newsletter" style="width: 80px;">
+                    <h2>Iscriviti alla Newsletter</h2>
+                </div>
+                <p>
+                    Rimani aggiornato sulle ultime offerte e prodotti per la tua routine di benessere.
+                </p>
+                <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin: 15px 0;">
+                    <input type="checkbox" id="newsletter" name="newsletter">
+                    <label for="newsletter">Iscriviti per ricevere novità sui prodotti</label>
+                </div>
+                <h3>Vantaggi di essere registrati:</h3>
+                <ul>
+                    <li>Tracking dei tuoi ordini</li>
+                    <li>Scrivere recensioni</li>
+                    <li>Accumulo di punti fedeltà</li>
+                </ul>
+            </aside>
+        </div>
     </main>
-
+    
     <footer>
         <section>
             <h5>Benessere Market</h5>
@@ -92,4 +113,7 @@
         </section>
     </footer>
 </body>
+
+<script src="js/displayPassword.js"></script>
+
 </html>
