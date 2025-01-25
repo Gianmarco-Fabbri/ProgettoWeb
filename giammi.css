@@ -1,0 +1,169 @@
+/* Layout del main */
+main {
+    padding: 0 20px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+/* Stile del form */
+form {
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: var(--background-color);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    max-width: 600px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+form h1 {
+    font-size: 1.8rem;
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+form ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+form ul li {
+    margin-bottom: 20px;
+}
+
+form input[type="email"],
+form input[type="password"],
+form input[type="text"],
+form input[name="submit"] {
+    width: 100%;
+    max-width: 500px;
+    padding: 10px;
+    border: 2px solid var(--text-color);
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+form input[name="submit"] {
+    background-color: var(--text-color);
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+form input[name="submit"]:hover {
+    background-color: var(--link-hover-color);
+    color: white;
+    transform: scale(1.05);
+    font-weight: bold;
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+form input[type="password"] + button {
+    padding: 10px;
+    border: 2px solid var(--text-color);
+    background-color: white;
+    color: var(--text-color);
+    border-radius: 5px;
+    height: 100%;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+form input[type="password"] + button:hover {
+    background-color: var(--text-color);
+    color: white;
+}
+
+aside {
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: var(--background-color);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    flex: 1;
+    max-width: 600px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+aside h3 {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+aside p {
+    color: var(--text-color);
+    font-size: 1rem;
+    margin: 0;
+    line-height: 1.5;
+}
+
+aside input[type="checkbox"] {
+    accent-color: var(--text-color);
+}
+
+aside ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+aside ul li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+aside ul li::before {
+    content: "✔";
+    color: var(--text-color);
+    font-weight: bold;
+}
+
+aside img {
+    width: 80px;
+    margin-bottom: 10px;
+    border-radius: 50%;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Schermi grandi */
+@media screen and (min-width: 1024px) {
+    main {
+        justify-content: center;
+        gap: 40px;
+    }
+
+    form, aside {
+        flex-basis: 48%;
+        max-width: 100%;
+    }
+}
+
+/* Schermi piccoli */
+@media screen and (max-width: 768px) {
+    main {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    form, aside {
+        max-width: 100%;
+    }
+}
