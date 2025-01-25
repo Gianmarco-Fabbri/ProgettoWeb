@@ -9,20 +9,49 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+body > header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #F4FBF8;
+}
+
 /* Logo */
 body > header > img {
     width: 80px;
     height: 80px;
 }
 
+nav ul li a {
+    display: flex; /* Imposta il contenitore come flexbox */
+    align-items: center; /* Centra verticalmente il contenuto */
+    text-decoration: none;
+    color: #0a5738;
+}
+
+
 /* Img del nav */
 body header nav ul li a img {
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+}
+
+body header nav ul li {
+    margin-top: 20px;
+    margin-right: 20px;
+}
+
+body header nav ul li a:hover {
+    cursor: pointer;
+}
+
+body header nav ul li:hover {
+    transform: scale(105%);
+    transition: 500ms;
 }
 
 body > header, body > footer, body > nav {
-    background-color: #f4fbf8;
     color: #0a5738;
 }
 
@@ -31,15 +60,7 @@ ul {
     list-style: none;
 }
 
-ul > li > a {
-    text-decoration: none;
-    color: #0a5738;
-}
-
 ul > li {
     display: inline-block;
-}
-
-ul > li > a:hover {
 }
 
