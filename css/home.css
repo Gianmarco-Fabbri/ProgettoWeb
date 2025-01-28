@@ -1,12 +1,52 @@
-/* Centrare gli h1 */
+/* Font generale */
+body {
+    font-family: "Poppins", sans-serif;
+}
+
+h1, h2, h3 {
+    font-weight: 700;
+}
+
+p, ul, li, a {
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+/* Stile per gli h1 delle sezioni */
 body > main > section > h1 {
+    color: #0a5738;
     text-align: center;
     font-size: 1.8rem;
     font-weight: bold;
     margin-bottom: 20px;
+    position: relative;
 }
 
-/* Impostare le sezioni con layout flessibile */
+/* Emoji per "Kit consigliati" */
+body > main > section:nth-of-type(1) > h1::before {
+    content: "\1F381"; /* Emoji 🎁 */
+    margin-right: 10px;
+}
+
+/* Emoji per "Categorie in evidenza" */
+body > main > section:nth-of-type(2) > h1::before {
+    content: "\1F4CC"; /* Emoji 📌 */
+    margin-right: 10px;
+}
+
+/* Emoji per "Novità" */
+body > main > section:nth-of-type(3) > h1::before {
+    content: "\2728"; /* Emoji ✨ */
+    margin-right: 10px;
+}
+
+/* Emoji per "Offerte esclusive" */
+body > main > section:nth-of-type(4) > h1::before {
+    content: "\1F525"; /* Emoji 🔥 */
+    margin-right: 10px;
+}
+
+/* Layout delle sezioni */
 body > main > section > ul {
     display: flex;
     justify-content: space-evenly;
@@ -17,11 +57,16 @@ body > main > section > ul {
     max-width: 1200px;
 }
 
-/* Spaziatura e dimensionamento delle immagini */
+/* Stile delle immagini */
+body > main > section > ul li a {
+    display: block;
+    text-decoration: none;
+}
+
 body > main > section > ul img {
-    width: 40%; /* Aumento della dimensione base */
-    max-width: 260px; /* Maggiore larghezza massima */
-    height: auto;
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
     display: block;
     margin: 0 auto;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -29,22 +74,62 @@ body > main > section > ul img {
 
 /* Effetto hover sulle immagini */
 body > main > section > ul img:hover {
-    transform: scale(1.08); /* Ingrandimento più delicato */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Ombra morbida */
+    transform: scale(1.08);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Spaziatura tra gli elementi della lista */
+/* Stile degli elementi della lista */
 body > main > section > ul li {
     text-align: center;
-    flex: 1 1 24%;
-    min-width: 260px;
+    flex: 1 1 22%;
+    min-width: 220px;
     margin-bottom: 20px;
 }
 
-/* Stile per i testi sotto le immagini */
+/* Stile dei testi sotto le immagini */
 body > main > section > ul li p {
     margin-top: 10px;
     font-size: 1rem;
     font-weight: 500;
     text-align: center;
+}
+
+/* Media query per schermi piccoli */
+@media (max-width: 768px) {
+    body > main > section > ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    body > main > section > ul li {
+        width: 100%;
+        min-width: auto;
+    }
+
+    body > main > section > ul img {
+        width: 180px;
+        height: 180px;
+    }
+}
+
+/* Stile per le offerte esclusive */
+body > main > section:nth-of-type(4) > ul li {
+    position: relative;
+}
+
+/* Stile per l'etichetta "Offerta imperdibile!" */
+body > main > section:nth-of-type(4) > ul li::before {
+    content: "Offerta imperdibile!";
+    position: absolute;
+    top: 5px; /* Distanzia dal bordo superiore */
+    left: 50%;
+    transform: translateX(-50%); /* Centra l'etichetta rispetto all'immagine */
+    background-color: rgba(255, 69, 58, 0.9); /* Rosso acceso con trasparenza */
+    color: white;
+    font-size: 0.9rem;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    z-index: 2;
+    white-space: nowrap; /* Impedisce il ritorno a capo */
 }
