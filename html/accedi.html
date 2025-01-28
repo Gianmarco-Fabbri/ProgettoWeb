@@ -31,29 +31,44 @@
                 <li><a href="casa_green.html">Casa & Green</a></li>
             </ul>
         </nav>
-        
-        <main>
-            <form action="#" method="post">
-                <h2>Accedi</h2>
-                <ul>
-                    <li>
-                      <label for="email">Email:</label>
-                      <input id="email" name="email" type="text" required />
-                    </li>
-                    <li>
-                      <label for="password">Password:</label>
-                      <input id="password" name="password" type="password" required />
-                    </li>
-                    <li>
-                      <input name="submit" type="submit" value="Invia" />
-                    </li>
-                    <li>
-                        <p>Non hai un account? <a href="registration.html">Registrati</a></p>
-                    </li>
-                  </ul>
-            </form>              
-        </main>
 
+        <nav>
+            <a href="index.html">Home</a> /
+            <a href="accedi.html">Accedi</a>
+        </nav>
+        
+        <main class="d-flex justify-content-center align-items-center" style="min-height: 100vh; background-color: white; padding: 5%;">
+            <section style="width: 100%; max-width: 450px;">
+                <form action="#" method="post" style="background-color: #F4FBF8; padding: 30px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); border-radius: 10px; font-family: Arial, sans-serif;">
+                    <h1 class="text-center mb-4" style="font-size: 1.8rem; color: #0a5738;">Accedi</h1>
+                    <ul style="list-style: none; padding: 0; font-size: 1.1rem;">
+                        <li class="mb-4">
+                            <label for="email" style="font-weight: bold; color: #0a5738;">Email</label><br>
+                            <input type="email" id="email" name="email" class="form-control" placeholder="esempio@email.com" required 
+                             style="border: 2px solid #0a5738; padding: 12px; background-color: white; width: 100%; border-radius: 5px; margin-bottom: 20px;">
+                        </li>
+                        <li class="mb-4">
+                            <label for="password" style="font-weight: bold; color: #0a5738; margin-top: 20px;">Password</label><br>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <input type="password" id="password" name="password" placeholder="Inserisci la tua password" 
+                                        style="border: 2px solid #0a5738; padding: 12px; flex: 1; background-color: white; border-radius: 5px; width: 100%;" required>
+                                <img src="../img/eye_close.png" id="toggle-password" alt="Mostra password" 
+                                    style="cursor: pointer; width: 24px;" onclick="toggleVisibility('password', 'toggle-password')"/>
+                            </div>
+                        </li>
+                        <li>
+                            <input name="submit" type="submit" value="Accedi" class="btn w-100" 
+                                    style="border: 2px solid #116341; color: white; background-color: #116341; font-weight: bold; padding: 12px; cursor: pointer; font-size: 1.1rem; border-radius: 5px; margin-top: 20px; width: 100%;">
+                        </li>
+                        <li class="text-center mt-4">
+                            <p style="font-size: medium; color: #0a5738;">Non hai un account? <a href="registration.html" style="color: #0a5738; font-weight: bold;">Registrati ora</a></p>
+                        </li>
+                    </ul>
+                </form>
+            </section>
+        </main>
+  
+        
         <footer>
             <section>
                 <h1>Benessere Market</h1>
@@ -82,3 +97,5 @@
         </footer>
     </body>
 </html>
+
+<script src="../js/displayPassword.js"></script>
