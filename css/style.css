@@ -126,6 +126,7 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    border-top: 1px solid #0a5738;
 }
 
 footer section {
