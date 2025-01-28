@@ -6,6 +6,7 @@ body, header {
 
 /* Font generale */
 body {
+    background-color: #F4FBF8;
     font-family: 'Roboto', sans-serif;
 }
 
@@ -208,4 +209,12 @@ footer a:hover::before {
     footer ul {
         align-items: flex-start;
     }
+}
+
+
+/*PROVE DI CSS SUI MAIN*/
+main > section > h1{
+    color: #0a5738;
+    text-align: center;
+    padding-left: 20px;
 }
