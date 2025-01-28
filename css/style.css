@@ -77,8 +77,9 @@ body > header nav ul li:hover::after {
 
 /* Navigazione categorie */
 body > nav:first-of-type {
-    background-color: #e8f5e9;
+    background-color: #F4FBF8;
     padding: 15px 0;
+    border-top: 1px solid #c8e6c9;
     border-bottom: 1px solid #c8e6c9;
 }
 
