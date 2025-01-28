@@ -213,7 +213,7 @@ footer a:hover::before {
 
 
 /*PROVE DI CSS SUI MAIN*/
-main > section > h1{
+main > section > h1 , aside > h1{
     color: #0a5738;
     text-align: center;
     padding-left: 20px;
