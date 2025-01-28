@@ -51,7 +51,6 @@ body > header nav ul li a img {
     transition: transform 0.3s ease;
 }
 
-/* Effetti hover header */
 body > header nav ul li:hover a {
     color: #064F32;
 }
@@ -120,26 +119,24 @@ body > nav:last-of-type a:hover {
     color: #064F32;
 }
 
-/* Footer */
 footer {
-    background-color: #0a5738;
+    background-color: #F4FBF8;
     color: white;
-    padding: 40px 20px;
-    margin-top: 50px;
+    padding: 10px 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
 footer section {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    max-width: 1200px;
-    margin: 0 auto;
-    gap: 30px;
+    flex: 1;
 }
 
 footer h1 {
     font-size: 1.2rem;
     margin-bottom: 20px;
-    color: #a5d6a7;
+    text-align: center;
+    color: #0a5738; 
 }
 
 footer ul {
@@ -149,26 +146,18 @@ footer ul {
 
 footer ul li {
     margin-bottom: 10px;
+    text-align: center;
 }
 
 footer a {
-    color: #e8f5e9;
+    color: #0a5738;
     text-decoration: none;
     transition: color 0.3s ease;
     position: relative;
-    padding-left: 15px;
 }
 
 footer a:hover {
-    color: #a5d6a7;
-}
-
-footer a::before {
-    content: '›';
-    position: absolute;
-    left: 0;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    font-weight: bold;    
 }
 
 footer a:hover::before {
