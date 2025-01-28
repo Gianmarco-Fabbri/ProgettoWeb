@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="it">
     <head>
-        <title>Login | Benessere Market</title>
+        <title>Recensioni | Benessere Market</title>
         <meta charset="UTF-8"/>
         <link rel="stylesheet" href="../css/style.css">
     </head>
@@ -32,7 +32,22 @@
             </ul>
         </nav>
         
-        <main>              
+        <main> 
+            <form action="recensioni.php" method="POST">
+                <h1>Valuta il tuo acquisto!</h1>
+                <fieldset>
+                    <!-- ogni span rappresenta una stella -->
+                    <span data-value="1"></span>
+                    <span data-value="2"></span>
+                    <span data-value="3"></span>
+                    <span data-value="4"></span>
+                    <span data-value="5"></span>
+                </fieldset>
+                <label for="review">Scrivi la tua recensione:</label>
+                <textarea id="review" name="review" placeholder="Dicci di più!" required></textarea>
+                
+                <button type="submit">Invia Recensione</button>    
+            </form>                       
         </main>
 
         <footer>
