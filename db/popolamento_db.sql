@@ -19,7 +19,7 @@ INSERT INTO CATEGORIA (nomeCategoria, scontoCategoria, inEvidenza) VALUES
 -- Popolamento tabella PRODOTTO
 INSERT INTO PRODOTTO (codiceProdotto, nome, prezzo, dataAggiunta, descrizione, numeroRecensioni, dimensione, scontoProdotto, categoria) VALUES
 ('P0', 'Tappetino Yoga', 20.00, '2025-01-01', 'Tappetino antiscivolo', 15, 2, 10, 'Fitness'),
-('P1', 'Olio Essenziale', 15.50, '2025-01-10', 'Aroma rilassante alla lavanda', 10, 1, 250, 'Relax'),
+('P1', 'Olio Essenziale', 15.50, '2025-01-10', 'Aroma rilassante alla lavanda', 10, 1, 25, 'Relax'),
 ('P2', 'Integratori Vitaminici', 30.00, '2025-01-15', 'Per rafforzare il sistema immunitario', 5, 100, NULL, 'Salute');
 
 -- Popolamento tabella BENEFICIO

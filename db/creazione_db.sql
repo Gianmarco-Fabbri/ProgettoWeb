@@ -1,296 +1,190 @@
 -- *********************************************
 -- * SQL MySQL generation                      
--- *--------------------------------------------
--- * DB-MAIN version: 11.0.2              
+-- * DB-MAIN version: 11.0.2               
 -- * Generator date: Sep 14 2021              
 -- * Generation date: Tue Jan 21 10:24:46 2025 
--- ********************************************* 
+-- *********************************************
 
-
--- Database Section
--- ________________ 
-drop database if exists benessereDB; 
-create database benessereDB;
-use benessereDB;
+-- Drop and recreate the database
+DROP DATABASE IF EXISTS benessereDB;
+CREATE DATABASE benessereDB;
+USE benessereDB;
 
 -- Tables Section
--- _____________ 
+-- Create all tables without foreign keys first
+CREATE TABLE BENEFICIO (
+    codiceProdotto CHAR(10) NOT NULL,
+    benefici CHAR(10) NOT NULL,
+    CONSTRAINT ID_benefici_ID PRIMARY KEY (codiceProdotto, benefici)
+);
 
-create table BENEFICIO (
-     codiceProdotto char(10) not null,
-     benefici char(10) not null,
-     constraint ID_benefici_ID primary key (codiceProdotto, benefici));
+CREATE TABLE CARRELLO (
+    codiceCarrello CHAR(10) NOT NULL,
+    CONSTRAINT ID_CARRELLO_ID PRIMARY KEY (codiceCarrello)
+);
 
-create table CARRELLO (
-     codiceCarrello char(10) not null,
-     constraint ID_CARRELLO_ID primary key (codiceCarrello));
+CREATE TABLE CATEGORIA (
+    nomeCategoria VARCHAR(50) NOT NULL,
+    scontoCategoria DECIMAL(4,2),
+    inEvidenza BOOLEAN NOT NULL DEFAULT FALSE,
+    CONSTRAINT ID_CATEGORIA_ID PRIMARY KEY (nomeCategoria)
+);
 
-create table CATEGORIA (
-     nomeCategoria varchar(50) not null,
-     scontoCategoria decimal(4,2),
-     inEvidenza boolean not null default false,
-     constraint ID_CATEGORIA_ID primary key (nomeCategoria));
+CREATE TABLE CLIENTE (
+    nome VARCHAR(30) NOT NULL,
+    cognome VARCHAR(30) NOT NULL,
+    username VARCHAR(30) NOT NULL,
+    email CHAR(50) NOT NULL,
+    password VARCHAR(64) NOT NULL,
+    telefono CHAR(15) NOT NULL,
+    codiceCarrello CHAR(10) NOT NULL,
+    CONSTRAINT ID_CLIENTE_ID PRIMARY KEY (email),
+    CONSTRAINT UNQ_codiceCarrello UNIQUE (codiceCarrello)
+);
 
-create table CLIENTE (
-     nome varchar(30) not null,
-     cognome varchar(30) not null,
-     username varchar(30) not null,
-     email char(50) not null,
-     password varchar(64) not null,
-     telefono char(15) not null,
-     codiceCarrello char(10) not null,
-     constraint ID_CLIENTE_ID primary key (email));
+CREATE TABLE COMPOSIZIONE_CARRELLO (
+    codiceCarrello CHAR(10) NOT NULL,
+    codiceProdotto CHAR(10) NOT NULL,
+    quantita INT NOT NULL,
+    CONSTRAINT ID_COMPOSIZIONE_CARRELLO_ID PRIMARY KEY (codiceCarrello, codiceProdotto)
+);
 
-create table COMPOSIZIONE_CARRELLO (
-     codiceCarrello char(10) not null,
-     codiceProdotto char(10) not null,
-     quantita int not null,
-     constraint ID_COMPOSIZIONE_CARRELLO_ID primary key (codiceCarrello, codiceProdotto));
+CREATE TABLE COMPOSIZIONE_KIT (
+    codiceProdotto1 CHAR(10) NOT NULL,
+    codiceProdotto2 CHAR(10) NOT NULL,
+    codiceKit CHAR(10) NOT NULL,
+    quantitaProdotto1 INT NOT NULL,
+    quantitaProdotto2 INT NOT NULL,
+    CONSTRAINT ID_COMPOSIZIONE_KIT_ID PRIMARY KEY (codiceProdotto1, codiceProdotto2, codiceKit)
+);
 
-create table COMPOSIZIONE_KIT (
-     codiceProdotto1 char(10) not null,
-     codiceProdotto2 char(10) not null,
-     codiceKit char(10) not null,
-     quantitaProdotto1 int not null,
-     quantitaProdotto2 int not null,
-     constraint ID_COMPOSIZIONE_KIT_ID primary key (codiceProdotto1, codiceProdotto2, codiceKit));
+CREATE TABLE COMPOSIZIONE_ORDINE (
+    codiceOrdine CHAR(10) NOT NULL,
+    codiceProdotto CHAR(10) NOT NULL,
+    quantita INT NOT NULL,
+    CONSTRAINT ID_COMPOSIZIONE_ORDINE_ID PRIMARY KEY (codiceOrdine, codiceProdotto)
+);
 
-create table COMPOSIZIONE_ORDINE (
-     codiceOrdine char(10) not null,
-     codiceProdotto char(10) not null,
-     quantita int not null,
-     constraint ID_COMPOSIZIONE_ORDINE_ID primary key (codiceOrdine, codiceProdotto));
+CREATE TABLE KIT (
+    codiceKit CHAR(10) NOT NULL,
+    prezzo DECIMAL(8,2) NOT NULL,
+    CONSTRAINT ID_KIT_ID PRIMARY KEY (codiceKit)
+);
 
-create table KIT (
-     codiceKit char(10) not null,
-     prezzo float(8,2) not null,
-     constraint ID_KIT_ID primary key (codiceKit));
+CREATE TABLE NOTIFICA (
+    codiceNotifica CHAR(10) NOT NULL,
+    testoNotifica VARCHAR(500) NOT NULL,
+    data DATE NOT NULL,
+    letta BOOLEAN NOT NULL DEFAULT FALSE,
+    cliente CHAR(50) NOT NULL,
+    emailVenditore CHAR(50) NOT NULL,
+    CONSTRAINT ID_NOTIFICA_ID PRIMARY KEY (codiceNotifica)
+);
 
-create table NOTIFICA (
-     codiceNotifica char(10) not null,
-     testoNotifica varchar(500) not null,
-     data date not null,
-     letta boolean not null default false,
-     cliente char(50) not null,
-     emailVenditore char(50) not null,
-     constraint ID_NOTIFICA_ID primary key (codiceNotifica));
+CREATE TABLE OFFERTA (
+    codiceOfferta CHAR(10) NOT NULL,
+    sconto DECIMAL(4,2) NOT NULL,
+    codiceProdotto CHAR(10) NOT NULL,
+    CONSTRAINT ID_OFFERTA_ID PRIMARY KEY (codiceOfferta)
+);
 
-create table OFFERTA (
-     codiceOfferta char(10) not null,
-     sconto float(4,2) not null,
-     codiceProdotto char(10) not null,
-     constraint ID_OFFERTA_ID primary key (codiceOfferta));
+CREATE TABLE ORDINE (
+    codiceOrdine CHAR(10) NOT NULL,
+    dataOrdine DATE NOT NULL,
+    dataSpedizione DATE NOT NULL,
+    dataArrivo DATE NOT NULL,
+    tipoPagamento VARCHAR(30) NOT NULL,
+    emailCliente CHAR(50) NOT NULL,
+    CONSTRAINT ID_ORDINE_ID PRIMARY KEY (codiceOrdine)
+);
 
-create table ORDINE (
-     codiceOrdine char(10) not null,
-     dataOrdine date not null,
-     dataSpedizione date not null,
-     dataArrivo date not null,
-     tipoPagamento varchar(30) not null,
-     emailCliente char(50) not null,
-     constraint ID_ORDINE_ID primary key (codiceOrdine));
+CREATE TABLE PRODOTTO (
+    codiceProdotto CHAR(10) NOT NULL,
+    nome VARCHAR(50) NOT NULL,
+    prezzo DECIMAL(8,2) NOT NULL,
+    dataAggiunta DATE NOT NULL,
+    descrizione VARCHAR(500) NOT NULL,
+    numeroRecensioni INT NOT NULL,
+    dimensione INT NOT NULL,
+    scontoProdotto DECIMAL(4,2),
+    categoria VARCHAR(50) NOT NULL,
+    CONSTRAINT ID_PRODOTTO_ID PRIMARY KEY (codiceProdotto)
+);
 
-create table PRODOTTO (
-     codiceProdotto char(10) not null,
-     nome varchar(50) not null,
-     prezzo float(8,2) not null,
-     dataAggiunta date not null,
-     descrizione varchar(500) not null,
-     numeroRecensioni int not null,
-     dimensione int not null,
-     scontoProdotto float(4,2),
-     categoria varchar(50) not null,
-     constraint ID_PRODOTTO_ID primary key (codiceProdotto));
+CREATE TABLE RECENSIONE (
+    codiceRecensione CHAR(10) NOT NULL,
+    testoRecensione VARCHAR(500) NOT NULL,
+    stelle INT NOT NULL,
+    data DATE NOT NULL,
+    emailCliente CHAR(50) NOT NULL,
+    codiceProdotto CHAR(10) NOT NULL,
+    CONSTRAINT ID_RECENSIONE_ID PRIMARY KEY (codiceRecensione)
+);
 
-create table RECENSIONE (
-     codiceRecensione char(10) not null,
-     testoRecensione varchar(500) not null,
-     stelle int not null,
-     data date not null,
-     emailCliente char(50) not null,
-     codiceProdotto char(10) not null,
-     constraint ID_RECENSIONE_ID primary key (codiceRecensione));
+CREATE TABLE VENDITORE (
+    email CHAR(50) NOT NULL,
+    password VARCHAR(64) NOT NULL,
+    telefono CHAR(15) NOT NULL,
+    codiceProdotto CHAR(10) NOT NULL,
+    CONSTRAINT ID_VENDITORE_ID PRIMARY KEY (email)
+);
 
-create table VENDITORE (
-     email char(50) not null,
-     password varchar(64) not null,
-     telefono char(15) not null,
-     codiceProdotto char(10) not null,
-     constraint ID_VENDITORE_ID primary key (email));
+-- Add foreign keys after all tables are created
+ALTER TABLE BENEFICIO
+    ADD CONSTRAINT EQU_benef_PRODO FOREIGN KEY (codiceProdotto) REFERENCES PRODOTTO (codiceProdotto);
 
+ALTER TABLE CARRELLO
+    ADD CONSTRAINT FK_Carrello_Cliente FOREIGN KEY (codiceCarrello) REFERENCES CLIENTE (codiceCarrello) ON DELETE CASCADE;
 
--- Constraints Section
--- ___________________ 
-alter table CLIENTE add constraint unique (codiceCarrello);
+ALTER TABLE COMPOSIZIONE_CARRELLO
+    ADD CONSTRAINT REF_COMPO_CARRE FOREIGN KEY (codiceCarrello) REFERENCES CARRELLO (codiceCarrello),
+    ADD CONSTRAINT REF_COMPO_PRODO_1_FK FOREIGN KEY (codiceProdotto) REFERENCES PRODOTTO (codiceProdotto);
 
-alter table BENEFICIO add constraint EQU_benef_PRODO
-     foreign key (codiceProdotto)
-     references PRODOTTO (codiceProdotto);
+ALTER TABLE COMPOSIZIONE_KIT
+    ADD CONSTRAINT REF_COMPO_PRODO_1 FOREIGN KEY (codiceProdotto1) REFERENCES PRODOTTO (codiceProdotto),
+    ADD CONSTRAINT REF_COMPO_PRODO_2 FOREIGN KEY (codiceProdotto2) REFERENCES PRODOTTO (codiceProdotto),
+    ADD CONSTRAINT REF_COMPO_KIT_FK FOREIGN KEY (codiceKit) REFERENCES KIT (codiceKit);
 
-alter table CARRELLO add constraint FK_Carrello_Cliente
-    foreign key (codiceCarrello)
-    references CLIENTE (codiceCarrello)
-    ON DELETE CASCADE;
+ALTER TABLE COMPOSIZIONE_ORDINE
+    ADD CONSTRAINT REF_COMPO_ORDIN FOREIGN KEY (codiceOrdine) REFERENCES ORDINE (codiceOrdine),
+    ADD CONSTRAINT REF_COMPO_PRODO_FK FOREIGN KEY (codiceProdotto) REFERENCES PRODOTTO (codiceProdotto);
 
-alter table COMPOSIZIONE_CARRELLO add constraint REF_COMPO_CARRE
-     foreign key (codiceCarrello)
-     references CARRELLO (codiceCarrello);
+ALTER TABLE NOTIFICA
+    ADD CONSTRAINT REF_NOTIF_CLIEN_FK FOREIGN KEY (cliente) REFERENCES CLIENTE (email),
+    ADD CONSTRAINT REF_NOTIF_VENDI_FK FOREIGN KEY (emailVenditore) REFERENCES VENDITORE (email);
 
-alter table COMPOSIZIONE_CARRELLO add constraint REF_COMPO_PRODO_1_FK
-     foreign key (codiceProdotto)
-     references PRODOTTO (codiceProdotto);
+ALTER TABLE OFFERTA
+    ADD CONSTRAINT REF_OFFER_PRODO_FK FOREIGN KEY (codiceProdotto) REFERENCES PRODOTTO (codiceProdotto);
 
-alter table COMPOSIZIONE_KIT add constraint REF_COMPO_PRODO_1
-     foreign key (codiceProdotto1)
-     references PRODOTTO (codiceProdotto);
+ALTER TABLE ORDINE
+    ADD CONSTRAINT REF_ORDIN_CLIEN_FK FOREIGN KEY (emailCliente) REFERENCES CLIENTE (email);
 
-alter table COMPOSIZIONE_KIT add constraint REF_COMPO_PRODO_2
-     foreign key (codiceProdotto2)
-     references PRODOTTO (codiceProdotto);
+ALTER TABLE RECENSIONE
+    ADD CONSTRAINT REF_RECEN_CLIEN_FK FOREIGN KEY (emailCliente) REFERENCES CLIENTE (email),
+    ADD CONSTRAINT REF_RECEN_PRODO_FK FOREIGN KEY (codiceProdotto) REFERENCES PRODOTTO (codiceProdotto);
 
-alter table COMPOSIZIONE_KIT add constraint REF_COMPO_KIT_FK
-     foreign key (codiceKit)
-     references KIT (codiceKit);
+ALTER TABLE VENDITORE
+    ADD CONSTRAINT REF_VENDI_PRODO_FK FOREIGN KEY (codiceProdotto) REFERENCES PRODOTTO (codiceProdotto);
 
-alter table COMPOSIZIONE_ORDINE add constraint REF_COMPO_ORDIN
-     foreign key (codiceOrdine)
-     references ORDINE (codiceOrdine);
+-- Add the trigger
+DELIMITER //
 
-alter table COMPOSIZIONE_ORDINE add constraint REF_COMPO_PRODO_FK
-     foreign key (codiceProdotto)
-     references PRODOTTO (codiceProdotto);
-
-alter table NOTIFICA add constraint REF_NOTIF_CLIEN_FK
-     foreign key (cliente)
-     references CLIENTE (email);
-
-alter table NOTIFICA add constraint REF_NOTIF_VENDI_FK
-     foreign key (emailVenditore)
-     references VENDITORE (email);
-
-alter table OFFERTA add constraint REF_OFFER_PRODO_FK
-     foreign key (codiceProdotto)
-     references PRODOTTO (codiceProdotto);
-
-alter table ORDINE add constraint REF_ORDIN_CLIEN_FK
-     foreign key (emailCliente)
-     references CLIENTE (email);
-
--- Not implemented
--- alter table PRODOTTO add constraint ID_PRODOTTO_CHK
---     check(exists(select * from BENEFICIO
---                  where BENEFICIO.codiceProdotto = codiceProdotto)); 
 CREATE TRIGGER TRG_before_update_prodotto
 BEFORE UPDATE ON PRODOTTO
 FOR EACH ROW
 BEGIN
     DECLARE beneficio_count INT;
-    
-    -- Conta i record nella tabella BENEFICIO con il codiceProdotto uguale al nuovo valore
+
     SELECT COUNT(*)
     INTO beneficio_count
     FROM BENEFICIO
     WHERE codiceProdotto = NEW.codiceProdotto;
 
-    -- Se non esiste alcun record, blocca l'aggiornamento
     IF beneficio_count = 0 THEN
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'Errore: codiceProdotto aggiornato non è associato a un beneficio esistente.';
     END IF;
 END;
+//
 
-
-alter table RECENSIONE add constraint REF_RECEN_CLIEN_FK
-     foreign key (emailCliente)
-     references CLIENTE (email);
-
-alter table RECENSIONE add constraint REF_RECEN_PRODO_FK
-     foreign key (codiceProdotto)
-     references PRODOTTO (codiceProdotto);
-
-alter table VENDITORE add constraint REF_VENDI_PRODO_FK
-     foreign key (codiceProdotto)
-     references PRODOTTO (codiceProdotto);
-
-
--- Index Section
--- _____________ 
-
-create unique index ID_benefici_IND
-     on BENEFICIO (codiceProdotto, benefici);
-
-create unique index ID_CARRELLO_IND
-     on CARRELLO (codiceCarrello);
-
-create unique index ID_CATEGORIA_IND
-     on CATEGORIA (nomeCategoria);
-
-create unique index ID_CLIENTE_IND
-     on CLIENTE (email);
-
-create index EQU_CLIEN_CARRE_IND
-     on CLIENTE (codiceCarrello);
-
-create unique index ID_COMPOSIZIONE_CARRELLO_IND
-     on COMPOSIZIONE_CARRELLO (codiceCarrello, codiceProdotto);
-
-create index REF_COMPO_PRODO_1_IND
-     on COMPOSIZIONE_CARRELLO (codiceProdotto);
-
-create unique index ID_COMPOSIZIONE_KIT_IND
-     on COMPOSIZIONE_KIT (codiceProdotto, codiceKit);
-
-create index REF_COMPO_KIT_IND
-     on COMPOSIZIONE_KIT (codiceKit);
-
-create unique index ID_COMPOSIZIONE_ORDINE_IND
-     on COMPOSIZIONE_ORDINE (codiceOrdine, codiceProdotto);
-
-create index REF_COMPO_PRODO_IND
-     on COMPOSIZIONE_ORDINE (codiceProdotto);
-
-create unique index ID_KIT_IND
-     on KIT (codiceKit);
-
-create unique index ID_NOTIFICA_IND
-     on NOTIFICA (codiceNotifica);
-
-create index REF_NOTIF_CLIEN_IND
-     on NOTIFICA (cliente);
-
-create index REF_NOTIF_VENDI_IND
-     on NOTIFICA (emailVenditore);
-
-create unique index ID_OFFERTA_IND
-     on OFFERTA (codiceOfferta);
-
-create index REF_OFFER_PRODO_IND
-     on OFFERTA (codiceProdotto);
-
-create unique index ID_ORDINE_IND
-     on ORDINE (codiceOrdine);
-
-create index REF_ORDIN_CLIEN_IND
-     on ORDINE (emailCliente);
-
-create unique index ID_PRODOTTO_IND
-     on PRODOTTO (codiceProdotto);
-
-create index REF_PRODO_CATEG_IND
-     on PRODOTTO (categoria);
-
-create unique index ID_RECENSIONE_IND
-     on RECENSIONE (codiceRecensione);
-
-create index REF_RECEN_CLIEN_IND
-     on RECENSIONE (emailCliente);
-
-create index REF_RECEN_PRODO_IND
-     on RECENSIONE (codiceProdotto);
-
-create unique index ID_VENDITORE_IND
-     on VENDITORE (email);
-
-create index REF_VENDI_PRODO_IND
-     on VENDITORE (codiceProdotto);
-
+DELIMITER ;
