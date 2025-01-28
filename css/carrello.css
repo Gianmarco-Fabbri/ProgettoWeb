@@ -27,18 +27,6 @@ article {
     box-sizing: border-box;
 }
 
-@media (max-width: 992px) {
-    article {
-        width: calc(50% - 1rem);
-    }
-}
-
-@media (max-width: 768px) {
-    article {
-        width: 100%;
-    }
-}
-
 article img {
     width: 150px;
     height: auto;
@@ -100,13 +88,13 @@ aside form {
 aside input {
     flex: 1;
     padding: 0.5rem;
-    border: 1px solid #ccc;
+    border: 1px solid #f4fbf8;
     border-radius: 3px;
 }
 
 aside button {
     background-color: #0a5738;
-    color: white;
+    color: #f4fbf8;
     border: none;
     padding: 0.5rem 1rem;
     border-radius: 3px;
@@ -132,8 +120,6 @@ aside button {
     text-align: center;
 }
 
-/* Aggiungi queste regole alla fine del CSS esistente */
-
 article {
     transition: all 0.3s ease;
     position: relative;
@@ -151,7 +137,7 @@ article img {
 
 article:hover img {
     transform: scale(1.02);
-    box-shadow: 0 2px 8px rgba(10, 87, 56, 0.1);
+    box-shadow: 0 2px 8px #0a5738;
 }
 
 aside button {
@@ -197,12 +183,23 @@ aside input:focus {
     border-color: #0a5738;
 }
 
-/* Miglioramento hover per i prezzi/quantità */
 article p strong {
     color: #0a5738;
     transition: color 0.3s ease;
 }
 
 article:hover p strong {
-    color: #083a25;
+    color: #0a5738;
+}
+
+@media (max-width: 992px) {
+    article {
+        width: calc(50% - 1rem);
+    }
+}
+
+@media (max-width: 768px) {
+    article {
+        width: 100%;
+    }
 }

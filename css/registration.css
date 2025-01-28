@@ -1,5 +1,6 @@
 /* Registrazione:
-    form per la registrazione e aside per la newsletter.
+    -form per la registrazione 
+    -aside per la newsletter.
  */
 :root {
     --text-color: #0a5738;
@@ -64,8 +65,8 @@ form input[type="password"],
 form input[type="text"],
 form input[name="submit"] {
     width: 100%;
-    max-width: 500px;
-    padding: 10px;
+    min-height: 2.8rem;
+    padding: 10px 40px 10px 10px;
     border: 2px solid var(--text-color);
     border-radius: 5px;
     box-sizing: border-box;
@@ -88,12 +89,11 @@ form input[name="submit"]:hover {
 }
 
 form input[type="password"] + button {
-    padding: 10px;
+    flex-shrink: 0;
+    padding: 10px 15px;
     border: 2px solid var(--text-color);
-    background-color: white;
     color: var(--text-color);
     border-radius: 5px;
-    height: 100%;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
 }
@@ -101,6 +101,12 @@ form input[type="password"] + button {
 form input[type="password"] + button:hover {
     background-color: var(--text-color);
     color: white;
+}
+
+form ul li > input[type="email"],
+form ul li > input[type="text"],
+form input[name="submit"] {
+    width: calc(100% - 33px);
 }
 
 aside h3 {
