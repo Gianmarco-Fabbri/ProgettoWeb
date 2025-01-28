@@ -1,207 +1,171 @@
+/* style.css */
 /* Reset */
-body, header {
+body, header, nav, ul, li, a {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-/* Font generale */
-body {
-    background-color: #F4FBF8;
-    font-family: 'Roboto', sans-serif;
-}
-
+/* Header */
 body > header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 10px 20px;
     background-color: #F4FBF8;
+    position: relative;
+    z-index: 1000;
 }
 
-/* Logo */
 body > header > img {
     width: 80px;
     height: 80px;
+    transition: transform 0.3s ease;
 }
 
-nav ul li a {
-    display: flex; /* Imposta il contenitore come flexbox */
-    align-items: center; /* Centra verticalmente il contenuto */
-    text-decoration: none;
-    color: #0a5738;
-}
-
-/* Img del nav */
-body header nav ul li a img {
-    width: 25px;
-    height: 25px;
-    margin-right: 5px;
-}
-
-body header nav ul li {
-    margin-top: 20px;
-    margin-right: 20px;
-}
-
-body header nav ul li a:hover {
-    cursor: pointer;
-}
-
-body header nav ul li:hover {
-    transform: scale(105%);
-    transition: 500ms;
-}
-
-body > header, body > footer, body > nav {
-    color: #0a5738;
-}
-
-ul {
+/* Navigazione header */
+body > header nav ul {
+    display: flex;
+    gap: 25px;
     list-style: none;
 }
 
-ul > li {
-    display: inline-block;
+body > header nav ul li {
+    position: relative;
+    padding: 10px 0;
 }
 
-/* NAVIGAZIONE CATEGORIE */
-body > nav:not(header nav) {
-    display: flex; /* Attiva il layout flessibile */
-    justify-content: center; /* Centra gli elementi orizzontalmente */
-    align-items: center; /* Allinea verticalmente */
-    text-align: center; /* Centra il testo */
-    padding: 1rem 0;
-}
-
-/* Centrare gli elementi della lista */
-body > nav:not(header nav) ul {
+body > header nav ul li a {
     display: flex;
-    justify-content: center; /* Mantiene il centro orizzontale */
-    gap: 2.5rem;
-    padding: 0;
-    margin: 0;
-}
-
-/* Assicura che ogni link rimanga centrato */
-body > nav:not(header nav) ul li {
-    display: flex;
-    justify-content: center;
     align-items: center;
-}
-
-/* Effetto hover migliorato */
-body > nav:not(header nav) ul li a {
-    display: inline-block;
-    padding: 0.5rem 1rem; /* Padding fisso per evitare spostamenti */
-    border-radius: 5px;
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
-}
-
-body > nav:not(header nav) ul li a:hover {
-    background-color: #064F32; /* Verde scuro */
-    color: #F4FBF8; /* Testo bianco */
-    transform: scale(1.05); /* Ingrandisce leggermente l'elemento */
-}
-
-body > nav:not(header nav) a {
+    gap: 8px;
+    text-decoration: none;
     color: #0a5738;
     font-weight: 500;
-    text-decoration: none;
-    font-size: 1.1rem;
     transition: all 0.3s ease;
-    position: relative;
-    padding: 0.5rem 0;
 }
 
-body > nav:not(header nav) a:hover {
-    color: #0a5738;
+body > header nav ul li a img {
+    width: 25px;
+    height: 25px;
+    transition: transform 0.3s ease;
 }
 
-body > nav:not(header nav) a:hover::after {
+/* Effetti hover header */
+body > header nav ul li:hover a {
+    color: #064F32;
+}
+
+body > header nav ul li:hover a img {
+    transform: scale(1.1) rotate(-8deg);
+}
+
+body > header nav ul li::after {
     content: '';
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 100%;
+    width: 0;
     height: 2px;
-    background-color: #0a5738;
-    animation: underlineSlide 0.3s ease;
+    background-color: #064F32;
+    transition: width 0.3s ease;
 }
 
-@keyframes underlineSlide {
-    from { transform: scaleX(0) }
-    to { transform: scaleX(1) }
+body > header nav ul li:hover::after {
+    width: 100%;
 }
 
-/* FOOTER */
+/* Navigazione categorie */
+body > nav:first-of-type {
+    background-color: #e8f5e9;
+    padding: 15px 0;
+    border-bottom: 1px solid #c8e6c9;
+}
+
+body > nav:first-of-type ul {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    list-style: none;
+}
+
+body > nav:first-of-type ul li a {
+    color: #0a5738;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 15px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+body > nav:first-of-type ul li a:hover {
+    background-color: #c8e6c9;
+    transform: translateY(-2px);
+}
+
+/* Breadcrumb */
+body > nav:last-of-type {
+    padding: 15px 20px;
+    background-color: #F4FBF8;
+}
+
+body > nav:last-of-type a {
+    color: #0a5738;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+body > nav:last-of-type a:hover {
+    color: #064F32;
+}
+
+/* Footer */
 footer {
     background-color: #0a5738;
     color: white;
-    padding: 3rem 5%;
-    margin-top: 4rem;
-    font-size: 0.95rem;
+    padding: 40px 20px;
+    margin-top: 50px;
 }
 
-/* Modifiche principali qui */
-footer > section {
+footer section {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 3rem;
+    grid-template-columns: repeat(3, 1fr);
     max-width: 1200px;
     margin: 0 auto;
-    align-items: start;
-}
-
-footer > section > * {
-    justify-self: center; /* Centra ogni sezione all'interno della propria colonna */
-}
-
-footer > section > *:nth-child(1) { 
-    grid-column: 1;
-}
-
-footer > section > *:nth-child(2) {
-    grid-column: 2;
-}
-
-footer > section > *:nth-child(3) { 
-    grid-column: 3;
+    gap: 30px;
 }
 
 footer h1 {
-    font-size: 1.25rem;
-    margin-bottom: 1.5rem;
-    font-weight: 600;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
     color: #a5d6a7;
-    letter-spacing: 0.5px;
-    text-align: left;
 }
 
 footer ul {
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
+    list-style: none;
     padding: 0;
-    align-items: center; /* Centra il contenuto delle liste */
+}
+
+footer ul li {
+    margin-bottom: 10px;
 }
 
 footer a {
     color: #e8f5e9;
     text-decoration: none;
-    transition: all 0.3s ease;
-    display: inline-block;
-    padding: 0.2rem 0;
-    text-align: center;
+    transition: color 0.3s ease;
+    position: relative;
+    padding-left: 15px;
 }
 
 footer a:hover {
     color: #a5d6a7;
-    transform: translateX(5px);
 }
 
 footer a::before {
-    content: '•';
-    margin-right: 0.5rem;
-    color: #a5d6a7;
+    content: '›';
+    position: absolute;
+    left: 0;
     opacity: 0;
     transition: opacity 0.3s ease;
 }
@@ -210,30 +174,20 @@ footer a:hover::before {
     opacity: 1;
 }
 
-/* RESPONSIVE */
+/* Responsive */
 @media (max-width: 768px) {
-    footer > section {
-        grid-template-columns: 1fr; /* Una colonna per schermi più piccoli */
-        gap: 2rem;
+    body > header {
+        flex-direction: column;
+        gap: 15px;
     }
 
-    footer > section > * {
-        grid-column: 1;
+    footer section {
+        grid-template-columns: 1fr;
     }
 
-    footer h1 {
-        text-align: left;
-        margin-bottom: 1rem;
+    body > nav:first-of-type ul {
+        flex-wrap: wrap;
+        gap: 15px;
+        padding: 0 15px;
     }
-
-    footer ul {
-        align-items: flex-start;
-    }
-}
-
-/*PROVE DI CSS SUI MAIN*/
-main > section > h1 , aside > h1 {
-    color: #0a5738;
-    text-align: center;
-    padding-left: 20px;
 }

@@ -1,25 +1,46 @@
-/* Layout del main */
+/* Registrazione:
+    form per la registrazione e aside per la newsletter.
+ */
+:root {
+    --text-color: #0a5738;
+    --link-hover-color: #064F32;
+    --background-color: #F4FBF8;
+    --transition-timing: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
 main {
     padding: 0 20px;
     display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 20px;
     flex-wrap: wrap;
-    margin-bottom: 20px;
+    gap: 40px;
+    justify-content: center;
+    margin: 40px auto;
+    max-width: 1300px;
 }
 
-/* Stile del form */
 form {
-    margin: 0 auto;
-    padding: 20px;
-    border-radius: 10px;
+    flex: 1 1 600px;
+    padding: 30px;
+    border-radius: 12px;
     background-color: var(--background-color);
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    flex: 1;
-    max-width: 600px;
-    width: 100%;
-    box-sizing: border-box;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s var(--transition-timing), box-shadow 0.3s ease;
+    min-width: 400px;
+}
+
+aside {
+    flex: 1 1 500px;
+    padding: 30px;
+    border-radius: 12px;
+    background-color: var(--background-color);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s var(--transition-timing), box-shadow 0.3s ease;
+    min-width: 300px;
+}
+
+form:hover, aside:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12);
 }
 
 form h1 {
@@ -82,19 +103,6 @@ form input[type="password"] + button:hover {
     color: white;
 }
 
-aside {
-    margin: 0 auto;
-    padding: 20px;
-    border-radius: 10px;
-    background-color: var(--background-color);
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    flex: 1;
-    max-width: 600px;
-    width: 100%;
-    box-sizing: border-box;
-}
-
 aside h3 {
     font-size: 1.5rem;
     color: var(--text-color);
@@ -143,27 +151,37 @@ aside img {
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Schermi grandi */
 @media screen and (min-width: 1024px) {
     main {
-        justify-content: center;
-        gap: 40px;
+        justify-content: space-between;
+        gap: 60px;
     }
-
+    
     form, aside {
-        flex-basis: 48%;
-        max-width: 100%;
+        flex: 1;
+        max-width: calc(50% - 30px);
     }
 }
 
-/* Schermi piccoli */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1023px) {
     main {
         flex-direction: column;
-        gap: 20px;
+        align-items: center;
     }
-
+    
     form, aside {
-        max-width: 100%;
+        width: 100%;
+        max-width: 600px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    form, aside {
+        min-width: unset;
+        padding: 20px;
+    }
+    
+    form input[name="submit"] {
+        width: 100%;
     }
 }

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Benessere Market - Registrazione</title>
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/giammi.css">
 </head>
 <body>
     <header>
@@ -51,16 +52,17 @@
                             <label for="password" style="font-weight: bold; color: var(--text-color);">Password</label><br>
                             <div style="display: flex; align-items: center; gap: 10px;">
                                 <input type="password" id="password" name="password" placeholder="Inserisci la tua password" style="border: 2px solid var(--text-color); padding: 10px; flex: 1;" required>
-                                <button type="button" onclick="toggleVisibility('password')">👁️</button>
+                                <img src="../img/eye_close.png" id="toggle-password" alt="Toggle Password Visibility" style="cursor: pointer; width: 24px;" onclick="toggleVisibility('password', 'toggle-password')"/>
                             </div>
                         </li>
                         <li class="mb-3">
                             <label for="confirm-password" style="font-weight: bold; color: var(--text-color);">Conferma Password</label><br>
                             <div style="display: flex; align-items: center; gap: 10px;">
                                 <input type="password" id="confirm-password" name="confirm-password" placeholder="Conferma la tua password" style="border: 2px solid var(--text-color); padding: 10px; flex: 1;" required>
-                                <button type="button" onclick="toggleVisibility('confirm-password')">👁️</button>
+                                <img src="../img/eye_close.png" id="toggle-confirm-password" alt="Toggle Confirm Password Visibility" style="cursor: pointer; width: 24px;" onclick="toggleVisibility('confirm-password', 'toggle-confirm-password')"/>
                             </div>
                         </li>
+                        
                         <li>
                             <input name="submit" type="submit" value="Registrati" class="btn w-100">
                         </li>
@@ -70,7 +72,7 @@
     
             <aside>
                 <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
-                    <img src="newsletter-icon.png" alt="Icona Newsletter" style="width: 80px;">
+                    <img src="../img/newsletter.png" alt="Icona Newsletter" style="width: 80px;">
                     <h2>Iscriviti alla Newsletter</h2>
                 </div>
                 <p>
