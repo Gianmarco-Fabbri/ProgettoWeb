@@ -7,11 +7,6 @@ h1, h2, h3, h4 {
     color: #0a5738;
 }
 
-section .row {
-    display: flex;
-    align-items: stretch;
-}
-
 article {
     display: flex;
     align-items: center;
@@ -21,14 +16,19 @@ article {
     border-radius: 5px;
     gap: 1rem;
     box-sizing: border-box;
-    transition: all 0.3s ease;
     position: relative;
+    transition: all 0.3s ease, transform 0.2s ease;
 }
 
 article:hover {
     border-color: #0a5738;
     box-shadow: 0 4px 12px rgba(10, 87, 56, 0.1);
     transform: translateY(-2px);
+}
+
+article p strong {
+    color: #0a5738;
+    transition: color 0.3s ease;
 }
 
 article img {
@@ -57,17 +57,6 @@ article input[type="number"]:focus {
     border-color: #0a5738;
 }
 
-button {
-    transition: all 0.3s ease;
-    border: 1px solid transparent;
-}
-
-button:hover {
-    background-color: #f4fbf8;
-    color: #0a5738;
-    border-color: #0a5738;
-}
-
 aside input {
     flex: 1;
     padding: 0.5rem;
@@ -81,13 +70,27 @@ aside input:focus {
     border-color: #0a5738;
 }
 
-p strong {
-    color: #0a5738;
-    transition: color 0.3s ease;
+button {
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
 }
 
-article:hover p strong {
+button:hover {
+    background-color: #f4fbf8;
     color: #0a5738;
+    border-color: #0a5738;
+}
+
+.d-grid .btn {
+    white-space: nowrap;
+}
+
+.card {
+    top: 1rem;
+}
+
+.text-muted {
+    color: #6c757d!important;
 }
 
 @media (max-width: 992px) {
@@ -97,9 +100,26 @@ article:hover p strong {
 }
 
 @media (max-width: 768px) {
-    article {
-        width: 100%;
-        flex-direction: column;
-        align-items: flex-start;
+    .product-card {
+      flex-direction: column;
+      align-items: flex-start;
     }
-}
+    
+    .product-image {
+      width: 100%;
+      max-width: 200px;
+      margin-bottom: 1rem;
+    }
+    
+    .quantity-selector {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .checkout-form {
+      flex-direction: column;
+    }
+    
+    h1 { font-size: 1.4rem; }
+    h2 { font-size: 1.2rem; }
+  }
