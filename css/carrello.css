@@ -3,18 +3,18 @@ main {
     background-color: white;
 }
 
-section h1 {
+/* Titoli */
+h1, h2, h3, h4 {
     color: #0a5738;
-    margin-bottom: 1.5rem;
 }
 
+/* Sezione principale */
 section .row {
     display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: space-between;
+    align-items: stretch; /* Assicura che le colonne abbiano la stessa altezza */
 }
 
+/* Articoli del carrello */
 article {
     display: flex;
     align-items: center;
@@ -23,104 +23,8 @@ article {
     border: 1px solid #ddd;
     border-radius: 5px;
     gap: 1rem;
-    width: calc(33.333% - 1rem);
+    width: 100%; /* Gestito da Bootstrap */
     box-sizing: border-box;
-}
-
-article img {
-    width: 150px;
-    height: auto;
-    border-radius: 5px;
-    flex-shrink: 0;
-}
-
-.article-content {
-    flex-grow: 1;
-}
-
-.article-actions {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 0.5rem;
-}
-
-article h2 {
-    font-size: 1.25rem;
-    color: #0a5738;
-}
-
-article p {
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
-}
-
-article input[type="number"] {
-    width: 60px;
-    padding: 0.25rem;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-}
-
-aside {
-    background-color: #f4fbf8;
-    padding: 1.5rem;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    max-width: 350px;
-    margin-top: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-}
-
-aside h3 {
-    color: #0a5738;
-    margin-bottom: 1rem;
-}
-
-aside form {
-    display: flex;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-}
-
-aside input {
-    flex: 1;
-    padding: 0.5rem;
-    border: 1px solid #f4fbf8;
-    border-radius: 3px;
-}
-
-aside button {
-    background-color: #0a5738;
-    color: #f4fbf8;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 3px;
-    cursor: pointer;
-    align-self: flex-end;
-}
-
-aside p {
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
-}
-
-aside h4 {
-    font-size: 1.25rem;
-    font-weight: bold;
-    color: #0a5738;
-}
-
-aside button {
-    width: auto;
-    margin-top: 0.5rem;
-    display: block;
-    text-align: center;
-}
-
-article {
     transition: all 0.3s ease;
     position: relative;
 }
@@ -131,7 +35,12 @@ article:hover {
     transform: translateY(-2px);
 }
 
+/* Immagini prodotti */
 article img {
+    width: 150px;
+    height: auto;
+    border-radius: 5px;
+    flex-shrink: 0;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -140,18 +49,12 @@ article:hover img {
     box-shadow: 0 2px 8px #0a5738;
 }
 
-aside button {
-    transition: all 0.3s ease;
-    border: 1px solid transparent;
-}
-
-aside button:hover {
-    background-color: #f4fbf8;
-    color: #0a5738;
-    border-color: #0a5738;
-}
-
+/* Input quantità */
 article input[type="number"] {
+    width: 60px;
+    padding: 0.25rem;
+    border: 1px solid #ccc;
+    border-radius: 3px;
     transition: border-color 0.3s ease;
 }
 
@@ -160,21 +63,42 @@ article input[type="number"]:focus {
     border-color: #0a5738;
 }
 
-.article-actions button {
-    background-color: transparent;
-    color: #0a5738;
-    padding: 0.25rem 0.5rem;
-    border: 1px solid #0a5738;
-    border-radius: 3px;
+/* Aside - Riepilogo Ordine */
+aside {
+    background-color: #f4fbf8;
+    padding: 1.5rem;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+aside .card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Pulsanti */
+button {
     transition: all 0.3s ease;
+    border: 1px solid transparent;
 }
 
-.article-actions button:hover {
-    background-color: #0a5738;
-    color: #f4fbf8;
+button:hover {
+    background-color: #f4fbf8;
+    color: #0a5738;
+    border-color: #0a5738;
 }
 
+/* Form e input in aside */
 aside input {
+    flex: 1;
+    padding: 0.5rem;
+    border: 1px solid #f4fbf8;
+    border-radius: 3px;
     transition: border-color 0.3s ease;
 }
 
@@ -183,7 +107,8 @@ aside input:focus {
     border-color: #0a5738;
 }
 
-article p strong {
+/* Effetti sui testi */
+p strong {
     color: #0a5738;
     transition: color 0.3s ease;
 }
@@ -192,14 +117,17 @@ article:hover p strong {
     color: #0a5738;
 }
 
+/* Responsive */
 @media (max-width: 992px) {
     article {
-        width: calc(50% - 1rem);
+        width: 100%;
     }
 }
 
 @media (max-width: 768px) {
     article {
         width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
     }
 }

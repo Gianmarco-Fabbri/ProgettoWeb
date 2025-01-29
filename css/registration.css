@@ -105,7 +105,7 @@ form input[type="password"] + button:hover {
 
 form ul li > input[type="email"],
 form ul li > input[type="text"],
-form input[name="submit"] {
+form ul li > input[name="submit"] {
     width: calc(100% - 33px);
 }
 
