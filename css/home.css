@@ -16,35 +16,17 @@ p, ul, li, a {
 body > main > section > h1 {
     color: #0a5738;
     text-align: center;
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     position: relative;
 }
 
-/* Emoji per "Kit consigliati" */
-body > main > section:nth-of-type(1) > h1::before {
-    content: "\1F381"; /* Emoji 🎁 */
-    margin-right: 10px;
-}
-
-/* Emoji per "Categorie in evidenza" */
-body > main > section:nth-of-type(2) > h1::before {
-    content: "\1F4CC"; /* Emoji 📌 */
-    margin-right: 10px;
-}
-
-/* Emoji per "Novità" */
-body > main > section:nth-of-type(3) > h1::before {
-    content: "\2728"; /* Emoji ✨ */
-    margin-right: 10px;
-}
-
-/* Emoji per "Offerte esclusive" */
-body > main > section:nth-of-type(4) > h1::before {
-    content: "\1F525"; /* Emoji 🔥 */
-    margin-right: 10px;
-}
+/* Emoji per le sezioni */
+body > main > section:nth-of-type(1) > h1::before { content: "🎁 "; margin-right: 5px; }
+body > main > section:nth-of-type(2) > h1::before { content: "📌 "; margin-right: 5px; }
+body > main > section:nth-of-type(3) > h1::before { content: "✨ "; margin-right: 5px; }
+body > main > section:nth-of-type(4) > h1::before { content: "🔥 "; margin-right: 5px; }
 
 /* Layout delle sezioni */
 body > main > section > ul {
@@ -57,15 +39,14 @@ body > main > section > ul {
     max-width: 1200px;
 }
 
-/* Stile delle immagini */
 body > main > section > ul li a {
     display: block;
     text-decoration: none;
 }
 
 body > main > section > ul img {
-    width: 220px;
-    height: 220px;
+    width: 200px;
+    height: 200px;
     object-fit: cover;
     display: block;
     margin: 0 auto;
@@ -74,7 +55,7 @@ body > main > section > ul img {
 
 /* Effetto hover sulle immagini */
 body > main > section > ul img:hover {
-    transform: scale(1.08);
+    transform: scale(1.05);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
@@ -83,33 +64,15 @@ body > main > section > ul li {
     text-align: center;
     flex: 1 1 22%;
     min-width: 220px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 /* Stile dei testi sotto le immagini */
 body > main > section > ul li p {
-    margin-top: 10px;
-    font-size: 1rem;
+    margin-top: 8px;
+    font-size: 0.9rem;
     font-weight: 500;
     text-align: center;
-}
-
-/* Media query per schermi piccoli */
-@media (max-width: 768px) {
-    body > main > section > ul {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    body > main > section > ul li {
-        width: 100%;
-        min-width: auto;
-    }
-
-    body > main > section > ul img {
-        width: 180px;
-        height: 180px;
-    }
 }
 
 /* Stile per le offerte esclusive */
@@ -121,15 +84,41 @@ body > main > section:nth-of-type(4) > ul li {
 body > main > section:nth-of-type(4) > ul li::before {
     content: "Offerta imperdibile!";
     position: absolute;
-    top: 5px; /* Distanzia dal bordo superiore */
+    top: 5px;
     left: 50%;
-    transform: translateX(-50%); /* Centra l'etichetta rispetto all'immagine */
-    background-color: rgba(255, 69, 58, 0.9); /* Rosso acceso con trasparenza */
+    transform: translateX(-50%);
+    background-color: rgba(255, 69, 58, 0.9);
     color: white;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     font-weight: bold;
-    padding: 5px 10px;
+    padding: 4px 8px;
     border-radius: 5px;
     z-index: 2;
-    white-space: nowrap; /* Impedisce il ritorno a capo */
+    white-space: nowrap;
+}
+
+/* Media query per schermi piccoli */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+
+    body > main > section > h1 {
+        font-size: 1.2rem;
+    }
+
+    body > main > section > ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    body > main > section > ul li {
+        width: 100%;
+        min-width: auto;
+    }
+
+    body > main > section > ul img {
+        width: 150px;
+        height: 150px;
+    }
 }

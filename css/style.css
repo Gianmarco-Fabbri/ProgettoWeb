@@ -77,7 +77,7 @@ body > header nav ul li:hover::after {
 /* Navigazione categorie */
 body > nav:first-of-type {
     background-color: #F4FBF8;
-    padding: 15px 0;
+    padding: 20px 0 15px; 
     border-top: 1px solid #c8e6c9;
     border-bottom: 1px solid #c8e6c9;
 }
@@ -180,5 +180,10 @@ footer a:hover::before {
         flex-wrap: wrap;
         gap: 15px;
         padding: 0 15px;
+    }
+
+    body {
+        overflow-x: hidden;
+        max-width: 100%;
     }
 }
