@@ -1,5 +1,4 @@
 /* style.css */
-/* Reset ampliato */
 *, *::before, *::after {
     margin: 0;
     padding: 0;
@@ -26,7 +25,6 @@ body > header > img {
     flex-shrink: 0;
 }
 
-/* Navigazione header mobile-friendly */
 body > header nav ul {
     display: flex;
     gap: 1.5rem;
@@ -92,7 +90,7 @@ body > nav:first-of-type {
 
 body > nav:first-of-type ul {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     gap: 1rem;
     list-style: none;
     min-width: max-content;
@@ -196,7 +194,14 @@ footer a:hover {
     }
 
     body > nav:first-of-type ul {
-        gap: 0.75rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    body > nav:first-of-type ul li a {
+        font-size: 0.85rem;
+        padding: 0.3rem 0.8rem;
     }
 
     footer {
@@ -215,6 +220,11 @@ footer a:hover {
 
     body > header nav ul {
         justify-content: center;
+    }
+
+    body > nav:first-of-type ul li a {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.6rem;
     }
 
     body > header nav ul li a img {
