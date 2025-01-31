@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="./css/style.css">
+
 <section>
     <h1>Kit consigliati</h1>
     <ul>
