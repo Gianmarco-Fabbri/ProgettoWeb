@@ -103,3 +103,9 @@ INSERT INTO NOTIFICA (codiceNotifica, testoNotifica, data, letta, cliente, email
 INSERT INTO OFFERTA (codiceOfferta, sconto, codiceProdotto) VALUES
 ('OFF1', 20, 'P2'),
 ('OFF2', 15, 'P9');
+
+INSERT INTO KIT (codiceKit, prezzo, img, nome) VALUES 
+('k0','€19.99','../img/kit1.png', 'kit_skin_care'), 
+('k1','€15.99','../img/kit1.png', 'kit_dopo_barba'), 
+('k2','€9.99','../img/kit1.png', 'kit_balsami'), 
+('k3','€19.99','../img/kit1.png', 'kit_maschere_viso');
