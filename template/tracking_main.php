@@ -197,7 +197,7 @@
             
             <button class="btn d-flex align-items-center mx-auto px-4 py-2" 
                     style="background-color: #f4fbf8; color: #0a5738; border: 2px solid #0a5738;"
-                    onclick="window.location.href='recensioni.html'">
+                    onclick="window.location.href='recensioni.php'">
                 Lascia una Recensione!
             </button>
         </div>

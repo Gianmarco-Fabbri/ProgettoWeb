@@ -38,7 +38,7 @@
                                 onmouseout="this.style.backgroundColor='transparent'; this.style.color='#0a5738';"
                                 onfocus="this.style.backgroundColor='#0a5738'; this.style.color='#f4fbf8';"
                                 onblur="this.style.backgroundColor='transparent'; this.style.color='#0a5738';"
-                                onclick="window.location.href='tracking.html'">
+                                onclick="window.location.href='tracking.php'">
                             Traccia ordine
                         </button>
                     </div>
@@ -82,7 +82,7 @@
                                 onmouseout="this.style.backgroundColor='#0a5738'; this.style.color='#f4fbf8';"
                                 onfocus="this.style.backgroundColor='#f4fbf8'; this.style.color='#0a5738';"
                                 onblur="this.style.backgroundColor='#0a5738'; this.style.color='#f4fbf8';"
-                                onclick="window.location.href='index.html'">
+                                onclick="window.location.href='index.php'">
                             Acquista di nuovo
                         </button>
                     </div>
@@ -95,7 +95,7 @@
             <div class="alert alert-success" style="background-color: #f4fbf8; border-color: #0a5738;">
                 <h2 class="alert-heading" style="color: #0a5738;">Nessun ordine effettuato</h2>
                 <p style="color: #0a5738;">Inizia a fare acquisti nel nostro negozio!</p>
-                <a href="../index.html" class="btn btn-success" style="background-color: #0a5738; border-color: #0a5738;">
+                <a href="../index.php" class="btn btn-success" style="background-color: #0a5738; border-color: #0a5738;">
                     Vai allo shopping
                 </a>
             </div>

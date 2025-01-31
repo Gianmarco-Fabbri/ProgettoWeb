@@ -67,7 +67,7 @@
                 onmouseout="this.style.backgroundColor='#f4fbf8'; this.style.color='#0a5738'"
                 onfocus="this.style.backgroundColor='#0a5738'; this.style.color='#f4fbf8'"
                 onblur="this.style.backgroundColor='#f4fbf8'; this.style.color='#0a5738'"
-                onclick="window.location.href='carrello.html'">
+                onclick="window.location.href='carrello.php'">
             Chiudi
         </button>
         <button id="svuotaCarrelloBtn"
@@ -78,7 +78,7 @@
                 onmouseout="this.style.backgroundColor='#0a5738'; this.style.color='#f4fbf8'"
                 onfocus="this.style.backgroundColor='#f4fbf8'; this.style.color='#0a5738'"
                 onblur="this.style.backgroundColor='#0a5738'; this.style.color='#f4fbf8'"
-                onclick="window.location.href='index.html'">
+                onclick="window.location.href='index.php'">
             Acquista ora
         </button>
     </div>

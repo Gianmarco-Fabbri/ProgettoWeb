@@ -50,7 +50,7 @@
                 </p>
 
                 <div class="text-center mt-4">
-                    <button onclick="window.location.href='index.html'" class="btn btn-success btn-lg shadow-sm">
+                    <button onclick="window.location.href='index.php'" class="btn btn-success btn-lg shadow-sm">
                         Torna alla home
                     </button>
                 </div>

@@ -25,7 +25,7 @@
             </div>
             <div class="text-center mt-4">
                 <p style="font-size: medium; color: #0a5738;">
-                    Non hai un account? <a href="registration.html" style="color: #0a5738; font-weight: bold;">Registrati ora</a>
+                    Non hai un account? <a href="registration.php" style="color: #0a5738; font-weight: bold;">Registrati ora</a>
                 </p>
             </div>
         </form>

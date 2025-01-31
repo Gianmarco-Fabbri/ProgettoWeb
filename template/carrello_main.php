@@ -53,7 +53,7 @@
                 <div class="d-grid gap-2">
                     <button 
                         class="btn btn-outline-secondary btn-sm"
-                        onclick="window.location.href='index.html'">
+                        onclick="window.location.href='index.php'">
                         Continua acquisti</button>
                     <button 
                         id="svuotaCarrelloBtn" 
@@ -63,7 +63,7 @@
                     </button>
                     <button 
                         class="btn btn-success btn-sm"
-                        onclick="window.location.href='pagamento.html'">
+                        onclick="window.location.href='pagamento.php'">
                         Procedi al pagamento
                     </button>
                 </div>

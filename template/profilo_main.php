@@ -35,7 +35,7 @@
                 <ul style="list-style: none; padding: 0; font-size: 1rem;">
                     <li class="mb-2" style="border-bottom: 1px; padding-bottom: 8px;">Punti totali: </li>
                     <li class="text-center mt-3">
-                        <a href="carrello.html" style="display: block; background-color: #0a5738; color: white; padding: 12px; border-radius: 5px; text-align: center; text-decoration: none; ">Vai al carrello per utilizzare i punti</a>
+                        <a href="carrello.php" style="display: block; background-color: #0a5738; color: white; padding: 12px; border-radius: 5px; text-align: center; text-decoration: none; ">Vai al carrello per utilizzare i punti</a>
                     </li>
                 </ul>
             </div>

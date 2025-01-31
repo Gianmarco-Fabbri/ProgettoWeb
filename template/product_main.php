@@ -11,7 +11,7 @@
                 <div class="bg-white p-4 rounded shadow-sm">
                     <h1 class="h2 font-weight-bold mb-3">MYVITALY&reg; Verdepuro Vita - estratto di foglie di olivo e calendula liquido (2x1000mL)</h1>
                     
-                    <a href="recensioni.html" class="d-block mb-3 text-decoration-none text-success fw-bold">Scrivi una recensione</a>
+                    <a href="recensioni.php" class="d-block mb-3 text-decoration-none text-success fw-bold">Scrivi una recensione</a>
 
                     <div class="d-flex flex-column flex-md-row align-items-md-center mb-4">
                         <div class="me-md-4 text-success">
