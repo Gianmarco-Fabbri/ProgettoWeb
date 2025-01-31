@@ -91,9 +91,21 @@
                     <h4 class="h5 text-primary mb-3">Totale: $41,06</h4>
                     
                     <div class="d-grid gap-2">
-                        <button class="btn btn-outline-secondary btn-sm">Continua acquisti</button>
-                        <button class="btn btn-outline-danger btn-sm">Svuota carrello</button>
-                        <button class="btn btn-success btn-sm">Procedi al pagamento</button>
+                        <button 
+                            class="btn btn-outline-secondary btn-sm"
+                            onclick="window.location.href='index.html'">
+                            Continua acquisti</button>
+                        <button 
+                            id="svuotaCarrelloBtn" 
+                            class="btn btn-outline-danger btn-sm"
+                            data-svuota-carrello>
+                            Svuota carrello
+                        </button>
+                        <button 
+                            class="btn btn-success btn-sm"
+                            onclick="window.location.href='pagamento.html'">
+                            Procedi al pagamento
+                        </button>
                     </div>
                 </div>
             </aside>
@@ -126,5 +138,7 @@
             </ul>
         </section>
     </footer>
+
+    <script src="../js/svuotaCarrello.js"></script>
 </body>
 </html>
