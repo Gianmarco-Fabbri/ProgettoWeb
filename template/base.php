@@ -13,7 +13,7 @@
 
 <body>
     <header>
-        <a href="index.html">
+        <a href="index.php">
             <img src="../img/logo.png" alt="Logo benessere market"/> 
         </a>
         <nav>
