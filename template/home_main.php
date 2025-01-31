@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="css/home.css">
 
 <section>
     <h1>Kit consigliati</h1>

@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta charset="UTF-8"/>
-    <link rel="stylesheet" type="text/css" href="css/style.css"/>
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
     <title><?php echo isset($templateParams["titolo"]) ? $templateParams["titolo"] : "Benessere Market"; ?></title>
 </head>
 
@@ -17,13 +16,17 @@
             <img src="img/logo.png" alt="Logo benessere market"/> 
         </a>
         <nav>
-            <ul>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="archivio.php">Archivio</a></li>
-                <li><a href="contatti.php">Contatti</a></li>
-                <li><a href="login.php">Login</a></li>
-            </ul>
-        </nav>
+                <ul>
+                    <li><a href="ordini.php">
+                        <img src="img/tracking.png" alt="Icona Ordini" />I miei ordini</a></li>
+                    <li><a href="notifiche.php">
+                        <img src="img/ring.png" alt="Icona Ring" />Notifiche</a></li>
+                    <li><a href="carrello.php">
+                        <img src="img/cart.png" alt="Icona Cart" />Carrello</a></li>
+                    <li><a href="profilo.php">
+                        <img src="img/icon.png" alt="Icona Profilo" />Profilo</a></li>
+                </ul>
+            </nav>
     </header>
 
     <nav>
