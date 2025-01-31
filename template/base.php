@@ -9,7 +9,9 @@
 
 <body>
     <header>
-        <img src="./img/logo.png" alt="Logo Benessere Market"/> 
+        <a href="index.html">
+            <img src="../img/logo.png" alt="Logo benessere market"/> 
+        </a>
         <nav>
             <ul>
                 <li><a href="index.php">Home</a></li>
