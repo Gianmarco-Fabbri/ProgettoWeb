@@ -8,5 +8,7 @@ class DatabaseHelper {
             die("Connessione al db fallita.");
         }
     }
+
+    
 }
 ?>
