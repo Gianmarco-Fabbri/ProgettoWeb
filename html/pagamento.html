@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <title>Bellezza | Benessere Market</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta charset="UTF-8"/>
+        <link rel="stylesheet" href="../css/style.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    </head>
+
+    <body>
+        <header>
+            <img src="../img/logo.png" alt="Logo benessere market" /> 
+            <nav>
+                <ul>
+                    <li><a href="ordini.html">
+                        <img src="../img/tracking.png" alt="Icona Ordini" />I miei ordini</a></li>
+                    <li><a href="notifiche.html">
+                        <img src="../img/ring.png" alt="Icona Ring" />Notifiche</a></li>
+                    <li><a href="carrello.html">
+                        <img src="../img/cart.png" alt="Icona Cart" />Carrello</a></li>
+                    <li><a href="profilo.html">
+                        <img src="../img/icon.png" alt="Icona Profilo" />Profilo</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="salute.html">Salute</a></li>
+                <li><a href="bellezza.html">Bellezza</a></li>
+                <li><a href="profumi.html">Profumi</a></li>
+                <li><a href="casa_green.html">Casa & Green</a></li>
+            </ul>
+        </nav>
+        
+        <nav>
+            <a href="index.html">Home</a> / 
+            <a href="salute.html">Salute</a>
+        </nav>
+
+        <main class="container py-5" style="max-width: 600px">
+            <h1 class="mb-4 text-center" style="color: #0a5738">Acquista i tuoi prodotti</h1>
+        
+            <div class="border rounded-3 p-4 mb-4" style="border-color: #0a5738; background-color: #f4fbf8!important;">
+                <div class="mb-4">
+                    <h2 class="mb-3" style="color: #0a5738">Riepilogo prodotti</h2>
+                    <p class="mb-2">Armadio per biancheria - 200 €</p>
+                </div>
+        
+                <div class="mb-4">
+                    <label for="tipo-spedizione" style="color: #0a5738">Tipo di spedizione</label>
+                    <select id="tipo-spedizione" class="form-select mb-3" style="border-color: #0a5738">
+                        <option selected disabled>Seleziona una modalità di spedizione</option>
+                        <option>Standard (+5€ - 7 giorni)</option>
+                        <option>Express (+10€ - 3 giorni)</option>
+                        <option>Premium (+15€ - 24h)</option>
+                    </select>
+        
+                    <div class="mb-3">
+                        <label for="indirizzo" style="color: #0a5738">Indirizzo</label>
+                        <input type="text" id="indirizzo" class="form-control mb-2" value="Via dell'Università" readonly style="border-color: #0a5738">
+        
+                        <label for="numero" style="color: #0a5738">Numero Civico</label>
+                        <input type="text" id="numero" class="form-control" value="50" readonly style="border-color: #0a5738">
+                    </div>
+                </div>
+        
+                <div class="d-flex justify-content-between align-items-center mb-4 py-2 border-top border-bottom" style="border-color: #0a5738!important">
+                    <span class="h5" style="color: #0a5738">Totale:</span>
+                    <span class="h4 fw-bold" style="color: #0a5738">205.00 €</span>
+                </div>
+        
+                <div class="mb-4">
+                    <label for="tipo-carta" style="color: #0a5738">Tipo carta</label>
+                    <select id="tipo-carta" class="form-select mb-3" style="border-color: #0a5738">
+                        <option selected disabled>Seleziona il tipo di carta</option>
+                        <option>Visa</option>
+                        <option>Mastercard</option>
+                        <option>American Express</option>
+                    </select>
+        
+                    <label for="numero-carta" style="color: #0a5738">Numero carta</label>
+                    <input type="text" id="numero-carta" class="form-control mb-3" placeholder="Numero carta (16 cifre)" maxlength="16" aria-label="Inserisci il numero della tua carta di credito" style="border-color: #0a5738">
+        
+                    <div class="row g-2">
+                        <div class="col-6">
+                            <label for="scadenza" style="color: #0a5738">Scadenza (MM/AA)</label>
+                            <input type="text" id="scadenza" class="form-control" placeholder="MM/AA" style="border-color: #0a5738">
+                        </div>
+                        <div class="col-6">
+                            <label for="cvv" style="color: #0a5738">CVV</label>
+                            <input type="text" id="cvv" class="form-control" placeholder="CVV" maxlength="3" style="border-color: #0a5738">
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="d-flex justify-content-between align-items-center mt-4 pt-2 border-top" style="border-color: #0a5738!important">
+                    <span style="color: #0a5738">Arrivo previsto:</span>
+                    <span class="fw-bold" style="color: #0a5738">7 febbraio 2025</span>
+                </div>
+            </div>
+        
+            <div class="d-grid gap-3 d-md-flex justify-content-md-end">
+                <button class="btn px-4" 
+                        style="background-color: #f4fbf8; color: #0a5738; border: 2px solid #0a5738; transition: 0.3s"
+                        onmouseover="this.style.backgroundColor='#0a5738'; this.style.color='#f4fbf8'" 
+                        onmouseout="this.style.backgroundColor='#f4fbf8'; this.style.color='#0a5738'"
+                        onfocus="this.style.backgroundColor='#0a5738'; this.style.color='#f4fbf8'"
+                        onblur="this.style.backgroundColor='#f4fbf8'; this.style.color='#0a5738'"
+                        onclick="window.location.href='carrello.html'">
+                    Chiudi
+                </button>
+                <button id="svuotaCarrelloBtn"
+                        class="btn px-4"
+                        data-svuota-carrello
+                        style="background-color: #0a5738; color: #f4fbf8; border: 2px solid #0a5738; transition: 0.3s"
+                        onmouseover="this.style.backgroundColor='#f4fbf8'; this.style.color='#0a5738'" 
+                        onmouseout="this.style.backgroundColor='#0a5738'; this.style.color='#f4fbf8'"
+                        onfocus="this.style.backgroundColor='#f4fbf8'; this.style.color='#0a5738'"
+                        onblur="this.style.backgroundColor='#0a5738'; this.style.color='#f4fbf8'"
+                        onclick="window.location.href='index.html'">
+                    Acquista ora
+                </button>
+            </div>
+        </main>
+          
+
+        <footer>
+            <section>
+                <h1>Benessere Market</h1>
+                <ul>
+                    <li><a href="chi_siamo.html">Chi siamo</a></li>
+                    <li><a href="contatti.html">Contatti</a></li>
+                    <li><a href="brand.html">Brand</a></li>
+                </ul>
+            </section>
+            <section>
+                <h1>Area Cliente</h1>
+                <ul>
+                    <li><a href="accedi.html">Accedi</a></li>
+                    <li><a href="carrello.html">Il mio carrello</a></li>
+                    <li><a href="ordini.html">I miei ordini</a></li>
+                </ul>
+            </section>
+            <section>
+                <h1>Informazioni</h1>
+                <ul>
+                    <li><a href="come_acquistare.html">Come acquistare</a></li>
+                    <li><a href="privacy_policy.html">Privacy Policy</a></li>
+                    <li><a href="cookie_policy.html">Cookie Policy</a></li>
+                </ul>
+            </section>
+        </footer>
+
+        <script src="../js/svuotaCarrello.js"></script>
+    </body>
+</html>
