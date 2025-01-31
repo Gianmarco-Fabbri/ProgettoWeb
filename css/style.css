@@ -18,7 +18,8 @@ body > header {
     gap: 1rem;
 }
 
-body > header > img {
+/* aggiunto per logo con link */
+body > header > img, body > header > a > img {
     width: 80px;
     height: 80px;
     transition: transform 0.3s ease;
