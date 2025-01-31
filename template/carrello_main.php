@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="./css/carrell.css">
+
 <div class="container py-4">
     <h1 class="mb-4">Il tuo carrello</h1>      
     <section class="row">
