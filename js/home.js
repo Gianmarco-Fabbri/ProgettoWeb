@@ -5,7 +5,7 @@ function generaKitConsigliati(kit) {
     for (let i = 0; i < kit.length; i++) { /*cambiare i percorsi alle immagini nel db!*/
         result +=` <li>
         <a href="../html/product.html">
-            <img src="${kit[i]["img"]}" alt="${kit[i]["nome"]}"/> 
+            <img src="img/${kit[i]["img"]}" alt="${kit[i]["nome"]}"/> 
         </a>
         <p>${kit[i]["nome"]}<br /> ${kit[i]["prezzo"]} (IVA inclusa)</p>
         </li>`;
