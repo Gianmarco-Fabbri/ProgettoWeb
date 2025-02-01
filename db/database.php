@@ -55,6 +55,30 @@ class DatabaseHelper {
     }
 
     /* DATI CLIENTE */
+    public function getClienteData($email) {
+        $stmt = $this->db->prepare("
+            SELECT nome, cognome, email, telefono, codiceCarrello 
+            FROM clienti 
+            WHERE email = ?
+        ");
+        
+        $stmt->bind_param('s', $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        return $result->fetch_assoc(); // Restituisce un array associativo con i dati del cliente
+    }
+
+    /* CREAZIONE CLIENTE */
+    public function createCliente($firstName, $lastName, $username, $email, $hashedPassword, $phone, $cartCode) {
+        $stmt = $this->db->prepare("
+            INSERT INTO clienti (nome, cognome, username, email, password, telefono, codiceCarrello, puntiAccumulati) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, 0)
+        ");
+        $stmt->bind_param("sssssss", $firstName, $lastName, $username, $email, $hashedPassword, $phone, $cartCode);
+        return $stmt->execute();
+    }
+
     /* questi dati sono presenti nella pagina del profilo */
     /* include il calcolo dei punti accumulati */
     public function updateCustomerPoints($codiceOrdine) {
@@ -106,6 +130,21 @@ class DatabaseHelper {
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    /* DATI VENDITORE */
+    public function getVenditoreData($email) {
+        $stmt = $this->db->prepare("
+            SELECT email, nome, cognome, telefono 
+            FROM venditori 
+            WHERE email = ?
+        ");
+        
+        $stmt->bind_param('s', $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        return $result->fetch_assoc(); 
+    }
+    
     /* PRODOTTI NEL CARRELLO */
     public function getCartProducts($codiceCarrello) {
         $stmt = $this->db->prepare("
@@ -171,6 +210,70 @@ class DatabaseHelper {
         $result = $stmt->get_result();
         
         return $result->fetch_all(MYSQLI_ASSOC);
+    }
+    
+    /* CATEGORIE SALUTE */
+    public function getSaluteCategories() {
+        $stmt = $this->db->prepare("
+            SELECT nomeCategoria, scontoCategoria, inEvidenza 
+            FROM categoria 
+            WHERE nomeCategoria LIKE '%Salute%'
+        ");
+        
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+    
+    /* CATEGORIE BELLEZZA */
+    public function getBellezzaCategories() {
+        $stmt = $this->db->prepare("
+            SELECT nomeCategoria, scontoCategoria, inEvidenza 
+            FROM categoria 
+            WHERE nomeCategoria LIKE '%Bellezza%'
+        ");
+        
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+    
+    /* CATEGORIE PROFUMI */
+    public function getProfumiCategories() {
+        $stmt = $this->db->prepare("
+            SELECT nomeCategoria, scontoCategoria, inEvidenza 
+            FROM categoria 
+            WHERE nomeCategoria LIKE '%Profumi%'
+        ");
+        
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+    
+    /* CATEGORIE CASA & GREEN */
+    public function getHomeGreenCategories() {
+        $stmt = $this->db->prepare("
+            SELECT nomeCategoria, scontoCategoria, inEvidenza 
+            FROM categoria 
+            WHERE nomeCategoria LIKE '%Casa & Green%'
+        ");
+        
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getCarrelloByCode($cartCode) {
+        $stmt = $this->db->prepare("SELECT codiceCarrello FROM clienti WHERE codiceCarrello = ?");
+        $stmt->bind_param("s", $cartCode);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
     }
     
 }   

@@ -105,7 +105,7 @@ INSERT INTO OFFERTA (codiceOfferta, sconto, codiceProdotto) VALUES
 ('OFF2', 15, 'P9');
 
 INSERT INTO KIT (codiceKit, prezzo, img, nome) VALUES 
-('k0','€19.99','../img/kit1.png', 'kit_skin_care'), 
-('k1','€15.99','../img/kit1.png', 'kit_dopo_barba'), 
-('k2','€9.99','../img/kit1.png', 'kit_balsami'), 
-('k3','€19.99','../img/kit1.png', 'kit_maschere_viso');
+('k1','€19.99','kit1.png', 'kit_skin_care'), 
+('k2','€15.99','kit2.png', 'kit_dopo_barba'), 
+('k3','€9.99','kit3.png', 'kit_balsami'), 
+('k4','€19.99','kit4.png', 'kit_maschere_viso');
