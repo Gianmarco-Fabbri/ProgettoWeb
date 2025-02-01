@@ -74,5 +74,12 @@
             </ul>
         </section>
     </footer>
+    <?php
+    if (isset($templateParams["js"])) {
+        foreach ($templateParams["js"] as $jsFile) {
+            echo '<script src="' . $jsFile . '"></script>';
+        }
+    }
+    ?>
 </body>
 </html>
