@@ -8,6 +8,13 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"/>
     <link rel="stylesheet" type="text/css" href="css/style.css"/>
     <title><?php echo isset($templateParams["titolo"]) ? $templateParams["titolo"] : "Benessere Market"; ?></title>
+    <?php
+    if (isset($templateParams["css"])) {
+        foreach ($templateParams["css"] as $cssFile) {
+            echo '<link rel="stylesheet" type="text/css" href="' . $cssFile . '"/>';
+        }
+    }
+    ?> 
 </head>
 
 <body>
@@ -80,6 +87,6 @@
             echo '<script src="' . $jsFile . '"></script>';
         }
     }
-    ?>
+    ?> 
 </body>
 </html>
