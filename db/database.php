@@ -37,25 +37,22 @@ class DatabaseHelper {
     }
 
     /* PRODOTTI IN OFFERTA */
-    /* PRODOTTI IN OFFERTA */
-        public function getDiscountedProducts($n) {
-    $stmt = $this->db->prepare("SELECT codiceProdotto, nome, prezzo, img, scontoProdotto 
-                                FROM PRODOTTO 
-                                WHERE inOfferta = 1 
-                                ORDER BY scontoProdotto DESC, prezzo ASC 
-                                LIMIT ?");
-    if (!$stmt) {
-        die("Errore nella preparazione della query: " . $this->db->error);
+    public function getDiscountedProducts($n) {
+        $stmt = $this->db->prepare("SELECT codiceProdotto, nome, prezzo, 
+                                           COALESCE(img, 'default.png') AS img, 
+                                           scontoProdotto 
+                                    FROM PRODOTTO 
+                                    WHERE inOfferta = 1 
+                                      AND img NOT LIKE '%novità%'  -- 👈 Escludi immagini con 'novità'
+                                    ORDER BY scontoProdotto DESC, prezzo ASC 
+                                    LIMIT ?");
+    
+        $stmt->bind_param('i', $n);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
-
-    $stmt->bind_param('i', $n);
-    $stmt->execute();
-
-    $result = $stmt->get_result();
-    return $result->fetch_all(MYSQLI_ASSOC);
-    }
-
-
+    
     /* RECENSIONI RECENTI */
     public function getLatestReviews($n) {
         $stmt = $this->db->prepare("SELECT * FROM recensione ORDER BY data DESC, codiceRecensione ASC LIMIT ?");
