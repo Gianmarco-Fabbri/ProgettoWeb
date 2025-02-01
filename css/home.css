@@ -86,22 +86,37 @@ body > main > section:nth-of-type(4) > ul li {
     position: relative;
 }
 
-/* Stile per l'etichetta "Offerta imperdibile!" */
-body > main > section:nth-of-type(4) > ul li::before {
-    content: "Offerta imperdibile!";
-    position: absolute;
-    top: 5px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(255, 69, 58, 0.9);
-    color: white;
-    font-size: 0.8rem;
+/* Stile per il prezzo originale barrato */
+.prezzo-originale {
+    text-decoration: line-through;
+    color: red;
+    font-size: 1rem;
     font-weight: bold;
-    padding: 4px 8px;
-    border-radius: 5px;
-    z-index: 2;
-    white-space: nowrap;
+    margin-right: 8px;
+    display: inline-block;
+    position: relative;
 }
+
+/* Stile per la barra rossa sopra al prezzo originale */
+.prezzo-originale::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: red;
+    transform: translateY(-50%);
+}
+
+/* Stile per il prezzo scontato */
+.prezzo-scontato {
+    color: green;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+
 
 @media (max-width: 768px) {
     body {
