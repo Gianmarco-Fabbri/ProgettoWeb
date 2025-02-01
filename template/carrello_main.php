@@ -1,7 +1,4 @@
 <?php
-session_start();
-require_once 'bootstrap.php'; // Carica il database
-
 $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
 ?>
 
@@ -20,10 +17,9 @@ $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
                             continue;
                         }
 
-                        // Debug prezzo
                         $prezzo = isset($prodotto['prezzo']) ? $prodotto['prezzo'] : "N/A";
                         ?>
-                        <article class="col-12 p-3 shadow-sm">
+                        <article class="col-12 p-3 shadow-sm" id="cart-item-<?php echo htmlspecialchars($idProdotto); ?>">
                             <div class="row align-items-center g-3">
                                 <div class="col-4 col-md-3">
                                     <img src="img/<?php echo htmlspecialchars($prodotto['img']); ?>" class="img-fluid rounded" alt="Prodotto"/>
@@ -37,7 +33,7 @@ $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
                                         <div class="d-flex align-items-center gap-2">
                                             <label for="quantity<?php echo $idProdotto; ?>" class="form-label mb-0">Quantità:</label>
                                             <input type="number" id="quantity<?php echo $idProdotto; ?>" 
-                                                   value="<?php echo $quantita; ?>" min="1" 
+                                                   value="<?php echo $quantita; ?>" min="0" 
                                                    class="form-control form-control-sm w-50"
                                                    onchange="aggiornaQuantita('<?php echo $idProdotto; ?>', this.value)">
                                         </div>
@@ -50,17 +46,16 @@ $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
             </div>
         </div>
 
-        <aside class="col-lg-4">
+        <aside class="col-lg-4" id="asideCarrello" <?php if (empty($cart)) echo 'style="display: none;"'; ?>>
             <div class="card p-3 shadow-sm sticky-top">
                 <h3 class="h5 mb-3">Riepilogo ordine</h3>
-                
+
                 <?php if (!empty($cart)): ?>
                     <dl class="row small mb-3">
                         <?php
                         $subtotale = 0;
                         foreach ($cart as $idProdotto => $quantita) {
                             $prezzoKit = $dbh->getKitPrezzo($idProdotto);
-
                             if ($prezzoKit !== null) {
                                 $subtotale += $prezzoKit * $quantita;
                             }
@@ -69,11 +64,11 @@ $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
                         $totale = $subtotale - $sconto;
                         ?>
                         <dt class="col-6">Subtotale:</dt>
-                        <dd class="col-6 text-end">€<?php echo number_format($subtotale, 2); ?></dd>
+                        <dd class="col-6 text-end" id="subtotale">€<?php echo number_format($subtotale, 2); ?></dd>
                         <dt class="col-6 text-success">Sconto punti:</dt>
                         <dd class="col-6 text-end text-success">-€<?php echo number_format($sconto, 2); ?></dd>
                     </dl>
-                    <h4 class="h5 text-primary mb-3">Totale: €<?php echo number_format($totale, 2); ?></h4>
+                    <h4 class="h5 mb-3" style="color: #0a5738!important">Totale: <span id="totale">€<?php echo number_format($totale, 2); ?></span></h4>
                     <div class="d-grid gap-2">
                         <button class="btn btn-outline-secondary btn-sm" onclick="window.location.href='index.php'">
                             Continua acquisti
@@ -86,9 +81,10 @@ $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
                         </button>
                     </div>
                 <?php else: ?>
-                    <p class="text-muted">Non ci sono prodotti nel carrello.</p>
+                    <p id="carrelloVuoto" class="text-muted text-center">Il tuo carrello è vuoto.</p>
                 <?php endif; ?>
             </div>
         </aside>
+
     </section>
 </div>

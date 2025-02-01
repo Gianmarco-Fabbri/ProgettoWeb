@@ -12,20 +12,12 @@ function getKitDataFromURL() {
 document.addEventListener('DOMContentLoaded', () => {
     const kitData = getKitDataFromURL();
 
-    // Assicurati di avere nel DOM degli elementi con gli id o classi corrispondenti per poter aggiornare il contenuto.
-    // Ad esempio, supponiamo di avere:
-    // - un elemento con id="productNome" per il nome
-    // - un elemento con id="productImg" per l'immagine
-    // - un elemento con id="productPrezzo" per il prezzo
-    // - un elemento con id="productCodice" per il codice del kit
-
     if (kitData.nome) {
         document.getElementById('productNome').textContent = kitData.nome;
     }
     if (kitData.img) {
-        // Imposta il percorso dell'immagine (ad esempio, se le immagini sono in ../img/)
+        // Percorso relativo dell'immagine (img/)
         document.getElementById('productImg').src = `img/${kitData.img}`;
-        // Aggiorna anche l'attributo alt
         document.getElementById('productImg').alt = kitData.nome;
     }
     if (kitData.prezzo) {
@@ -40,19 +32,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const params = new URLSearchParams(window.location.search);
     const nome = params.get('nome') || 'Nome del prodotto';
     const prezzo = params.get('prezzo') || 'Prezzo';
-    const codice = params.get('codiceKit') || '';  // Controlla se questo è vuoto
+    const codice = params.get('codiceKit') || '';
     const img = params.get('img') || 'default.png';
 
-    // Aggiorna i campi con i dati ricevuti dalla query string
     document.getElementById('productNome').textContent = nome;
-    document.getElementById('productPrezzo').textContent = prezzo;
+    document.getElementById('productPrezzo').textContent = "€"+prezzo;
     document.getElementById('productCodice').textContent = "Codice prodotto: " + codice;
     document.getElementById('productImg').src = "img/" + img;
-    document.getElementById('idProdotto').value = codice; // Assicurati che venga valorizzato
+    document.getElementById('idProdotto').value = codice;
 
-    console.log("Codice prodotto impostato:", document.getElementById('idProdotto').value); // Debug
-
-    // Gestione del click sul bottone "Aggiungi al carrello"
+    // Click -> Aggiungi al carrello
     document.getElementById('addToCartButton').addEventListener('click', () => {
         const idProdotto = document.getElementById('idProdotto').value;
         const quantita = document.getElementById('quantita').value;
@@ -70,8 +59,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const formData = new URLSearchParams();
         formData.append('idProdotto', idProdotto);
         formData.append('quantita', quantita);
-
-        console.log("Dati inviati al server:", formData.toString()); // Debug
 
         fetch('ajax/carrello/aggiungiProdotto.php', {
             method: 'POST',

@@ -1,34 +1,75 @@
 /**
- * Aggiorna la quantità di un prodotto nel carrello.
- * @param {number} idProdotto - L'ID del prodotto da aggiornare.
+ * Aggiorna la quantità di un prodotto nel carrello e ricalcola il subtotale.
+ * @param {string} idProdotto - L'ID del prodotto da aggiornare.
  * @param {number} nuovaQuantita - La nuova quantità impostata dall'utente.
  */
 function aggiornaQuantita(idProdotto, nuovaQuantita) {
     if (nuovaQuantita < 1) {
-        alert("La quantità deve essere almeno 1.");
-        return;
+        if (confirm("Vuoi rimuovere il prodotto dal carrello?")) {
+            rimuoviProdotto(idProdotto);
+            return;
+        } else {
+            return;
+        }
     }
-    
-    // Crea i dati formattati in x-www-form-urlencoded
-    const formData = new URLSearchParams();
-    formData.append('idProdotto', idProdotto);
-    formData.append('quantita', nuovaQuantita);
 
-    fetch('ajax/carrello/aggiornaQuantita.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: formData.toString()
+    fetch("ajax/carrello/aggiornaQuantita.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({ "idProdotto": idProdotto, "quantita": nuovaQuantita })
     })
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            // Ricarica la pagina per aggiornare la visualizzazione del carrello
-            location.reload();
+            aggiornaSubtotale();
         } else {
             alert("Errore nell'aggiornamento della quantità: " + data.message);
         }
     })
-    .catch(error => console.error('Errore:', error));
+    .catch(error => console.error("Errore:", error));
+}
+
+/**
+ * Rimuove un prodotto dal carrello se la quantità è 0.
+ * @param {string} idProdotto - L'ID del prodotto da rimuovere.
+ */
+function rimuoviProdotto(idProdotto) {
+    fetch("ajax/carrello/rimuoviProdotto.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({ "idProdotto": idProdotto }).toString()
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            document.getElementById(`article-${idProdotto}`).remove();
+            aggiornaSubtotale();
+        } else {
+            alert("Errore nella rimozione del prodotto: " + data.message);
+        }
+    })
+    .catch(error => console.error("Errore:", error));
+}
+
+/**
+ * Aggiorna il subtotale e il totale nel DOM.
+ */
+function aggiornaSubtotale() {
+    fetch("ajax/carrello/calcolaSubtotale.php")
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Aggiorna il subtotale
+                document.getElementById("subtotale").textContent = "€" + data.subtotale.toFixed(2);
+                // Aggiorna il totale (sottraendo lo sconto)
+                const sconto = 1.52; // Lo sconto è fisso
+                const totale = data.subtotale - sconto;
+                document.getElementById("totale").textContent = "€" + totale.toFixed(2);
+            } else {
+                alert("Errore nel calcolo del subtotale: " + data.message);
+            }
+        })
+        .catch(error => console.error("Errore:", error));
 }
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -52,9 +93,6 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     }
-
-    // (Opzionale) Listener per l'applicazione dei punti.
-    // Assicurati di aver aggiunto l'id "applicaPuntiBtn" al pulsante "Applica" nel template.
     const applicaPuntiBtn = document.getElementById("applicaPuntiBtn");
     if (applicaPuntiBtn) {
         applicaPuntiBtn.addEventListener("click", function() {
