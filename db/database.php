@@ -43,15 +43,15 @@ class DatabaseHelper {
                                            scontoProdotto 
                                     FROM PRODOTTO 
                                     WHERE inOfferta = 1 
-                                      AND img NOT LIKE '%novità%'  -- 👈 Escludi immagini con 'novità'
-                                    ORDER BY scontoProdotto DESC, prezzo ASC 
+                                    AND img NOT LIKE '%novità%' 
                                     LIMIT ?");
-    
+        
         $stmt->bind_param('i', $n);
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+    
     
     /* RECENSIONI RECENTI */
     public function getLatestReviews($n) {

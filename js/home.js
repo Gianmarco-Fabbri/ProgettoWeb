@@ -16,23 +16,26 @@ function generaKitConsigliati(kit) {
 }
 
 function generaOfferte(offerte) {
-    let result = `<section>
+    let result = `<section class="offerte">
         <h1>Offerte Esclusive</h1>
         <ul>`;
+
     for (let i = 0; i < offerte.length; i++) {
-        let prezzoOriginale = offerte[i]["prezzo"];
-        let prezzoScontato = (prezzoOriginale * (1 - offerte[i]["scontoProdotto"] / 100)).toFixed(2);
+        let prezzoOriginale = parseFloat(offerte[i].prezzo); // Prezzo originale
+        let sconto = parseFloat(offerte[i].scontoProdotto);  // Sconto assoluto
+        let prezzoScontato = (prezzoOriginale - sconto).toFixed(2);
 
         result += `<li>
             <a href="product.php?nome=${encodeURIComponent(offerte[i].nome)}&codiceProdotto=${encodeURIComponent(offerte[i].codiceProdotto)}&img=${encodeURIComponent(offerte[i].img)}&prezzo=${encodeURIComponent(prezzoScontato)}">
-                <img src="img/${offerte[i]["img"]}" alt="${offerte[i]["nome"]}"/> 
+                <img src="img/${offerte[i].img}" alt="${offerte[i].nome}"/> 
             </a>
-            <p>${offerte[i]["nome"]}<br/> 
-               Prezzo originale: €${prezzoOriginale}<br/>
-               Prezzo scontato: €${prezzoScontato} (IVA inclusa)
+            <p>${offerte[i].nome}<br/> 
+               <span class="prezzo-originale">€${prezzoOriginale.toFixed(2)}</span> 
+               <span class="prezzo-scontato">€${prezzoScontato} (IVA inclusa)</span>
             </p>
         </li>`;
     }
+
     result += `</ul>
     </section>`;
     return result;
@@ -61,7 +64,7 @@ async function caricaKit() {
 
 async function caricaOfferte() {
     console.log("Eseguo caricaOfferte()...");
-    const url = 'ajax/api-offerte-esclusive.php';
+    const url = 'ajax/api-offerte_esclusive.php';
     try {
         const response = await fetch(url);
         console.log("Response status:", response.status);
