@@ -38,13 +38,21 @@ class DatabaseHelper {
 
     /* PRODOTTI IN OFFERTA */
     public function getDiscountedProducts($n) {
-        $stmt = $this->db->prepare("SELECT * FROM prodotti WHERE inOfferta = 1 ORDER BY scontoProdotto DESC, prezzo ASC LIMIT ?");
+        $stmt = $this->db->prepare("SELECT codiceProdotto, nome, prezzo, 
+                                           COALESCE(img, 'default.png') AS img, 
+                                           scontoProdotto 
+                                    FROM PRODOTTO 
+                                    WHERE inOfferta = 1 
+                                      AND img NOT LIKE '%novità%'  -- 👈 Escludi immagini con 'novità'
+                                    ORDER BY scontoProdotto DESC, prezzo ASC 
+                                    LIMIT ?");
+    
         $stmt->bind_param('i', $n);
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
     }
-
+    
     /* RECENSIONI RECENTI */
     public function getLatestReviews($n) {
         $stmt = $this->db->prepare("SELECT * FROM recensione ORDER BY data DESC, codiceRecensione ASC LIMIT ?");
@@ -275,6 +283,25 @@ class DatabaseHelper {
         $result = $stmt->get_result();
         return $result->fetch_assoc();
     }
+
+    public function getKitByCodice($codiceKit) {
+        $stmt = $this->db->prepare("SELECT * FROM KIT WHERE codiceKit = ?");
+        $stmt->bind_param("s", $codiceKit);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc(); // Restituisce un singolo kit come array associativo
+    }
+    
+    public function getKitPrezzo($codiceKit) {
+        $stmt = $this->db->prepare("SELECT prezzo FROM KIT WHERE codiceKit = ?");
+        $stmt->bind_param("s", $codiceKit);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $kit = $result->fetch_assoc();
+        return $kit ? $kit['prezzo'] : null;
+    }
+    
+    
     
 }   
 ?>

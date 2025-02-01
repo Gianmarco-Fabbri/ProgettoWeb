@@ -1,79 +1,7 @@
-<!-- <link rel="stylesheet" href="./css/carrell.css">
-
-<div class="container py-4">
-    <h1 class="mb-4">Il tuo carrello</h1>      
-    <section class="row">
-        <div class="col-lg-8 mb-4">
-            <div class="row g-3">
-                <article class="col-12 p-3 shadow-sm">
-                    <div class="row align-items-center g-3">
-                        <div class="col-4 col-md-3">
-                            <img src="../img/kit4.png" class="img-fluid rounded" alt="Prodotto"/>
-                        </div>
-                        <div class="col-8 col-md-6">
-                            <h2 class="h5 mb-1">Prodotto 1</h2>
-                            <p class="text-muted small mb-0">Descrizione breve del prodotto</p>
-                        </div>
-                        <div class="col-12 col-md-3">
-                            <div class="d-flex flex-column gap-2">
-                                <div class="d-flex align-items-center gap-2">
-                                    <label for="quantity1" class="form-label mb-0">Quantità:</label>
-                                    <input type="number" id="quantity1" value="1" min="1" 
-                                        class="form-control form-control-sm w-50"/>
-                                </div>
-                                <p class="fw-bold mb-0">Prezzo: $21,42</p>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-            </div>
-        </div>
-
-        <aside class="col-lg-4">
-            <div class="card p-3 shadow-sm sticky-top">
-                <h3 class="h5 mb-3">Riepilogo ordine</h3>
-                <div class="d-flex flex-column gap-2 mb-3">
-                    <label for="points" class="form-label small">Punti da applicare</label>
-                    <div class="d-flex gap-2">
-                        <input type="text" id="points" class="form-control form-control-sm" 
-                            placeholder="Inserisci punti"/>
-                        <button class="btn btn-success btn-sm flex-shrink-0">Applica</button>
-                    </div>
-                </div>
-                
-                <dl class="row small mb-3">
-                    <dt class="col-6">Subtotale:</dt>
-                    <dd class="col-6 text-end">$42,58</dd>
-                    <dt class="col-6 text-success">Sconto punti:</dt>
-                    <dd class="col-6 text-end text-success">-$1,52</dd>
-                </dl>
-                
-                <h4 class="h5 text-primary mb-3">Totale: $41,06</h4>
-                
-                <div class="d-grid gap-2">
-                    <button 
-                        class="btn btn-outline-secondary btn-sm"
-                        onclick="window.location.href='index.php'">
-                        Continua acquisti</button>
-                    <button 
-                        id="svuotaCarrelloBtn" 
-                        class="btn btn-outline-danger btn-sm"
-                        data-svuota-carrello>
-                        Svuota carrello
-                    </button>
-                    <button 
-                        class="btn btn-success btn-sm"
-                        onclick="window.location.href='pagamento.php'">
-                        Procedi al pagamento
-                    </button>
-                </div>
-            </div>
-        </aside>
-    </section>
-</div> -->
 <?php
-// Non serve avviare la sessione: bootstrap.php (incluso in carrello.php) l'ha già fatto.
-// Recupera il carrello salvato in sessione
+session_start();
+require_once 'bootstrap.php'; // Carica il database
+
 $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
 ?>
 
@@ -87,23 +15,22 @@ $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
                 <?php else: ?>
                     <?php foreach ($cart as $idProdotto => $quantita): ?>
                         <?php
-                        // Recupera le informazioni del prodotto dal database
-                        $stmt = $dbh->getConnection()->prepare("SELECT * FROM prodotto WHERE codiceProdotto = ?");
-                        $stmt->bind_param("i", $idProdotto);
-                        $stmt->execute();
-                        $result = $stmt->get_result();
-                        $prodotto = $result->fetch_assoc();
-                        if (!$prodotto) continue;
+                        $prodotto = $dbh->getKitByCodice($idProdotto);
+                        if (!$prodotto) {
+                            continue;
+                        }
+
+                        // Debug prezzo
+                        $prezzo = isset($prodotto['prezzo']) ? $prodotto['prezzo'] : "N/A";
                         ?>
                         <article class="col-12 p-3 shadow-sm">
                             <div class="row align-items-center g-3">
                                 <div class="col-4 col-md-3">
-                                    <!-- Percorso dell'immagine: regola il path se necessario -->
-                                    <img src="img/<?php echo htmlspecialchars($prodotto['immagine']); ?>" class="img-fluid rounded" alt="Prodotto"/>
+                                    <img src="img/<?php echo htmlspecialchars($prodotto['img']); ?>" class="img-fluid rounded" alt="Prodotto"/>
                                 </div>
                                 <div class="col-8 col-md-6">
                                     <h2 class="h5 mb-1"><?php echo htmlspecialchars($prodotto['nome']); ?></h2>
-                                    <p class="text-muted small mb-0"><?php echo htmlspecialchars($prodotto['descrizioneBreve']); ?></p>
+                                    <p class="text-muted small mb-0">Prezzo: €<?php echo $prezzo; ?></p>
                                 </div>
                                 <div class="col-12 col-md-3">
                                     <div class="d-flex flex-column gap-2">
@@ -112,9 +39,8 @@ $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
                                             <input type="number" id="quantity<?php echo $idProdotto; ?>" 
                                                    value="<?php echo $quantita; ?>" min="1" 
                                                    class="form-control form-control-sm w-50"
-                                                   onchange="aggiornaQuantita(<?php echo $idProdotto; ?>, this.value)">
+                                                   onchange="aggiornaQuantita('<?php echo $idProdotto; ?>', this.value)">
                                         </div>
-                                        <p class="fw-bold mb-0">Prezzo: $<?php echo number_format($prodotto['prezzo'], 2); ?></p>
                                     </div>
                                 </div>
                             </div>
@@ -123,51 +49,45 @@ $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
                 <?php endif; ?>
             </div>
         </div>
+
         <aside class="col-lg-4">
             <div class="card p-3 shadow-sm sticky-top">
                 <h3 class="h5 mb-3">Riepilogo ordine</h3>
-                <div class="d-flex flex-column gap-2 mb-3">
-                    <label for="points" class="form-label small">Punti da applicare</label>
-                    <div class="d-flex gap-2">
-                        <input type="text" id="points" class="form-control form-control-sm" placeholder="Inserisci punti">
-                        <button class="btn btn-success btn-sm flex-shrink-0">Applica</button>
-                    </div>
-                </div>
-                <dl class="row small mb-3">
-                    <?php
-                    // Calcola il subtotale sommando il prezzo dei prodotti per le quantità
-                    $subtotale = 0;
-                    foreach ($cart as $idProdotto => $quantita) {
-                        $stmt = $dbh->getConnection()->prepare("SELECT prezzo FROM prodotto WHERE codiceProdotto = ?");
-                        $stmt->bind_param("i", $idProdotto);
-                        $stmt->execute();
-                        $result = $stmt->get_result();
-                        $prod = $result->fetch_assoc();
-                        if ($prod) {
-                            $subtotale += $prod['prezzo'] * $quantita;
+                
+                <?php if (!empty($cart)): ?>
+                    <dl class="row small mb-3">
+                        <?php
+                        $subtotale = 0;
+                        foreach ($cart as $idProdotto => $quantita) {
+                            $prezzoKit = $dbh->getKitPrezzo($idProdotto);
+
+                            if ($prezzoKit !== null) {
+                                $subtotale += $prezzoKit * $quantita;
+                            }
                         }
-                    }
-                    // Esempio di sconto fisso: in una versione reale il calcolo dovrebbe basarsi sui punti utente
-                    $sconto = 1.52;
-                    $totale = $subtotale - $sconto;
-                    ?>
-                    <dt class="col-6">Subtotale:</dt>
-                    <dd class="col-6 text-end">$<?php echo number_format($subtotale, 2); ?></dd>
-                    <dt class="col-6 text-success">Sconto punti:</dt>
-                    <dd class="col-6 text-end text-success">-$<?php echo number_format($sconto, 2); ?></dd>
-                </dl>
-                <h4 class="h5 text-primary mb-3">Totale: $<?php echo number_format($totale, 2); ?></h4>
-                <div class="d-grid gap-2">
-                    <button class="btn btn-outline-secondary btn-sm" onclick="window.location.href='index.php'">
-                        Continua acquisti
-                    </button>
-                    <button id="svuotaCarrelloBtn" class="btn btn-outline-danger btn-sm">
-                        Svuota carrello
-                    </button>
-                    <button class="btn btn-success btn-sm" onclick="window.location.href='pagamento.php'">
-                        Procedi al pagamento
-                    </button>
-                </div>
+                        $sconto = 1.52;
+                        $totale = $subtotale - $sconto;
+                        ?>
+                        <dt class="col-6">Subtotale:</dt>
+                        <dd class="col-6 text-end">€<?php echo number_format($subtotale, 2); ?></dd>
+                        <dt class="col-6 text-success">Sconto punti:</dt>
+                        <dd class="col-6 text-end text-success">-€<?php echo number_format($sconto, 2); ?></dd>
+                    </dl>
+                    <h4 class="h5 text-primary mb-3">Totale: €<?php echo number_format($totale, 2); ?></h4>
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-outline-secondary btn-sm" onclick="window.location.href='index.php'">
+                            Continua acquisti
+                        </button>
+                        <button id="svuotaCarrelloBtn" class="btn btn-outline-danger btn-sm">
+                            Svuota carrello
+                        </button>
+                        <button class="btn btn-success btn-sm" onclick="window.location.href='pagamento.php'">
+                            Procedi al pagamento
+                        </button>
+                    </div>
+                <?php else: ?>
+                    <p class="text-muted">Non ci sono prodotti nel carrello.</p>
+                <?php endif; ?>
             </div>
         </aside>
     </section>
