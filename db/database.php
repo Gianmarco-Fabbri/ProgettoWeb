@@ -65,7 +65,7 @@ class DatabaseHelper {
     /* DATI CLIENTE */
     public function getClienteData($email) {
         $stmt = $this->db->prepare("
-            SELECT nome, cognome, email, telefono, codiceCarrello 
+            SELECT nome, cognome, email, telefono, password, codiceCarrello 
             FROM cliente
             WHERE email = ?
         ");
@@ -74,7 +74,7 @@ class DatabaseHelper {
         $stmt->execute();
         $result = $stmt->get_result();
         
-        return $result->fetch_assoc(); // Restituisce un array associativo con i dati del cliente
+        return $result->fetch_assoc(); 
     }
 
     /* CREAZIONE CLIENTE */
@@ -141,7 +141,7 @@ class DatabaseHelper {
     /* DATI VENDITORE */
     public function getVenditoreData($email) {
         $stmt = $this->db->prepare("
-            SELECT email, nome, cognome, telefono 
+            SELECT email, nome, cognome, password, telefono 
             FROM venditori 
             WHERE email = ?
         ");

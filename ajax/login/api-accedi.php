@@ -1,29 +1,34 @@
 <?php
-
 require_once '../../bootstrap.php';
 
 header('Content-Type: application/json');
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 // Ricezione dati JSON
 $data = json_decode(file_get_contents('php://input'), true);
-if (!$data) {
-    echo json_encode(['success' => false, 'message' => 'Nessun dato ricevuto.']);
+if (!isset($data['email'], $data['password'])) {
+    echo json_encode(['success' => false, 'message' => 'Dati mancanti.', 'debug' => $data]);
     exit();
 }
 
-// Estrazione dati
-$email = isset($data['email']) ? trim($data['email']) : null;
-$password = isset($data['password']) ? trim($data['password']) : null;
-
-if (!$email || !$password) {
-    echo json_encode(['success' => false, 'message' => 'Email o password non possono essere vuoti.']);
-    exit();
-}
+$email = trim($data['email']);
+$password = trim($data['password']);
 
 // Controlla se l'utente esiste nel database
 $cliente = $dbh->getClienteData($email);
 if (!$cliente) {
     echo json_encode(['success' => false, 'message' => 'Utente non trovato.']);
+    exit();
+}
+
+if (empty($cliente['password']) || is_null($cliente['password'])) {
+    echo json_encode([
+        'success' => false,
+        'message' => 'Errore: password non impostata nel database.',
+        'debug' => print_r($cliente, true)
+    ]);
     exit();
 }
 
