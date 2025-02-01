@@ -4,11 +4,31 @@
             <div class="card p-4 shadow-sm border-0 bg-light w-100 h-100">
                 <h1 class="text-center mb-4 text-success fw-bold">Crea un account</h1>
 
-                <form action="#" method="post">
+                <form id="registration-form" action="#" method="post">
                     <div class="mb-3">
-                        <label for="username" class="form-label fw-bold">Email</label>
-                        <input type="email" id="username" name="username" class="form-control" 
+                        <label for="first_name" class="form-label fw-bold">Nome</label>
+                        <input type="text" id="first_name" name="first_name" class="form-control" 
+                                placeholder="Inserisci il tuo nome" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="last_name" class="form-label fw-bold">Cognome</label>
+                        <input type="text" id="last_name" name="last_name" class="form-control" 
+                                placeholder="Inserisci il tuo cognome" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="username" class="form-label fw-bold">Username</label>
+                        <input type="text" id="username" name="username" class="form-control" 
+                                placeholder="Scegli un username" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label fw-bold">Email</label>
+                        <input type="email" id="email" name="email" class="form-control" 
                                 placeholder="esempio@email.com" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label fw-bold">Telefono</label>
+                        <input type="tel" id="phone" name="phone" class="form-control" 
+                                placeholder="Inserisci il tuo numero di telefono" required>
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label fw-bold">Password</label>
@@ -17,7 +37,7 @@
                                     placeholder="Inserisci la tua password" required>
                             <button class="btn btn-outline-secondary d-flex align-items-center px-3" type="button" 
                                     onclick="toggleVisibility('password', 'toggle-password')">
-                                <img src="../img/eye_close.png" 
+                                <img src="img/eye_close.png" 
                                         id="toggle-password" 
                                         alt="Mostra/Nascondi Password" 
                                         width="20">
@@ -31,7 +51,7 @@
                                     placeholder="Conferma la tua password" required>
                             <button class="btn btn-outline-secondary d-flex align-items-center px-3" type="button" 
                                     onclick="toggleVisibility('confirm-password', 'toggle-confirm-password')">
-                                <img src="../img/eye_close.png" 
+                                <img src="img/eye_close.png" 
                                         id="toggle-confirm-password" 
                                         alt="Mostra/Nascondi Password" 
                                         width="20">
@@ -47,7 +67,7 @@
         <aside class="col-lg-6 col-md-8 d-flex">
             <div class="card p-4 shadow-sm border-0 bg-light w-100 h-100 text-center">
                 <div class="mb-3">
-                    <img src="../img/newsletter.png" alt="Icona Newsletter" class="img-fluid" width="80">
+                    <img src="img/newsletter.png" alt="Icona Newsletter" class="img-fluid" width="80">
                     <h2 class="text-success fw-bold mt-2">Iscriviti alla Newsletter</h2>
                 </div>
                 <p class="text-dark">

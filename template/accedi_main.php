@@ -1,9 +1,9 @@
 <div class="d-flex justify-content-center align-items-center" style="min-height: 100vh; padding: 5%;">
     <section style="width: 100%; max-width: 450px;">
-        <form action="#" method="post"  class="bg-light p-4 shadow rounded" style="font-family: Arial, sans-serif;">
+        <form action="#" method="post" id="login-form" class="bg-light p-4 shadow rounded" style="font-family: Arial, sans-serif;">
             <div class="mb-3">
-                <label for="username" class="form-label fw-bold" style="color: #0a5738;">Email</label>
-                <input type="email" id="username" name="username" class="form-control" 
+                <label for="email" class="form-label fw-bold" style="color: #0a5738;">Email</label>
+                <input type="email" id="email" name="email" class="form-control" 
                         placeholder="esempio@email.com" required>
             </div>
             <div class="mb-3">
@@ -13,7 +13,7 @@
                             placeholder="Inserisci la tua password" required>
                     <button class="btn btn-outline-secondary d-flex align-items-center px-3" type="button" 
                             onclick="toggleVisibility('password', 'toggle-password')">
-                        <img src="../img/eye_close.png" 
+                        <img src="img/eye_close.png" 
                                 id="toggle-password" 
                                 alt="Mostra/Nascondi Password" 
                                 width="20">
@@ -21,13 +21,14 @@
                 </div>
             </div>
             <div class="text-center mt-4">
-                <button type="submit" class="btn btn-success w-100 fw-bold">Registrati</button>
+                <button type="submit" class="btn btn-success w-100 fw-bold">Accedi</button>
             </div>
             <div class="text-center mt-4">
                 <p style="font-size: medium; color: #0a5738;">
-                    Non hai un account? <a href="registration.php" style="color: #0a5738; font-weight: bold;">Registrati ora</a>
+                    Non hai un account? <a href="registrazione.php" style="color: #0a5738; font-weight: bold;">Registrati ora</a>
                 </p>
             </div>
+            <div id="error-message" class="alert alert-danger mt-3" style="display: none;"></div>
         </form>
     </section>
 </div>

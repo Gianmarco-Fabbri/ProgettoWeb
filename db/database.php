@@ -58,7 +58,7 @@ class DatabaseHelper {
     public function getClienteData($email) {
         $stmt = $this->db->prepare("
             SELECT nome, cognome, email, telefono, codiceCarrello 
-            FROM clienti 
+            FROM cliente
             WHERE email = ?
         ");
         
@@ -72,7 +72,7 @@ class DatabaseHelper {
     /* CREAZIONE CLIENTE */
     public function createCliente($firstName, $lastName, $username, $email, $hashedPassword, $phone, $cartCode) {
         $stmt = $this->db->prepare("
-            INSERT INTO clienti (nome, cognome, username, email, password, telefono, codiceCarrello, puntiAccumulati) 
+            INSERT INTO cliente (nome, cognome, username, email, password, telefono, codiceCarrello, puntiAccumulati) 
             VALUES (?, ?, ?, ?, ?, ?, ?, 0)
         ");
         $stmt->bind_param("sssssss", $firstName, $lastName, $username, $email, $hashedPassword, $phone, $cartCode);
@@ -114,7 +114,7 @@ class DatabaseHelper {
 
     /* PUNTI ACCUMULATI DAL CLIENTE */
     public function getCustomerPoints($email) {
-        $stmt = $this->db->prepare("SELECT puntiAccumulati FROM clienti WHERE email = ?");
+        $stmt = $this->db->prepare("SELECT puntiAccumulati FROM cliente WHERE email = ?");
         $stmt->bind_param('s', $email);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -269,7 +269,7 @@ class DatabaseHelper {
     }
 
     public function getCarrelloByCode($cartCode) {
-        $stmt = $this->db->prepare("SELECT codiceCarrello FROM clienti WHERE codiceCarrello = ?");
+        $stmt = $this->db->prepare("SELECT codiceCarrello FROM cliente WHERE codiceCarrello = ?");
         $stmt->bind_param("s", $cartCode);
         $stmt->execute();
         $result = $stmt->get_result();
