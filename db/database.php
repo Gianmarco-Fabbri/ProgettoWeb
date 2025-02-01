@@ -286,6 +286,25 @@ class DatabaseHelper {
         $result = $stmt->get_result();
         return $result->fetch_assoc();
     }
+
+    public function getKitByCodice($codiceKit) {
+        $stmt = $this->db->prepare("SELECT * FROM KIT WHERE codiceKit = ?");
+        $stmt->bind_param("s", $codiceKit);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc(); // Restituisce un singolo kit come array associativo
+    }
+    
+    public function getKitPrezzo($codiceKit) {
+        $stmt = $this->db->prepare("SELECT prezzo FROM KIT WHERE codiceKit = ?");
+        $stmt->bind_param("s", $codiceKit);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $kit = $result->fetch_assoc();
+        return $kit ? $kit['prezzo'] : null;
+    }
+    
+    
     
 }   
 ?>
