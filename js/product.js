@@ -37,43 +37,55 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    const addToCartButton = document.getElementById('addToCartButton');
-    if (addToCartButton) {
-        addToCartButton.addEventListener('click', () => {
-            // Recupera l'id del prodotto dal campo nascosto
-            const idProdotto = document.getElementById('idProdotto').value;
-            // Recupera la quantità dall'input
-            const quantita = document.getElementById('quantita').value;
+    const params = new URLSearchParams(window.location.search);
+    const nome = params.get('nome') || 'Nome del prodotto';
+    const prezzo = params.get('prezzo') || 'Prezzo';
+    const codice = params.get('codiceKit') || '';  // Controlla se questo è vuoto
+    const img = params.get('img') || 'default.png';
 
-            // Verifica che la quantità sia almeno 1
-            if (quantita < 1) {
-                alert("La quantità deve essere almeno 1.");
-                return;
+    // Aggiorna i campi con i dati ricevuti dalla query string
+    document.getElementById('productNome').textContent = nome;
+    document.getElementById('productPrezzo').textContent = prezzo;
+    document.getElementById('productCodice').textContent = "Codice prodotto: " + codice;
+    document.getElementById('productImg').src = "img/" + img;
+    document.getElementById('idProdotto').value = codice; // Assicurati che venga valorizzato
+
+    console.log("Codice prodotto impostato:", document.getElementById('idProdotto').value); // Debug
+
+    // Gestione del click sul bottone "Aggiungi al carrello"
+    document.getElementById('addToCartButton').addEventListener('click', () => {
+        const idProdotto = document.getElementById('idProdotto').value;
+        const quantita = document.getElementById('quantita').value;
+
+        if (!idProdotto) {
+            alert("Errore: il codice del prodotto è mancante.");
+            return;
+        }
+
+        if (quantita < 1) {
+            alert("La quantità deve essere almeno 1.");
+            return;
+        }
+
+        const formData = new URLSearchParams();
+        formData.append('idProdotto', idProdotto);
+        formData.append('quantita', quantita);
+
+        console.log("Dati inviati al server:", formData.toString()); // Debug
+
+        fetch('ajax/carrello/aggiungiProdotto.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: formData.toString()
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert("Prodotto aggiunto al carrello!");
+            } else {
+                alert("Errore: " + data.message);
             }
-
-            // Prepara i dati per la richiesta (x-www-form-urlencoded)
-            const formData = new URLSearchParams();
-            formData.append('idProdotto', idProdotto);
-            formData.append('quantita', quantita);
-
-            // Effettua la richiesta al file PHP che gestisce l'aggiunta al carrello
-            fetch('ajax/carrello/aggiungiProdotto.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: formData.toString()
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    // Puoi mostrare un messaggio o aggiornare un contatore nel DOM
-                    alert("Prodotto aggiunto al carrello!");
-                } else {
-                    alert("Errore nell'aggiunta del prodotto: " + data.message);
-                }
-            })
-            .catch(error => console.error('Errore:', error));
-        });
-    }
+        })
+        .catch(error => console.error('Errore:', error));
+    });
 });
-
-

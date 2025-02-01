@@ -25,14 +25,14 @@
                     <div class="row mb-4">
                         <div class="col-6">
                             <!-- Placeholder per il codice del prodotto -->
-                            <p id="productCodice" class="mb-0 text-muted">Codice prodotto: </p>
+                            <p id="productCodice" class="mb-0 text-muted">Codice prodotto:</p>
                         </div>
                         <div class="col-6">
                             <p class="mb-0 text-muted">Disponibilità: <span class="text-success">Disponibile</span></p>
                         </div>
                     </div>
-                    <!-- Campo nascosto per memorizzare l'id del prodotto -->
-                    <input type="hidden" id="idProdotto" value="12345" />
+                    <!-- Campo nascosto per memorizzare l'id (codice) del prodotto -->
+                    <input type="hidden" id="idProdotto" value="" />
                     <div class="mb-4">
                         <label for="quantita" class="form-label fw-bold">Quantità:</label>
                         <input type="number" id="quantita" class="form-control" value="1" style="max-width: 100px;"/>
