@@ -88,5 +88,9 @@ async function caricaOfferte() {
     }
 }
 
-caricaKit();
-caricaOfferte();
+async function caricaContenuti() {
+    await caricaKit();  // Aspetta che carichi i kit consigliati
+    await caricaOfferte();  // Solo dopo, carica le offerte esclusive
+}
+
+caricaContenuti();
