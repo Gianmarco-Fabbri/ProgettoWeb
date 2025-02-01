@@ -4,7 +4,7 @@ function generaKitConsigliati(kit) {
         <ul>`;
     for (let i = 0; i < kit.length; i++) {
         result += `<li>
-            <a href="../html/product.html">
+            <a href="../html/product.php">
                 <img src="img/${kit[i]["img"]}" alt="${kit[i]["nome"]}"/> 
             </a>
             <p>${kit[i]["nome"]}<br/> ${kit[i]["prezzo"]} (IVA inclusa)</p>
