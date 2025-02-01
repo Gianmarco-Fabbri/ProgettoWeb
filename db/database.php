@@ -9,7 +9,7 @@ class DatabaseHelper {
         }
     }
     
-    /*KIT CONSIGLIATI*/
+    /* KIT CONSIGLIATI */
     public function getAllKits($n) {
         $stmt = $this->db->prepare("SELECT * FROM KIT ORDER BY RAND() LIMIT ?");
         $stmt->bind_param('i', $n);
@@ -18,7 +18,7 @@ class DatabaseHelper {
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    /*CATEGORIE IN EVIDENZA*/
+    /* CATEGORIE IN EVIDENZA */
     public function getFeaturedCategories($n) {
         $stmt = $this->db->prepare("SELECT nomeCategoria FROM CATEGORIA WHERE inEvidenza = 1 ORDER BY RAND() LIMIT ?");
         $stmt->bind_param('i', $n);
@@ -36,7 +36,7 @@ class DatabaseHelper {
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    /*PRODOTTI IN OFFERTA*/
+    /* PRODOTTI IN OFFERTA */
     public function getDiscountedProducts($n) {
         $stmt = $this->db->prepare("SELECT * FROM prodotti WHERE inOfferta = 1 ORDER BY scontoProdotto DESC, prezzo ASC LIMIT ?");
         $stmt->bind_param('i', $n);
@@ -45,7 +45,7 @@ class DatabaseHelper {
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    /*RECENSIONI RECENTI*/
+    /* RECENSIONI RECENTI */
     public function getLatestReviews($n) {
         $stmt = $this->db->prepare("SELECT * FROM recensione ORDER BY data DESC, codiceRecensione ASC LIMIT ?");
         $stmt->bind_param('i', $n);
@@ -54,9 +54,9 @@ class DatabaseHelper {
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    /*DATI CLIENTE*/
-    /*questi dati sono presenti nella pagina del profilo */
-    /*include il calcolo dei punti accumulati */
+    /* DATI CLIENTE */
+    /* questi dati sono presenti nella pagina del profilo */
+    /* include il calcolo dei punti accumulati */
     public function updateCustomerPoints($codiceOrdine) {
         // Recupera l'email del cliente dall'ordine
         $sql = "SELECT cliente.email, SUM(prodotto.prezzo * composizione_ordine.quantita) AS totale_spesa 
@@ -88,7 +88,7 @@ class DatabaseHelper {
         }
     }
 
-    /*PUNTI ACCUMULATI DAL CLIENTE */
+    /* PUNTI ACCUMULATI DAL CLIENTE */
     public function getCustomerPoints($email) {
         $stmt = $this->db->prepare("SELECT puntiAccumulati FROM clienti WHERE email = ?");
         $stmt->bind_param('s', $email);
@@ -96,6 +96,82 @@ class DatabaseHelper {
         $result = $stmt->get_result();
         return $result->fetch_assoc()['puntiAccumulati'] ?? 0;
     }
-  
-}
+
+    /* RECENSIONI LASCIATE DAL CLIENTE */
+    public function getCustomerReviews($email) {
+        $stmt = $this->db->prepare("SELECT codiceRecensione, testoRecensione, stelle, data, codiceProdotto FROM recensione WHERE emailCliente = ? ORDER BY data DESC");
+        $stmt->bind_param('s', $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    /* PRODOTTI NEL CARRELLO */
+    public function getCartProducts($codiceCarrello) {
+        $stmt = $this->db->prepare("
+            SELECT prodotti.codiceProdotto, prodotti.nome, prodotti.prezzo, prodotti.img, carrello.quantita 
+            FROM carrello 
+            JOIN prodotti ON carrello.codiceProdotto = prodotti.codiceProdotto
+            WHERE carrello.codiceCarrello = ?
+        ");
+        
+        $stmt->bind_param('s', $codiceCarrello);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    /* NOTIFICHE NON LETTE */
+    public function getUnreadNotifications($emailCliente) {
+        $stmt = $this->db->prepare("
+            SELECT codiceNotifica, testoNotifica, data 
+            FROM notifiche 
+            WHERE cliente = ? AND letta = 0
+            ORDER BY data DESC
+        ");
+        
+        $stmt->bind_param('s', $emailCliente);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }    
+    
+    /* NOTIFICA LETTA */
+    public function getReadNotifications($emailCliente) {
+        $stmt = $this->db->prepare("
+            SELECT codiceNotifica, testoNotifica, data 
+            FROM notifiche 
+            WHERE cliente = ? AND letta = 1
+            ORDER BY data DESC
+        ");
+        
+        $stmt->bind_param('s', $emailCliente);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+    
+    /* ORDINI DI UN CLIENTE */
+    public function getCustomerOrders($emailCliente) {
+        $stmt = $this->db->prepare("
+            SELECT ordini.codiceOrdine, ordini.dataOrdine, ordini.dataSpedizione, ordini.dataArrivo, ordini.tipoPagamento, 
+                   prodotti.codiceProdotto, prodotti.nome, prodotti.prezzo, composizione_ordine.quantita
+            FROM ordini
+            JOIN composizione_ordine ON ordini.codiceOrdine = composizione_ordine.codiceOrdine
+            JOIN prodotti ON composizione_ordine.codiceProdotto = prodotti.codiceProdotto
+            WHERE ordini.emailCliente = ?
+            ORDER BY ordini.dataOrdine DESC
+        ");
+        
+        $stmt->bind_param('s', $emailCliente);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+    
+}   
 ?>
