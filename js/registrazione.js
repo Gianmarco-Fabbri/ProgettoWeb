@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     registerForm.addEventListener("submit", async function (e) {
-        e.preventDefault();
+        e.preventDefault();        
 
         const firstName = document.getElementById('first_name').value.trim();
         const lastName = document.getElementById('last_name').value.trim();
@@ -37,27 +37,26 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        let formData = new FormData();
-        formData.append("first_name", firstName);
-        formData.append("last_name", lastName);
-        formData.append("username", username);
-        formData.append("email", email);
-        formData.append("phone", phone);
-        formData.append("password", password);
+        const userData = {
+            first_name: firstName,
+            last_name: lastName,
+            username: username,
+            email: email,
+            phone: phone,
+            password: password
+        };
 
-        // Disabilita il pulsante di registrazione durante la richiesta
         submitButton.disabled = true;
         submitButton.innerText = "Registrazione in corso...";
-
+        
         try {
             const response = await fetch("ajax/login/api-registrazione.php", {
                 method: "POST",
-                body: formData
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(userData)
             });
-
-            if (!response.ok) {
-                throw new Error(`Errore HTTP: ${response.status}`);
-            }
 
             const result = await response.json();
 
@@ -73,23 +72,21 @@ document.addEventListener("DOMContentLoaded", function () {
             console.error("Errore nella richiesta AJAX:", error);
             showMessage("Errore di connessione. Riprova più tardi.", "error");
         } finally {
-            // Riabilita il pulsante dopo la risposta
             submitButton.disabled = false;
             submitButton.innerText = "Registrati";
         }
     });
 
-    /**
-     * Funzione per mostrare un messaggio di errore o successo
-     */
     function showMessage(message, type) {
         let messageBox = document.getElementById("message-box");
         if (!messageBox) {
             console.error("Errore: il contenitore del messaggio non è stato trovato.");
             return;
         }
+    
         messageBox.innerText = message;
         messageBox.className = type === "success" ? "alert alert-success" : "alert alert-danger";
         messageBox.style.display = "block";
-    }    
+    }
+    
 });
