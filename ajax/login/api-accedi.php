@@ -32,15 +32,17 @@ if (empty($cliente['password']) || is_null($cliente['password'])) {
     exit();
 }
 
-// Verifica la password
-if (!password_verify($password, $cliente['password'])) {
+// Verifica la password con SHA2
+if (hash('sha256', $password) !== $cliente['password']) {
     echo json_encode(['success' => false, 'message' => 'Password errata.']);
     exit();
 }
 
-// Avvia la sessione
-session_start();
+// Avvia la sessione solo se non è già attiva
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 $_SESSION['user_email'] = $cliente['email'];
 
-echo json_encode(['success' => true, 'redirect' => 'profile.php', 'message' => 'Login effettuato con successo!']);
+echo json_encode(['success' => true, 'redirect' => 'index.php', 'message' => 'Login effettuato con successo!']);
 exit();

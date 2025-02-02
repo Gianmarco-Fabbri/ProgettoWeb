@@ -2,10 +2,9 @@ function toggleVisibility(inputId, iconId) {
     const input = document.getElementById(inputId);
     const icon = document.getElementById(iconId);
     input.type = input.type === 'password' ? 'text' : 'password';
-    icon.src = input.type === 'password' 
-        ? 'img/eye_close.png' 
-        : 'img/eye_open.png';
+    icon.src = input.type === 'password' ? 'img/eye_close.png' : 'img/eye_open.png';
 }
+
 document.addEventListener("DOMContentLoaded", function () {
     const loginForm = document.getElementById("login-form");
 
@@ -36,10 +35,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 body: JSON.stringify(data)
             });
 
-            if (!response.ok) {
-                throw new Error(`Errore HTTP: ${response.status}`);
-            }
-
             const result = await response.json();
 
             if (result.success) {
@@ -57,13 +52,13 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     function showMessage(message, type) {
-        let errorMessage = document.getElementById("error-message");
-        if (!errorMessage) {
+        let messageBox = document.getElementById("error-message");
+        if (!messageBox) {
             console.error("Errore: il contenitore del messaggio non è stato trovato.");
             return;
         }
-        errorMessage.innerText = message;
-        errorMessage.className = type === "success" ? "alert alert-success" : "alert alert-danger";
-        errorMessage.style.display = "block";
+        messageBox.innerText = message;
+        messageBox.className = type === "success" ? "alert alert-success" : "alert alert-danger";
+        messageBox.style.display = "block";
     }
 });

@@ -46,11 +46,11 @@ INSERT INTO CATEGORIA (nomeCategoria, scontoCategoria, inEvidenza) VALUES
 
 -- Popolamento tabella CLIENTE
 INSERT INTO CLIENTE (nome, cognome, username, email, password, telefono, codiceCarrello) VALUES
-('provaNome', 'provaCognome', 'prova', 'nome.cognome@example.com', 'prova1234', '0000000000', 'C1'),
-('Lisa', 'Vandi', 'lisav', 'lisavandi@example.com', 'password2', '1112223334', 'C2'), 
-('Kevin', 'Shimaj', 'kev', 'kevshi@example.com', 'password3', '2223334445', 'C3'),
-('Gianmarco', 'Fabbri', 'gimbo', 'giammifab@example.com', 'password4', '3334445556', 'C4'),
-('Andrea', 'Rossi', 'andrear', 'andrea.rossi@example.com', 'pass123', '4445556667', 'C5');
+('provaNome', 'provaCognome', 'prova', 'nome.cognome@example.com',  SHA2('prova1234', 256), '0000000000', 'C1'),
+('Lisa', 'Vandi', 'lisav', 'lisavandi@example.com', SHA2('password2', 256), '1112223334', 'C2'), 
+('Kevin', 'Shimaj', 'kev', 'kevshi@example.com', SHA2('password3', 256), '2223334445', 'C3'),
+('Gianmarco', 'Fabbri', 'gimbo', 'giammifab@example.com', SHA2('password4', 256), '3334445556', 'C4'),
+('Andrea', 'Rossi', 'andrear', 'andrea.rossi@example.com', SHA2('pass123', 256), '4445556667', 'C5');
 
 -- Popolamento tabella CARRELLO
 INSERT INTO CARRELLO (codiceCarrello) VALUES
