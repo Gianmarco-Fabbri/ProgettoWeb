@@ -4,6 +4,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const dataConsegnaElement = document.getElementById("data-consegna");
     const riepilogoProdottiElement = document.getElementById("riepilogo-prodotti");
 
+    if (!tipoSpedizione || !totaleElement || !dataConsegnaElement || !riepilogoProdottiElement) {
+        console.error("Errore: Elementi della pagina mancanti!");
+        return;
+    }
+
     // Carica il riepilogo dei prodotti dal server
     fetch("ajax/pagamento/api-riepilogo.php")
         .then(response => response.json())
@@ -11,23 +16,18 @@ document.addEventListener("DOMContentLoaded", function () {
             if (data.success) {
                 let html = "";
                 data.prodotti.forEach(prodotto => {
-                    // Mostriamo solo immagine, nome e quantita
                     html += `
                       <div class="d-flex align-items-center mb-2">
                         <img src="img/${prodotto.immagine}" 
-                             class="img-fluid"
+                             class="img-fluid rounded"
                              alt="${prodotto.nome}" 
-                             style="width:50px; height:auto; margin-right:8px;">
-                        <p class="mb-0">${prodotto.nome} x ${prodotto.quantita}</p>
+                             style="width:50px; height:50px; object-fit:cover;">
+                        <p class="mb-0 ms-2">${prodotto.nome} x ${prodotto.quantita}</p>
                       </div>
                     `;
                 });
-                
-                // Inseriamo il contenuto generato nel div riepilogo
-                riepilogoProdottiElement.innerHTML = html;
 
-                // Mostra il subtotale (o totale) in alto/basso
-                // Se vuoi ancora vedere il subtotale cumulativo (anche senza mostrare il prezzo unitario):
+                riepilogoProdottiElement.innerHTML = html;
                 totaleElement.textContent = `${data.subtotale.toFixed(2)} €`;
             } else {
                 console.error("Errore nel caricamento del riepilogo:", data.message);
@@ -39,7 +39,6 @@ document.addEventListener("DOMContentLoaded", function () {
     tipoSpedizione.addEventListener("change", function () {
         const tipoSpedizioneValore = tipoSpedizione.value;
 
-        // Aggiorna il totale
         fetch(`ajax/pagamento/api-calcola_totale.php?spedizione=${tipoSpedizioneValore}`)
             .then(response => response.json())
             .then(data => {
@@ -51,7 +50,6 @@ document.addEventListener("DOMContentLoaded", function () {
             })
             .catch(error => console.error("Errore durante il calcolo del totale:", error));
 
-        // Aggiorna la data di consegna
         fetch(`ajax/pagamento/api-consegna.php?spedizione=${tipoSpedizioneValore}`)
             .then(response => response.json())
             .then(data => {
@@ -62,5 +60,47 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             })
             .catch(error => console.error("Errore durante l'aggiornamento della data di consegna:", error));
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const buttonAcquisto = document.getElementById("procediPagamento");
+    if (!buttonAcquisto) {
+        console.error("Errore: Il pulsante di pagamento non esiste!");
+        return;
+    }
+
+    buttonAcquisto.addEventListener("click", function () {
+        const tipoPagamento = document.getElementById("tipo-carta").value;
+        let dataArrivo = document.getElementById("data-consegna").textContent.trim();
+
+        let formattedDate = "";
+        try {
+            const dateObj = new Date(dataArrivo);
+            if (!isNaN(dateObj.getTime())) {
+                formattedDate = dateObj.toISOString().split("T")[0];
+            } else {
+                throw new Error("Data non valida");
+            }
+        } catch (error) {
+            alert("Errore nella conversione della data di arrivo.");
+            return;
+        }
+
+        fetch("ajax/pagamento/api-acquista.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: `tipoPagamento=${encodeURIComponent(tipoPagamento)}&dataArrivo=${encodeURIComponent(formattedDate)}`
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert("Ordine completato! Numero ordine: " + data.codiceOrdine);
+                window.location.href = "ordini.php";
+            } else {
+                alert("Errore durante l'acquisto: " + data.message);
+            }
+        })
+        .catch(error => console.error("Errore:", error));
     });
 });
