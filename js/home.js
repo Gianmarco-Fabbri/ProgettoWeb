@@ -41,6 +41,26 @@ function generaOfferte(offerte) {
     return result;
 }
 
+function generaProdottiNovita(prodotti) {
+    let result = `<section>
+        <h1>Novità</h1>
+        <ul>`;
+
+    for (let i = 0; i < prodotti.length; i++) {
+        result += `<li>
+            <a href="product.php?nome=${encodeURIComponent(prodotti[i].nome)}&codiceProdotto=${encodeURIComponent(prodotti[i].codiceProdotto)}&img=${encodeURIComponent(prodotti[i].img)}&prezzo=${encodeURIComponent(prodotti[i].prezzo)}">
+                <img src="img/${prodotti[i].img}" alt="${prodotti[i].nome}"/> 
+            </a>
+            <p>${prodotti[i].nome}<br/>€${prodotti[i].prezzo} (IVA inclusa)</p>
+        </li>`;
+    }
+
+    result += `</ul>
+    </section>`;
+    return result;
+}
+
+
 async function caricaKit() {
     const url = 'ajax/api-kit_consigliati.php';
     try {
@@ -88,9 +108,35 @@ async function caricaOfferte() {
     }
 }
 
+async function caricaProdottiNovita() {
+    const url = 'ajax/api-prodotti_novita.php';
+    try {
+        const response = await fetch(url);
+        console.log("Response status:", response.status);
+
+        if (response.ok) {
+            const json = await response.json();
+            console.log("Prodotti novità ricevuti:", json);
+
+            const main = document.querySelector("main");
+            if (main) {
+                console.log("Main trovato, inserisco HTML...");
+                main.innerHTML += generaProdottiNovita(json);
+            } else {
+                console.error("Elemento <main> non trovato nel DOM");
+            }
+        } else {
+            console.error("Errore nella risposta:", response.status);
+        }
+    } catch (error) {
+        console.error("Errore durante il fetch:", error);
+    }
+}
+
 async function caricaContenuti() {
-    await caricaKit();  // Aspetta che carichi i kit consigliati
-    await caricaOfferte();  // Solo dopo, carica le offerte esclusive
+    await caricaKit();
+    await caricaOfferte();
+    await caricaProdottiNovita(); 
 }
 
 caricaContenuti();

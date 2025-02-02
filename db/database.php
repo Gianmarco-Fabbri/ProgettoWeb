@@ -29,7 +29,7 @@ class DatabaseHelper {
 
     /*PRODOTTI NOVITA'*/
     public function getLatestProducts($n) {
-        $stmt = $this->db->prepare("SELECT * FROM prodotti ORDER BY dataAggiunta DESC, codiceProdotto ASC LIMIT ?");
+        $stmt = $this->db->prepare("SELECT * FROM prodotto ORDER BY dataAggiunta DESC, codiceProdotto ASC LIMIT ?");
         $stmt->bind_param('i', $n);
         $stmt->execute();
         $result = $stmt->get_result();
