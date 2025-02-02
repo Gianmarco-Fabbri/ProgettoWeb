@@ -3,8 +3,9 @@
     <div class="border rounded-3 p-4 mb-4" style="border-color: #0a5738; background-color: #f4fbf8!important;">
         <div class="mb-4">
             <h2 class="mb-3" style="color: #0a5738">Riepilogo prodotti</h2>
-            <div id="riepilogo-prodotti">
-                <!-- Riepilogo prodotti verrà caricato dinamicamente -->
+            <!-- Aggiunte classi Bootstrap per gestire meglio il layout -->
+            <div id="riepilogo-prodotti" class="row g-3">
+                <!-- Riepilogo prodotti verrà caricato dinamicamente da pagamento.js -->
             </div>
         </div>
         <div class="mb-4">
@@ -28,22 +29,48 @@
         </div>
         <div class="mb-4">
             <label for="tipo-carta" style="color: #0a5738">Tipo carta</label>
-            <select id="tipo-carta" class="form-select mb-3" style="border-color: #0a5738">
+            <select id="tipo-carta" class="form-select mb-3" style="border-color: #0a5738" required>
                 <option selected disabled>Seleziona il tipo di carta</option>
                 <option>Visa</option>
                 <option>Mastercard</option>
                 <option>American Express</option>
             </select>
+
             <label for="numero-carta" style="color: #0a5738">Numero carta</label>
-            <input type="text" id="numero-carta" class="form-control mb-3" placeholder="Numero carta (16 cifre)" maxlength="16" aria-label="Inserisci il numero della tua carta di credito" style="border-color: #0a5738">
+            <input type="text" 
+                    id="numero-carta" 
+                    class="form-control mb-3" 
+                    placeholder="Numero carta (16 cifre)" 
+                    maxlength="16" 
+                    required
+                    pattern="^\d{16}$" 
+                    title="Inserisci 16 cifre numeriche" 
+                    style="border-color: #0a5738">
+
             <div class="row g-2">
                 <div class="col-6">
-                    <label for="scadenza" style="color: #0a5738">Scadenza (MM/AA)</label>
-                    <input type="text" id="scadenza" class="form-control" placeholder="MM/AA" style="border-color: #0a5738">
+                <label for="scadenza" style="color: #0a5738">Scadenza (MM/YY)</label>
+                <input type="text" 
+                        id="scadenza" 
+                        class="form-control" 
+                        placeholder="MM/YY" 
+                        maxlength="5"
+                        required
+                        pattern="^(0[1-9]|1[0-2])\/\d{2}$"
+                        title="Inserisci una data nel formato MM/YY (mese tra 01 e 12)" 
+                        style="border-color: #0a5738">
                 </div>
                 <div class="col-6">
-                    <label for="cvv" style="color: #0a5738">CVV</label>
-                    <input type="text" id="cvv" class="form-control" placeholder="CVV" maxlength="3" style="border-color: #0a5738">
+                <label for="cvv" style="color: #0a5738">CVV</label>
+                <input type="text" 
+                        id="cvv" 
+                        class="form-control" 
+                        placeholder="CVV" 
+                        maxlength="3" 
+                        required
+                        pattern="^\d{3}$" 
+                        title="Inserisci 3 cifre numeriche" 
+                        style="border-color: #0a5738">
                 </div>
             </div>
         </div>
@@ -76,5 +103,4 @@
     </div>
 </div>
 
-<!-- Includi il file JavaScript -->
 <script src="js/pagamento.js"></script>

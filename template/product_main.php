@@ -3,9 +3,9 @@
         <div class="row align-items-center">
             <div class="col-lg-5 mb-4 mb-lg-0">
                 <div class="bg-light rounded d-flex align-items-center justify-content-center"
-                     style="min-height: 500px; background-color: #f4fbf8!important;">
+                     style="min-height: 500px; background-color: white!important;">
                     <!-- Placeholder per l'immagine del prodotto -->
-                    <img id="productImg" src="img/kit1.png" alt="Immagine prodotto">
+                    <img id="productImg" class="img-fluid" src="img/kit1.png" alt="Immagine prodotto"/>
                 </div>
             </div> 
             <div class="col-lg-7">
