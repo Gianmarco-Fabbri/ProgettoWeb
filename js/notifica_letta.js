@@ -1,34 +1,19 @@
 document.addEventListener("DOMContentLoaded", async function () {
     const notificheLista = document.getElementById("notifiche-lista");
 
-    // Recupera l'email dell'utente loggato da sessionStorage/localStorage (se gestito lato frontend)
-    let emailUtente = localStorage.getItem("emailUtente") || sessionStorage.getItem("emailUtente");
-
-    // Se l'email non è disponibile, prova a ottenerla da un'API di sessione
-    if (!emailUtente) {
-        try {
-            const response = await fetch("../api/sessione.php");
-            if (response.ok) {
-                const data = await response.json();
-                emailUtente = data.email || "";
-            }
-        } catch (error) {
-            console.error("Errore nel recupero della sessione utente:", error);
-        }
-    }
-
-    if (!emailUtente) {
-        notificheLista.innerHTML = "<p class='text-center text-danger'>Errore: utente non autenticato.</p>";
-        return;
-    }
-
     async function caricaNotifiche() {
         try {
-            const response = await fetch(`../api/notifiche.php?azione=getNotifiche&email=${encodeURIComponent(emailUtente)}`);
-            if (!response.ok) throw new Error("Errore nel recupero delle notifiche");
+            const response = await fetch("ajax/api-notifiche.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: "azione=getNotifiche"
+            });
 
-            const notifiche = await response.json();
-            notificheLista.innerHTML = ""; // Svuota la lista prima di popolarla
+            const data = await response.json();
+            if (data.status !== "success") throw new Error(data.message);
+
+            const notifiche = data.notifiche;
+            notificheLista.innerHTML = ""; 
 
             if (notifiche.length === 0) {
                 notificheLista.innerHTML = "<p class='text-center'>Nessuna notifica disponibile.</p>";
@@ -45,6 +30,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                         <p class="text-muted"><small>${new Date(notifica.data_notifica).toLocaleString()}</small></p>
                     </div>
                     <button class="btn btn-success btn-sm segna-letta" data-id="${notifica.id}">Segna come letta</button>
+                    <button class="btn btn-danger btn-sm elimina-notifica" data-id="${notifica.id}">X</button>
                 `;
 
                 notificheLista.appendChild(notificaElemento);
@@ -54,14 +40,20 @@ document.addEventListener("DOMContentLoaded", async function () {
             document.querySelectorAll(".segna-letta").forEach(button => {
                 button.addEventListener("click", async function () {
                     const idNotifica = this.getAttribute("data-id");
-                    const notificaElemento = this.parentElement;
-
                     await segnaNotificaComeLetta(idNotifica);
-                    
-                    // Rimuovi la notifica dalla lista senza ricaricare tutta la pagina
-                    notificaElemento.remove();
+                    this.parentElement.remove();
+                    if (document.querySelectorAll(".list-group-item").length === 0) {
+                        notificheLista.innerHTML = "<p class='text-center'>Nessuna notifica disponibile.</p>";
+                    }
+                });
+            });
 
-                    // Se non ci sono più notifiche, mostra il messaggio di lista vuota
+            // Aggiungi event listener ai bottoni "Elimina notifica"
+            document.querySelectorAll(".elimina-notifica").forEach(button => {
+                button.addEventListener("click", async function () {
+                    const idNotifica = this.getAttribute("data-id");
+                    await eliminaNotifica(idNotifica);
+                    this.parentElement.remove();
                     if (document.querySelectorAll(".list-group-item").length === 0) {
                         notificheLista.innerHTML = "<p class='text-center'>Nessuna notifica disponibile.</p>";
                     }
@@ -75,16 +67,31 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     async function segnaNotificaComeLetta(idNotifica) {
         try {
-            const response = await fetch("../api/notifiche.php?azione=setNotificaLetta", {
+            const response = await fetch("ajax/api-notifiche.php", {
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: `id=${encodeURIComponent(idNotifica)}`
+                body: `azione=setNotificaLetta&id_notifica=${encodeURIComponent(idNotifica)}`
             });
 
             const result = await response.json();
-            if (!result.success) throw new Error("Errore nella marcatura della notifica");
+            if (result.status !== "success") throw new Error(result.message);
         } catch (error) {
             console.error("Errore nel segnare la notifica come letta:", error);
+        }
+    }
+
+    async function eliminaNotifica(idNotifica) {
+        try { 
+                const response = await fetch("ajax/api-notifiche.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: `azione=deleteNotifica&id_notifica=${encodeURIComponent(idNotifica)}`
+            });
+
+            const result = await response.json();
+            if (result.status !== "success") throw new Error(result.message);
+        } catch (error) {
+            console.error("Errore nell'eliminare la notifica:", error);
         }
     }
 

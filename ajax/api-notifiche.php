@@ -1,35 +1,63 @@
 <?php
 require_once('../bootstrap.php');
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+header("Content-Type: application/json");
 
-$azione = $_GET['azione'] ?? '';
+// Verifica la sessione
+session_start();
+if (!isset($_SESSION["email"])) {
+    echo json_encode(["status" => "error", "message" => "Utente non autenticato"]);
+    exit();
+}
 
-switch ($azione) {
-    case 'getNotifiche':
-        $email = $_GET['email'] ?? '';
-        if ($email) {
+$email = $_SESSION["email"];
+$isCliente = !$_SESSION["venditore"];
+
+// Gestione azioni tramite metodo POST
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $azione = $_POST["azione"] ?? '';
+
+    switch ($azione) {
+        case 'getNotifiche':
             $notifiche = $dbh->getNotificheUtente($email);
-            header("Content-Type: application/json");
-            echo json_encode($notifiche);
-        } else {
-            echo json_encode(["error" => "Email richiesta"]);
-        }
-        break;
+            echo json_encode(["status" => "success", "notifiche" => $notifiche]);
+            break;
 
-    case 'setNotificaLetta':
-        $idNotifica = $_POST['id'] ?? '';
-        if ($idNotifica) {
-            $dbh->setNotificaLetta($idNotifica);
-            echo json_encode(["success" => true]);
-        } else {
-            echo json_encode(["error" => "ID notifica richiesto"]);
-        }
-        break;
+        case 'leggiTutto':
+            $result = $dbh->updateAllNotify($email, $isCliente);
+            echo json_encode(["status" => $result ? "success" : "error", "message" => $result ? "" : "Errore nel segnare tutte le notifiche come lette"]);
+            break;
 
-    default:
-        echo json_encode(["error" => "Azione non valida"]);
+        case 'setNotificaLetta':
+            $idNotifica = $_POST["id_notifica"] ?? '';
+            if ($idNotifica) {
+                $result = $dbh->setNotificaLetta($idNotifica);
+                echo json_encode(["status" => $result ? "success" : "error", "message" => $result ? "" : "Errore nel segnare la notifica"]);
+            } else {
+                echo json_encode(["status" => "error", "message" => "ID notifica richiesto"]);
+            }
+            break;
+
+        case 'deleteNotifica':
+            $idNotifica = $_POST["id_notifica"] ?? '';
+            if ($idNotifica) {
+                $result = $dbh->deleteNotify($idNotifica, $isCliente);
+                echo json_encode(["status" => $result ? "success" : "error", "message" => $result ? "" : "Errore nell'eliminazione della notifica"]);
+            } else {
+                echo json_encode(["status" => "error", "message" => "ID notifica richiesto"]);
+            }
+            break;
+
+        case 'countNotificheNonLette':
+            $result = $dbh->countNotifyToRead($email, $isCliente);
+            echo json_encode(["status" => "success", "count" => $result]);
+            break;
+
+        default:
+            echo json_encode(["status" => "error", "message" => "Azione non valida"]);
+            break;
+    }
+} else {
+    echo json_encode(["status" => "error", "message" => "Metodo non consentito"]);
 }
 ?>

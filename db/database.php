@@ -364,6 +364,41 @@ class DatabaseHelper {
         return $result->fetch_assoc();
     }
 
+    public function countNotifyToRead($email, $isCliente) {
+        $stmt = $this->db->prepare("SELECT COUNT(*) as count 
+                                    FROM NOTIFICA 
+                                    WHERE destinatario_email = ? 
+                                      AND letto = FALSE");
+        $stmt->bind_param('s', $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        return $row['count'] ?? 0;
+    }
+    
+    public function deleteNotify($idNotifica) {
+        $stmt = $this->db->prepare("DELETE FROM NOTIFICA WHERE id = ?");
+        $stmt->bind_param('i', $idNotifica);
+        return $stmt->execute();
+    }
+    
+    public function updateAllNotify($email) {
+        $stmt = $this->db->prepare("UPDATE NOTIFICA 
+                                    SET letto = TRUE 
+                                    WHERE destinatario_email = ?");
+        $stmt->bind_param('s', $email);
+        return $stmt->execute();
+    }
+    
+    public function updateNotify($idNotifica) {
+        $stmt = $this->db->prepare("UPDATE NOTIFICA 
+                                    SET letto = TRUE 
+                                    WHERE id = ?");
+        $stmt->bind_param('i', $idNotifica);
+        return $stmt->execute();
+    }
+    
+
 
 }   
 ?>
