@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     html += `
                       <div class="d-flex align-items-center mb-2">
                         <img src="img/${prodotto.immagine}" 
+                             class="img-fluid"
                              alt="${prodotto.nome}" 
                              style="width:50px; height:auto; margin-right:8px;">
                         <p class="mb-0">${prodotto.nome} x ${prodotto.quantita}</p>

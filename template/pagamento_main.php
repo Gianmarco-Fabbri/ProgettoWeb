@@ -102,5 +102,3 @@
         </button>
     </div>
 </div>
-
-<script src="js/pagamento.js"></script>
