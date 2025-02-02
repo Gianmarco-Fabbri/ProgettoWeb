@@ -1,24 +1,30 @@
 document.addEventListener("DOMContentLoaded", async function () {
     const notificheLista = document.getElementById("notifiche-lista");
 
+    if (!notificheLista) {
+        console.error("Elemento #notifiche-lista non trovato nel DOM.");
+        return;
+    }
+
     async function caricaNotifiche() {
         try {
             const response = await fetch("ajax/api-notifiche.php", {
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: "azione=getNotifiche"
+                body: new URLSearchParams({ azione: "getNotifiche" })
             });
 
             const data = await response.json();
             if (data.status !== "success") throw new Error(data.message);
 
             const notifiche = data.notifiche;
-            notificheLista.innerHTML = ""; 
 
             if (notifiche.length === 0) {
                 notificheLista.innerHTML = "<p class='text-center'>Nessuna notifica disponibile.</p>";
                 return;
             }
+
+            notificheLista.innerHTML = "";
 
             notifiche.forEach(notifica => {
                 const notificaElemento = document.createElement("div");
@@ -48,7 +54,6 @@ document.addEventListener("DOMContentLoaded", async function () {
                 });
             });
 
-            // Aggiungi event listener ai bottoni "Elimina notifica"
             document.querySelectorAll(".elimina-notifica").forEach(button => {
                 button.addEventListener("click", async function () {
                     const idNotifica = this.getAttribute("data-id");
@@ -70,7 +75,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             const response = await fetch("ajax/api-notifiche.php", {
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: `azione=setNotificaLetta&id_notifica=${encodeURIComponent(idNotifica)}`
+                body: new URLSearchParams({ azione: "setNotificaLetta", id_notifica: idNotifica })
             });
 
             const result = await response.json();
@@ -82,10 +87,10 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     async function eliminaNotifica(idNotifica) {
         try { 
-                const response = await fetch("ajax/api-notifiche.php", {
+            const response = await fetch("ajax/api-notifiche.php", {
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: `azione=deleteNotifica&id_notifica=${encodeURIComponent(idNotifica)}`
+                body: new URLSearchParams({ azione: "deleteNotifica", id_notifica: idNotifica })
             });
 
             const result = await response.json();
