@@ -25,6 +25,7 @@
             <div class="d-flex justify-content-end gap-3 mt-4">
                 <button type="button" class="btn" style="background-color: #0a5738;color:#FFFFFF;">Cambia password</button>
                 <button type="button" class="btn" style="background-color: #B00000;color:#FFFFFF;">Elimina account</button>
+                <button type="button" id="logoutBtn" class="btn btn-warning" style="background-color:orange; color:#FFFFFF;">Logout</button>
             </div>
         </section>
 
@@ -35,7 +36,7 @@
                 <ul style="list-style: none; padding: 0; font-size: 1rem;">
                     <li class="mb-2" style="border-bottom: 1px; padding-bottom: 8px;">Punti totali: </li>
                     <li class="text-center mt-3">
-                        <a href="carrello.php" style="display: block; background-color: #0a5738; color: white; padding: 12px; border-radius: 5px; text-align: center; text-decoration: none; ">Vai al carrello per utilizzare i punti</a>
+                        <a href="carrello.php" style="display: block; background-color: #0a5738; color: white; padding: 12px; border-radius: 5px; text-align: center; text-decoration: none;">Vai al carrello per utilizzare i punti</a>
                     </li>
                 </ul>
             </div>
@@ -43,7 +44,7 @@
             <!-- Sezione Recensioni -->
             <div class="border rounded p-3" style="height: 310px; overflow-y: auto;">
                 <h3>Recensioni</h3>
-                    <p>Nessuna recensione lasciata.</p>
+                <p>Nessuna recensione lasciata.</p>
             </div>
         </aside>
     </div>

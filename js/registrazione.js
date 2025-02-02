@@ -25,6 +25,15 @@ document.addEventListener("DOMContentLoaded", function () {
         const confirmPassword = document.getElementById('confirm-password').value.trim();
         const submitButton = registerForm.querySelector("button[type='submit']");
 
+        const messageBox = document.getElementById("message-box");
+
+        if (!messageBox) {
+            console.error("Errore: il contenitore del messaggio (message-box) non è stato trovato nel DOM.");
+            return;
+        }
+
+        messageBox.style.display = "none"; // Nasconde il messaggio prima di mostrarne uno nuovo
+
         if (!firstName || !lastName || !username || !email || !phone || !password || !confirmPassword) {
             showMessage("Tutti i campi sono obbligatori.", "error");
             return;
@@ -41,7 +50,8 @@ document.addEventListener("DOMContentLoaded", function () {
             username: username,
             email: email,
             phone: phone,
-            password: password
+            password: password,
+            confirm_password: confirmPassword 
         };
 
         submitButton.disabled = true;

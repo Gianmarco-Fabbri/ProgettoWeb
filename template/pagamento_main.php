@@ -89,16 +89,15 @@
                 onclick="window.location.href='carrello.php'">
             Chiudi
         </button>
-        <button id="svuotaCarrelloBtn"
+        <button id="procediPagamento"
                 class="btn px-4"
-                data-svuota-carrello
                 style="background-color: #0a5738; color: #f4fbf8; border: 2px solid #0a5738; transition: 0.3s"
                 onmouseover="this.style.backgroundColor='#f4fbf8'; this.style.color='#0a5738'" 
                 onmouseout="this.style.backgroundColor='#0a5738'; this.style.color='#f4fbf8'"
                 onfocus="this.style.backgroundColor='#f4fbf8'; this.style.color='#0a5738'"
-                onblur="this.style.backgroundColor='#0a5738'; this.style.color='#f4fbf8'"
-                onclick="window.location.href='index.php'">
+                onblur="this.style.backgroundColor='#0a5738'; this.style.color='#f4fbf8'">
             Acquista ora
         </button>
+
     </div>
 </div>

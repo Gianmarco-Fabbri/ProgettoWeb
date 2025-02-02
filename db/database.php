@@ -284,6 +284,8 @@ class DatabaseHelper {
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    /* CARRELLO */
+
     public function getCarrelloByCode($cartCode) {
         $stmt = $this->db->prepare("SELECT codiceCarrello FROM cliente WHERE codiceCarrello = ?");
         $stmt->bind_param("s", $cartCode);
@@ -364,6 +366,57 @@ class DatabaseHelper {
         return $result->fetch_assoc();
     }
 
+    /* ORDINI */
+    public function getOrdiniByCliente($email) {
+        $stmt = $this->db->prepare("SELECT codiceOrdine, dataOrdine, dataSpedizione, dataArrivo FROM ordine WHERE emailCliente = ?");
+        $stmt->bind_param('s', $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all();
+    }
+
+    public function buyOrderByCliente($email, $tipoPagamento, $dataArrivo) {
+        $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
+    
+        if (empty($cart)) {
+            return ["success" => false, "message" => "Il carrello è vuoto."];
+        }
+        $idOrdine = "O" . rand(1000, 9999);
+    
+        try {
+            $this->db->begin_transaction();
+
+            $stmt = $this->db->prepare("
+                INSERT INTO ordine (codiceOrdine, dataOrdine, dataSpedizione, dataArrivo, tipoPagamento, emailCliente)
+                VALUES (?, NOW(), NOW(), ?, ?, ?)
+            ");
+            $stmt->bind_param("ssss", $idOrdine, $dataArrivo, $tipoPagamento, $email);
+            $stmt->execute();
+            $stmt->close();
+    
+            $stmt = $this->db->prepare("
+                INSERT INTO composizione_ordine (codiceOrdine, codiceProdotto, quantita)
+                VALUES (?, ?, ?)
+            ");
+    
+            foreach ($cart as $codiceProdotto => $quantita) {
+                $stmt->bind_param("ssi", $idOrdine, $codiceProdotto, $quantita);
+                $stmt->execute();
+            }
+            $stmt->close();
+    
+            $this->db->commit();
+    
+            unset($_SESSION['cart']);
+    
+            return ["success" => true, "message" => "Ordine effettuato con successo!", "codiceOrdine" => $idOrdine];
+    
+        } catch (Exception $e) {
+            $this->db->rollback();
+            return ["success" => false, "message" => "Errore durante l'acquisto: " . $e->getMessage()];
+        }
+    }
+    
     public function countNotifyToRead($email, $isCliente) {
         $stmt = $this->db->prepare("SELECT COUNT(*) as count 
                                     FROM NOTIFICA 

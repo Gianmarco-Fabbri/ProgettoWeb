@@ -20,7 +20,7 @@ VALUES
 
 -- Popolamento tabella VENDITORE
 INSERT INTO VENDITORE (email, password, telefono, codiceProdotto) VALUES
-('venditore@example.com', 'venditorepw', '1111111111', 'P1');
+('venditore@example.com', SHA2('venditorepw', 256), '1111111111', 'P1');
 
 -- Popolamento tabella CATEGORIA
 INSERT INTO CATEGORIA (nomeCategoria, scontoCategoria, inEvidenza) VALUES

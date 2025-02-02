@@ -9,7 +9,7 @@ ini_set('display_errors', 1);
 // Ricezione dati JSON
 $data = json_decode(file_get_contents('php://input'), true);
 if (!isset($data['email'], $data['password'])) {
-    echo json_encode(['success' => false, 'message' => 'Dati mancanti.', 'debug' => $data]);
+    echo json_encode(['success' => false, 'message' => 'Dati mancanti: specificare email e password.', 'debug' => $data]);
     exit();
 }
 
@@ -18,31 +18,43 @@ $password = trim($data['password']);
 
 // Controlla se l'utente esiste nel database
 $cliente = $dbh->getClienteData($email);
-if (!$cliente) {
+$venditore = $dbh->getVenditoreData($email);
+
+if (!$cliente && !$venditore) {
     echo json_encode(['success' => false, 'message' => 'Utente non trovato.']);
     exit();
 }
 
-if (empty($cliente['password']) || is_null($cliente['password'])) {
+// Determina se è un cliente o un venditore
+if ($cliente) {
+    $utente = $cliente;
+    $tipoUtente = 'cliente';
+} else {
+    $utente = $venditore;
+    $tipoUtente = 'venditore';
+}
+
+if (empty($utente['password'] || is_null($utente['password']))) {
     echo json_encode([
         'success' => false,
         'message' => 'Errore: password non impostata nel database.',
-        'debug' => print_r($cliente, true)
+        'debug'   => print_r($utente, true)
     ]);
-    exit();
+    exit;
 }
 
-// Verifica la password con SHA2
-if (hash('sha256', $password) !== $cliente['password']) {
+if (hash('sha256', $password) !== $utente['password']) {
     echo json_encode(['success' => false, 'message' => 'Password errata.']);
-    exit();
+    exit;
 }
 
-// Avvia la sessione solo se non è già attiva
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-$_SESSION['user_email'] = $cliente['email'];
 
-echo json_encode(['success' => true, 'redirect' => 'index.php', 'message' => 'Login effettuato con successo!']);
+$_SESSION['email'] = $cliente['email'];
+$_SESSION['user_type']  = $tipoUtente;
+
+echo json_encode(['success' => true, 'redirect' => 'index.php', 'message' => 'Login effettuato con successo!', 'userType' => $tipoUtente]);
 exit();
+?>
