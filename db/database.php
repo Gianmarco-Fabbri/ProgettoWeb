@@ -27,14 +27,15 @@ class DatabaseHelper {
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    /*PRODOTTI NOVITA'*/
+    /* PRODOTTI NOVITA */
     public function getLatestProducts($n) {
-        $stmt = $this->db->prepare("SELECT * FROM prodotto ORDER BY dataAggiunta DESC, codiceProdotto ASC LIMIT ?");
+        $stmt = $this->db->prepare("SELECT * FROM prodotto ORDER BY dataAggiunta ASC LIMIT ?");
         $stmt->bind_param('i', $n);
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+    
 
     /* PRODOTTI IN OFFERTA */
     public function getDiscountedProducts($n) {
