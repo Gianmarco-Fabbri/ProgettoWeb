@@ -1,30 +1,30 @@
 // Funzione per estrarre i parametri dalla query string
-function getKitDataFromURL() {
+function getProdottoDataFromURL() {
     const params = new URLSearchParams(window.location.search);
     return {
         nome: params.get('nome'),
-        codiceKit: params.get('codiceKit'),
+        codiceProdotto: params.get('codiceProdotto'),
         img: params.get('img'),
         prezzo: params.get('prezzo')
     };
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const kitData = getKitDataFromURL();
+    const prodottoData = getProdottoDataFromURL();
 
-    if (kitData.nome) {
-        document.getElementById('productNome').textContent = kitData.nome;
+    if (prodottoData.nome) {
+        document.getElementById('productNome').textContent = prodottoData.nome;
     }
-    if (kitData.img) {
+    if (prodottoData.img) {
         // Percorso relativo dell'immagine (img/)
-        document.getElementById('productImg').src = `img/${kitData.img}`;
-        document.getElementById('productImg').alt = kitData.nome;
+        document.getElementById('productImg').src = `img/${prodottoData.img}`;
+        document.getElementById('productImg').alt = prodottoData.nome;
     }
-    if (kitData.prezzo) {
-        document.getElementById('productPrezzo').textContent = kitData.prezzo;
+    if (prodottoData.prezzo) {
+        document.getElementById('productPrezzo').textContent = prodottoData.prezzo;
     }
-    if (kitData.codiceKit) {
-        document.getElementById('productCodice').textContent = kitData.codiceKit;
+    if (prodottoData.codiceProdotto) {
+        document.getElementById('productCodice').textContent = prodottoData.codiceProdotto;
     }
 });
 
@@ -32,8 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const params = new URLSearchParams(window.location.search);
     const nome = params.get('nome') || 'Nome del prodotto';
     const prezzo = params.get('prezzo') || 'Prezzo';
-    const codice = params.get('codiceKit') || '';
-    const img = params.get('img') || 'default.png';
+    const codice = params.get('codiceProdotto') || '';
+    const img = params.get('img');
 
     document.getElementById('productNome').textContent = nome;
     document.getElementById('productPrezzo').textContent = "€"+prezzo;

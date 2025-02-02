@@ -5,7 +5,7 @@
                 <div class="bg-light rounded d-flex align-items-center justify-content-center"
                      style="min-height: 500px; background-color: #f4fbf8!important;">
                     <!-- Placeholder per l'immagine del prodotto -->
-                    <img id="productImg" src="../img/default.png" alt="Immagine prodotto">
+                    <img id="productImg" src="img/kit1.png" alt="Immagine prodotto">
                 </div>
             </div> 
             <div class="col-lg-7">

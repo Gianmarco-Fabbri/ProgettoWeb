@@ -15,12 +15,8 @@ if (isset($_POST['idProdotto']) && isset($_POST['quantita'])) {
 
     // Inizializza il carrello se non esiste
     if (!isset($_SESSION['cart'])) {
-        $_SESSION['cart'] = array();
+        $_SESSION['cart'] = [];
     }
-
-    // Rimuove ID errati dalla sessione
-    unset($_SESSION['cart']['12345']); // Se esiste ancora, rimuovilo
-    unset($_SESSION['cart']['']); // Rimuove eventuali chiavi vuote
 
     if ($quantita > 0) {
         if (isset($_SESSION['cart'][$idProdotto])) {

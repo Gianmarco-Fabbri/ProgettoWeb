@@ -11,7 +11,14 @@ class DatabaseHelper {
     
     /* KIT CONSIGLIATI */
     public function getAllKits($n) {
-        $stmt = $this->db->prepare("SELECT * FROM KIT ORDER BY RAND() LIMIT ?");
+        $stmt = $this->db->prepare("
+            SELECT *
+            FROM PRODOTTO
+            WHERE nome LIKE 'Kit%'
+            ORDER BY RAND()
+            LIMIT ?
+            "
+        );
         $stmt->bind_param('i', $n);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -285,24 +292,21 @@ class DatabaseHelper {
         return $result->fetch_assoc();
     }
 
-    public function getKitByCodice($codiceKit) {
-        $stmt = $this->db->prepare("SELECT * FROM KIT WHERE codiceKit = ?");
-        $stmt->bind_param("s", $codiceKit);
+    public function getProdottoByCodice($codiceProdotto) {
+        $stmt = $this->db->prepare("SELECT * FROM PRODOTTO WHERE codiceProdotto = ?");
+        $stmt->bind_param("s", $codiceProdotto);
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_assoc();
     }
     
-    public function getKitPrezzo($codiceKit) {
-        $stmt = $this->db->prepare("SELECT prezzo FROM KIT WHERE codiceKit = ?");
-        $stmt->bind_param("s", $codiceKit);
+    public function getPrezzoProdotto($codiceProdotto) {
+        $stmt = $this->db->prepare("SELECT prezzo FROM PRODOTTO WHERE codiceProdotto = ?");
+        $stmt->bind_param("s", $codiceProdotto);
         $stmt->execute();
         $result = $stmt->get_result();
-        $kit = $result->fetch_assoc();
-        return $kit ? $kit['prezzo'] : null;
+        $prodotto = $result->fetch_assoc();
+        return $prodotto ? $prodotto['prezzo'] : null;
     }
-    
-    
-    
 }   
 ?>

@@ -12,7 +12,7 @@ $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
                 <?php else: ?>
                     <?php foreach ($cart as $idProdotto => $quantita): ?>
                         <?php
-                        $prodotto = $dbh->getKitByCodice($idProdotto);
+                        $prodotto = $dbh->getProdottoByCodice($idProdotto);
                         if (!$prodotto) {
                             continue;
                         }
@@ -55,9 +55,9 @@ $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
                         <?php
                         $subtotale = 0;
                         foreach ($cart as $idProdotto => $quantita) {
-                            $prezzoKit = $dbh->getKitPrezzo($idProdotto);
-                            if ($prezzoKit !== null) {
-                                $subtotale += $prezzoKit * $quantita;
+                            $prezzoProdotto = $dbh->getPrezzoProdotto($idProdotto);
+                            if ($prezzoProdotto !== null) {
+                                $subtotale += $prezzoProdotto * $quantita;
                             }
                         }
                         $sconto = 1.52;

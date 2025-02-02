@@ -1,18 +1,16 @@
 <?php
 error_log("Richiesta ricevuta in calcolaSubtotale.php");
 
-// Includi il database handler (dbh)
 require_once "../../bootstrap.php";
 
-// Verifica se il carrello esiste
 $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
 $subtotale = 0;
 
 try {
     foreach ($cart as $idProdotto => $quantita) {
-        $prezzoKit = $dbh->getKitPrezzo($idProdotto);
-        if ($prezzoKit !== null) {
-            $subtotale += $prezzoKit * $quantita;
+        $prezzoProdotto = $dbh->getPrezzoProdotto($idProdotto);
+        if ($prezzoProdotto !== null) {
+            $subtotale += $prezzoProdotto * $quantita;
         }
     }
 

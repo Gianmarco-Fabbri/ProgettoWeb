@@ -16,7 +16,7 @@ try {
         $_SESSION['cart'][$idProdotto] = $quantita;
         echo json_encode(["success" => true, "message" => "Quantità aggiornata"]);
     } else {
-        unset($_SESSION['cart'][$idProdotto]); // Rimuovi il prodotto se la quantità è 0
+        unset($_SESSION['cart'][$idProdotto]);
         echo json_encode(["success" => true, "message" => "Prodotto rimosso"]);
     }
 } catch (Exception $e) {
