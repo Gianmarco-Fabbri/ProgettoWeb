@@ -146,6 +146,16 @@ class DatabaseHelper {
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    /* MODIFICA DATI CLIENTE */
+    public function updateClienteData($email, $nome, $cognome, $telefono) {
+        $sql = "UPDATE cliente
+                SET nome = ?, cognome = ?, telefono = ?
+                WHERE email = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bind_param("ssss", $nome, $cognome, $telefono, $email);
+        return $stmt->execute();
+    }    
+
     /* DATI VENDITORE */
     public function getVenditoreData($email) {
         $stmt = $this->db->prepare("
