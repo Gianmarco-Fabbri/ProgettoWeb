@@ -3,15 +3,20 @@ require_once('../bootstrap.php');
 
 header("Content-Type: application/json");
 
-// Verifica la sessione
-session_start();
+// Verifica se la sessione è già attiva prima di avviarla
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Controllo se l'utente è autenticato
 if (!isset($_SESSION["email"])) {
     echo json_encode(["status" => "error", "message" => "Utente non autenticato"]);
     exit();
 }
 
+// Definizione delle variabili di sessione in modo sicuro
 $email = $_SESSION["email"];
-$isCliente = !$_SESSION["venditore"];
+$isCliente = isset($_SESSION["venditore"]) ? !$_SESSION["venditore"] : true; // Se "venditore" non è definito, assumiamo che sia un cliente
 
 // Gestione azioni tramite metodo POST
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -29,8 +34,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             break;
 
         case 'setNotificaLetta':
-            $idNotifica = $_POST["id_notifica"] ?? '';
-            if ($idNotifica) {
+            if (isset($_POST["id_notifica"])) {
+                $idNotifica = $_POST["id_notifica"];
                 $result = $dbh->setNotificaLetta($idNotifica);
                 echo json_encode(["status" => $result ? "success" : "error", "message" => $result ? "" : "Errore nel segnare la notifica"]);
             } else {
@@ -39,8 +44,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             break;
 
         case 'deleteNotifica':
-            $idNotifica = $_POST["id_notifica"] ?? '';
-            if ($idNotifica) {
+            if (isset($_POST["id_notifica"])) {
+                $idNotifica = $_POST["id_notifica"];
                 $result = $dbh->deleteNotify($idNotifica, $isCliente);
                 echo json_encode(["status" => $result ? "success" : "error", "message" => $result ? "" : "Errore nell'eliminazione della notifica"]);
             } else {
