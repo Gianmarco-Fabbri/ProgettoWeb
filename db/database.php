@@ -290,7 +290,7 @@ class DatabaseHelper {
         $stmt->bind_param("s", $codiceKit);
         $stmt->execute();
         $result = $stmt->get_result();
-        return $result->fetch_assoc(); // Restituisce un singolo kit come array associativo
+        return $result->fetch_assoc();
     }
     
     public function getKitPrezzo($codiceKit) {
