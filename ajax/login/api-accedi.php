@@ -52,7 +52,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-$_SESSION['user_email'] = $utente['email'];
+$_SESSION['email'] = $cliente['email'];
 $_SESSION['user_type']  = $tipoUtente;
 
 echo json_encode(['success' => true, 'redirect' => 'index.php', 'message' => 'Login effettuato con successo!', 'userType' => $tipoUtente]);
