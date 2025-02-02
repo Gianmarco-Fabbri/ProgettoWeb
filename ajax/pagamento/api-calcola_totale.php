@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-// Recupera il tipo di spedizione dalla query string
+require_once "../../bootstrap.php";
+
 $spedizione = $_GET['spedizione'] ?? null;
 
-// Calcola il costo della spedizione
 $costoSpedizione = match ($spedizione) {
     "standard" => 5,
     "express" => 10,
@@ -16,7 +16,7 @@ $costoSpedizione = match ($spedizione) {
 $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
 $subtotale = 0;
 foreach ($cart as $idProdotto => $quantita) {
-    $prezzoKit = 10; // Recupera il prezzo reale dal database
+    $prezzoKit = $dbh->getPrezzoProdotto($idProdotto);
     $subtotale += $prezzoKit * $quantita;
 }
 

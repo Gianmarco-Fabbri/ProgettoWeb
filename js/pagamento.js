@@ -11,9 +11,23 @@ document.addEventListener("DOMContentLoaded", function () {
             if (data.success) {
                 let html = "";
                 data.prodotti.forEach(prodotto => {
-                    html += `<p class="mb-2">${prodotto.nome} - ${prodotto.quantita} x ${prodotto.prezzoUnitario.toFixed(2)} € = ${prodotto.prezzoTotale.toFixed(2)} €</p>`;
+                    // Mostriamo solo immagine, nome e quantita
+                    html += `
+                      <div class="d-flex align-items-center mb-2">
+                        <img src="img/${prodotto.immagine}" 
+                             class="img-fluid"
+                             alt="${prodotto.nome}" 
+                             style="width:50px; height:auto; margin-right:8px;">
+                        <p class="mb-0">${prodotto.nome} x ${prodotto.quantita}</p>
+                      </div>
+                    `;
                 });
+                
+                // Inseriamo il contenuto generato nel div riepilogo
                 riepilogoProdottiElement.innerHTML = html;
+
+                // Mostra il subtotale (o totale) in alto/basso
+                // Se vuoi ancora vedere il subtotale cumulativo (anche senza mostrare il prezzo unitario):
                 totaleElement.textContent = `${data.subtotale.toFixed(2)} €`;
             } else {
                 console.error("Errore nel caricamento del riepilogo:", data.message);

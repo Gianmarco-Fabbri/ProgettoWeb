@@ -308,5 +308,62 @@ class DatabaseHelper {
         $prodotto = $result->fetch_assoc();
         return $prodotto ? $prodotto['prezzo'] : null;
     }
+
+    /* NOTIFICHE */
+    public function aggiungiNotifica($destinatario, $tipo, $messaggio) {
+        $stmt = $this->db->prepare("INSERT INTO NOTIFICA (destinatario_email, tipo, messaggio) VALUES (?, ?, ?)");
+        $stmt->bind_param('sss', $destinatario, $tipo, $messaggio);
+        return $stmt->execute();
+    }
+
+    public function getNotificheUtente($email) {
+        $stmt = $this->db->prepare("SELECT id, tipo, messaggio, data_notifica, letto FROM NOTIFICA WHERE destinatario_email = ? ORDER BY data_notifica DESC");
+        $stmt->bind_param('s', $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function setNotificaLetta($idNotifica) {
+        $stmt = $this->db->prepare("UPDATE NOTIFICA SET letto = TRUE WHERE id = ?");
+        $stmt->bind_param('i', $idNotifica);
+        return $stmt->execute();
+    }
+
+    public function getEmailClienteDaOrdine($codiceOrdine) {
+        $stmt = $this->db->prepare("SELECT emailCliente FROM ORDINE WHERE codiceOrdine = ?");
+        $stmt->bind_param('s', $codiceOrdine);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
+    }
+
+    public function getVenditoriDaOrdine($codiceOrdine) {
+        $stmt = $this->db->prepare("SELECT DISTINCT v.email FROM venditore v 
+                                     JOIN prodotto p ON v.codiceProdotto = p.codiceProdotto
+                                     JOIN ordine o ON p.codiceProdotto = o.codiceProdotto
+                                     WHERE o.codiceOrdine = ?");
+        $stmt->bind_param('s', $codiceOrdine);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getTuttiClienti() {
+        $stmt = $this->db->prepare("SELECT email FROM cliente");
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getNomeProdotto($codiceProdotto) {
+        $stmt = $this->db->prepare("SELECT nome FROM prodotto WHERE codiceProdotto = ?");
+        $stmt->bind_param('s', $codiceProdotto);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
+    }
+
+
 }   
 ?>
