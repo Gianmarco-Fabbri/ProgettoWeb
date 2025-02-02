@@ -2,9 +2,7 @@ function toggleVisibility(inputId, iconId) {
     const input = document.getElementById(inputId);
     const icon = document.getElementById(iconId);
     input.type = input.type === 'password' ? 'text' : 'password';
-    icon.src = input.type === 'password' 
-        ? 'img/eye_close.png' 
-        : 'img/eye_open.png';
+    icon.src = input.type === 'password' ? 'img/eye_close.png' : 'img/eye_open.png';
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -63,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (result.success) {
                 showMessage("Registrazione completata! Reindirizzamento...", "success");
                 setTimeout(() => {
-                    window.location.href = "accedi.php";
+                    window.location.href = "index.php";
                 }, 1000);
             } else {
                 showMessage(result.message, "error");
@@ -88,5 +86,4 @@ document.addEventListener("DOMContentLoaded", function () {
         messageBox.className = type === "success" ? "alert alert-success" : "alert alert-danger";
         messageBox.style.display = "block";
     }
-    
 });

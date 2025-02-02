@@ -142,8 +142,8 @@ class DatabaseHelper {
     /* DATI VENDITORE */
     public function getVenditoreData($email) {
         $stmt = $this->db->prepare("
-            SELECT email, nome, cognome, password, telefono 
-            FROM venditori 
+            SELECT email, password, telefono
+            FROM venditore 
             WHERE email = ?
         ");
         

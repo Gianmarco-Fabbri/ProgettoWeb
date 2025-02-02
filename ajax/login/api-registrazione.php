@@ -2,6 +2,8 @@
 require_once '../../bootstrap.php';
 
 header('Content-Type: application/json');
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 // Legge i dati JSON dal client
 $data = json_decode(file_get_contents('php://input'), true);
@@ -11,12 +13,13 @@ if (!$data) {
     exit;
 }
 
-$firstName = filter_var($data['first_name'], FILTER_SANITIZE_STRING);
-$lastName = filter_var($data['last_name'], FILTER_SANITIZE_STRING);
-$username = filter_var($data['username'], FILTER_SANITIZE_STRING);
+// Sanificazione input
+$firstName = htmlspecialchars(strip_tags($data['first_name']));
+$lastName = htmlspecialchars(strip_tags($data['last_name']));
+$username = htmlspecialchars(strip_tags($data['username']));
 $email = filter_var($data['email'], FILTER_SANITIZE_EMAIL);
-$phone = filter_var($data['phone'], FILTER_SANITIZE_STRING);
-$password = $data['password'];
+$phone = htmlspecialchars(strip_tags($data['phone']));
+$password = trim($data['password']);
 
 if (!$firstName || !$lastName || !$username || !$email || !$phone || !$password) {
     echo json_encode(['success' => false, 'message' => 'Tutti i campi sono obbligatori.']);
@@ -38,16 +41,11 @@ do {
     $existingCart = $dbh->getCarrelloByCode($cartCode);
 } while ($existingCart);
 
-// Hash della password
-$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+// Hash della password con SHA2
+$hashedPassword = hash('sha256', $password);
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-header('Content-Type: application/json');
-
-
-// Inserisce il nuovo utente nel database
 try {
+    // Inserisce il nuovo utente nel database
     $insertSuccess = $dbh->createCliente($firstName, $lastName, $username, $email, $hashedPassword, $phone, $cartCode);
     if ($insertSuccess) {
         echo json_encode(['success' => true, 'message' => 'Registrazione completata con successo!']);
@@ -55,6 +53,6 @@ try {
         echo json_encode(['success' => false, 'message' => 'Errore durante la registrazione.']);
     }
 } catch (Exception $e) {
-    echo json_encode(['success' => false, 'message' => 'Errore del server.']);
+    echo json_encode(['success' => false, 'message' => 'Errore del server.', 'debug' => $e->getMessage()]);
 }
 ?>
