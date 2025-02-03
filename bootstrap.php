@@ -1,5 +1,9 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+} else {
+    error_log("Sessione già attiva con ID: " . session_id());
+}
 define("UPLOAD_DIR", "./img/");
 
 require_once("utils/functions.php");
