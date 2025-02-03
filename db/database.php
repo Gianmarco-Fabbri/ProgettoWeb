@@ -460,8 +460,21 @@ class DatabaseHelper {
         $stmt->bind_param('i', $idNotifica);
         return $stmt->execute();
     }
+
+    public function aggiungiNotifica($destinatario, $tipo, $messaggio) {
+        $stmt = $this->db->prepare("INSERT INTO NOTIFICA (destinatario_email, tipo, messaggio, data_notifica, letto) 
+                                    VALUES (?, ?, ?, NOW(), FALSE)");
+        $stmt->bind_param('sss', $destinatario, $tipo, $messaggio);
+        return $stmt->execute();
+    }
     
-
-
+    public function aggiornaStatoOrdine($codiceOrdine) {
+        $stmt = $this->db->prepare("UPDATE ORDINE 
+                                    SET stato = 'Consegnato' 
+                                    WHERE codiceOrdine = ?");
+        $stmt->bind_param('s', $codiceOrdine);
+        return $stmt->execute();
+    }
+    
 }   
 ?>
