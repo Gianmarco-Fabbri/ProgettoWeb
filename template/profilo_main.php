@@ -28,7 +28,7 @@
                 <button type="button" class="btn btn-light border" data-bs-toggle="modal" data-bs-target="#modificaProfiloModal">Modifica Profilo</button>
             </div>
             <div class="d-flex justify-content-end gap-3 mt-4">
-                <button type="button" class="btn" style="background-color: #0a5738;color:#FFFFFF;">Cambia password</button>
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modificaPasswordModal" style="background-color: #0a5738;color:#FFFFFF;">Cambia password</button>
                 <button type="button" class="btn" style="background-color: #B00000;color:#FFFFFF;">Elimina account</button>
                 <button type="button" id="logoutBtn" class="btn btn-warning" style="background-color:orange; color:#FFFFFF;">Logout</button>
             </div>
@@ -99,3 +99,76 @@
     </div>
 </div>
 
+<!-- Cambia Password -->
+<div class="modal fade" id="modificaPasswordModal" tabindex="-1" aria-labelledby="modificaPasswordLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modificaPasswordLabel">Cambia la tua password</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Contenitore per il messaggio di errore -->
+                <div id="message-container" class="message-container text-center" style="color: #B00000; margin-bottom: 15px;"></div>
+                
+                <form id="cambiaPasswordForm">
+                    <!-- Password Attuale -->
+                    <div class="mb-3">
+                        <label for="passwordAttuale" class="form-label">Password Attuale</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="passwordAttuale" name="passwordAttuale" required>
+                            <button class="btn btn-outline-secondary d-flex align-items-center px-3" type="button" 
+                                    onclick="toggleVisibility('passwordAttuale', 'togglePasswordAttuale')">
+                                <img src="img/eye_close.png" id="togglePasswordAttuale" alt="Mostra/Nascondi Password" width="20">
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Nuova Password -->
+                    <div class="mb-3">
+                        <label for="nuovaPassword" class="form-label">Nuova Password</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="nuovaPassword" name="nuovaPassword" required>
+                            <button class="btn btn-outline-secondary d-flex align-items-center px-3" type="button" 
+                                    onclick="toggleVisibility('nuovaPassword', 'togglePasswordNuova')">
+                                <img src="img/eye_close.png" id="togglePasswordNuova" alt="Mostra/Nascondi Password" width="20">
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Conferma Nuova Password -->
+                    <div class="mb-3">
+                        <label for="confermaNuovaPassword" class="form-label">Conferma Nuova Password</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="confermaNuovaPassword" name="confermaNuovaPassword" required>
+                            <button class="btn btn-outline-secondary d-flex align-items-center px-3" type="button" 
+                                    onclick="toggleVisibility('confermaNuovaPassword', 'togglePasswordConferma')">
+                                <img src="img/eye_close.png" id="togglePasswordConferma" alt="Mostra/Nascondi Password" width="20">
+                            </button>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn" style="background-color: #0a5738; color:#FFFFFF">Cambia Password</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Elimina Account -->
+<div class="modal fade" id="eliminaAccountModal" tabindex="-1" aria-labelledby="eliminaAccountLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="eliminaAccountLabel">Elimina Account</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Sei sicuro di voler eliminare il tuo account? Questa azione è irreversibile.</p>
+                <button type="button" class="btn" style="background-color: #B00000;color:#FFFFFF">Elimina Account</button>
+                <div class="message"></div> <!-- Contenitore per i messaggi di successo o errore -->
+            </div>
+        </div>
+    </div>
+</div>
