@@ -14,8 +14,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 return response.json();
             })
             .then(notifiche => {
+                console.log(notifiche);
                 if (!notifiche) return;
-    
+                
                 notificheLista.innerHTML = '';
                 notifiche.forEach(notifica => {
                     const notificaElement = document.createElement('div');
