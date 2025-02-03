@@ -3,7 +3,11 @@ require_once 'bootstrap.php';
 
 $templateParams["titolo"] = "Profilo - Benessere market";
 $templateParams["nome"] = "profilo_main.php";
-$templateParams["js"] = ["js/logout.js", "js/profilo.js", "js/modificaProfilo.js"];
+$templateParams["js"] = ["js/logout.js", 
+                         "js/profilo.js", 
+                         "js/modificaProfilo.js",
+                         "js/eliminaAccount.js",
+                         "js/modificaPassword.js"];
 
 // Verifica se l'utente è loggato
 if (isset($_SESSION['email'])) {
