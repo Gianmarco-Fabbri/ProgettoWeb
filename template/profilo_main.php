@@ -92,8 +92,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
-                <button type="button" class="btn btn-primary" id="salvaModificheBtn">Salva modifiche</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="background-color: grey; color:white">Chiudi</button>
+                <button type="button" class="btn btn-primary" id="salvaModificheBtn" style="background-color: #0a5738; color:#FFFFFF">Salva modifiche</button>
             </div>
         </div>
     </div>
