@@ -1,51 +1,52 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // Se hai già fetchDatiProfilo() all’avvio, qui resti come prima
     fetchDatiProfilo();
 
-    // Aggiungi l’ascoltatore sul bottone
     document.getElementById("salvaModificheBtn").addEventListener("click", function() {
         salvaModificheProfilo();
     });
 });
 
-function salvaModificheProfilo() {
-    // Prendi i valori dalla modale
-    const nome = document.getElementById("editNome").value;
-    const cognome = document.getElementById("editCognome").value;
-    const telefono = document.getElementById("editTelefono").value;
+async function salvaModificheProfilo() {
+    try {
+        const nome = document.getElementById("editNome").value.trim();
+        const cognome = document.getElementById("editCognome").value.trim();
+        const telefono = document.getElementById("editTelefono").value.trim();
+        const formData = new FormData();
+        
+        formData.append("nome", nome);
+        formData.append("cognome", cognome);
+        formData.append("telefono", telefono);
 
-    // Prepara i dati da inviare in POST
-    const formData = new FormData();
-    formData.append("nome", nome);
-    formData.append("cognome", cognome);
-    formData.append("telefono", telefono);
+        const response = await fetch("ajax/profilo/api-modificaProfilo.php", {
+            method: "POST",
+            credentials: "same-origin",
+            body: formData
+        });
 
-    fetch("ajax/profilo/api-modificaProfilo.php", {
-        method: "POST",
-        credentials: "same-origin",
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        if(data.success) {
-            // Aggiornamento avvenuto con successo
+        const text = await response.text();
+        let data;
+        try {
+            data = JSON.parse(text);
+        } catch (error) {
+            throw new Error("ERRORE: La risposta del server non è un JSON valido!");
+        }
+
+        if (data.success) {
             alert(data.message);
-
-            // Chiudi la modale
-            let modalEl = document.getElementById("modificaProfiloModal");
-            let modal = bootstrap.Modal.getInstance(modalEl);
-            modal.hide();
-
-            // Aggiorna i campi nella pagina (nome, cognome, telefono)
+            
             document.getElementById("nome").value = nome;
             document.getElementById("cognome").value = cognome;
             document.getElementById("telefono").value = telefono;
+
+            document.activeElement.blur();
+
+            let modalEl = document.getElementById("modificaProfiloModal");
+            let modal = bootstrap.Modal.getInstance(modalEl);
+            modal.hide();
         } else {
-            // Errore dal server
-            alert(data.message);
+            alert("Errore: " + data.message);
         }
-    })
-    .catch(error => {
-        console.error("Errore:", error);
-    });
+    } catch (error) {
+        alert("Errore nella connessione al server: " + error.message);
+    }
 }
