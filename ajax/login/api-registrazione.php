@@ -45,9 +45,9 @@ do {
 $hashedPassword = hash('sha256', $password);
 
 try {
-    // Inserisce il nuovo utente nel database
     $insertSuccess = $dbh->createCliente($firstName, $lastName, $username, $email, $hashedPassword, $phone, $cartCode);
     if ($insertSuccess) {
+        $_SESSION['email'] = $email; // login automatico
         echo json_encode(['success' => true, 'message' => 'Registrazione completata con successo!']);
     } else {
         echo json_encode(['success' => false, 'message' => 'Errore durante la registrazione.']);
