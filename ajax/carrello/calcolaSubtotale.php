@@ -13,11 +13,10 @@ try {
             $subtotale += $prezzoProdotto * $quantita;
         }
     }
-
-    // Arrotonda il subtotale a 2 cifre decimali
+    
+    $subtotale < 0 ? $subtotale = 0 : $subtotale;
     $subtotale = round($subtotale, 2);
 
-    // Restituisci il subtotale come JSON
     echo json_encode([
         "success" => true,
         "subtotale" => $subtotale
