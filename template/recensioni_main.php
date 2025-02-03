@@ -9,7 +9,8 @@
 
                 <!-- Immagine per desktop -->
                 <div class="d-none d-md-block text-center">
-                    <img src="../img/cart.png" alt="Immagine Prodotto" 
+                    <!-- Immagine dinamica -->
+                    <img src="" alt="Immagine Prodotto" 
                             class="img-fluid" 
                             style="max-width: 120px; height: auto; object-fit: contain;">
                 </div>
@@ -17,7 +18,8 @@
     
             <!-- Immagine per mobile -->
             <div class="d-block d-md-none">
-                <img src="../img/cart.png" alt="Immagine Prodotto" 
+                <!-- Immagine dinamica -->
+                <img src="." alt="Immagine Prodotto" 
                         class="img-fluid" 
                         style="max-width: 80px; height: auto; object-fit: contain;">
             </div>
