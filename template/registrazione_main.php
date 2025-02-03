@@ -62,6 +62,10 @@
                         <button type="submit" class="btn btn-success w-100 fw-bold">Registrati</button>
                     </div>
                 </form>
+
+            <!-- ELIMINA --> 
+            <div id="message-box" class="alert d-none"></div>
+
             </div>
         </section>
         <aside class="col-lg-6 col-md-8 d-flex">

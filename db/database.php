@@ -70,6 +70,24 @@ class DatabaseHelper {
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    /* AGGIUNTA RECENSIONE */
+    public function aggiungiRecensione($codiceRecensione, $testoRecensione, $stelle, $data, $emailCliente, $codiceProdotto) {
+        $stmt = $this->db->prepare("INSERT INTO recensione (codiceRecensione, testoRecensione, stelle, data, emailCliente, codiceProdotto) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param('ssisss', $codiceRecensione, $testoRecensione, $stelle, $data, $emailCliente, $codiceProdotto);
+        $success = $stmt->execute();
+        
+        return $success;
+    }
+    
+    public function getRecensione($codiceRecensione) {
+        $stmt = $this->db->prepare("SELECT codiceRecensione FROM recensione WHERE codiceRecensione = ?");
+        $stmt->bind_param('s', $codiceRecensione);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc(); 
+    }
+    
+
     /* DATI CLIENTE */
     public function getClienteData($email) {
         $stmt = $this->db->prepare("
