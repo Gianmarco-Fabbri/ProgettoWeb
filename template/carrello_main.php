@@ -61,7 +61,7 @@ $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
                             }
                         }
                         $sconto = 1.52;
-                        $totale = $subtotale - $sconto;
+                        $totale = $subtotale - $sconto < 0 ? 0 : $subtotale - $sconto;
                         ?>
                         <dt class="col-6">Subtotale:</dt>
                         <dd class="col-6 text-end" id="subtotale">€<?php echo number_format($subtotale, 2); ?></dd>

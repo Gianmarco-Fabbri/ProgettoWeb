@@ -1,18 +1,4 @@
-/**
- * Aggiorna la quantità di un prodotto nel carrello e ricalcola il subtotale.
- * @param {string} idProdotto - L'ID del prodotto da aggiornare.
- * @param {number} nuovaQuantita - La nuova quantità impostata dall'utente.
- */
 function aggiornaQuantita(idProdotto, nuovaQuantita) {
-    if (nuovaQuantita < 1) {
-        if (confirm("Vuoi rimuovere il prodotto dal carrello?")) {
-            rimuoviProdotto(idProdotto);
-            return;
-        } else {
-            return;
-        }
-    }
-
     fetch("ajax/carrello/aggiornaQuantita.php", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -21,6 +7,27 @@ function aggiornaQuantita(idProdotto, nuovaQuantita) {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
+            console.log("Risposta API:", data);
+
+            const prodottoRiga = document.getElementById(`cart-item-${idProdotto}`);
+
+            if (nuovaQuantita == 0) {
+                if (prodottoRiga) {
+                    prodottoRiga.remove(); // Rimuove l'articolo dal carrello
+                    console.log(`Prodotto ${idProdotto} rimosso dal DOM.`);
+                } else {
+                    console.warn(`Elemento con id "cart-item-${idProdotto}" non trovato.`);
+                }
+
+                // Controlla se il carrello è vuoto
+                if (document.querySelectorAll("[id^='cart-item-']").length === 0) {
+                    document.getElementById("carrello-container").innerHTML = `
+                        <p class="text-center text-muted">Il carrello è vuoto.</p>
+                    `;
+                    document.getElementById("asideCarrello").style.display = "none"; // Nasconde il riepilogo
+                }
+            }
+
             aggiornaSubtotale();
         } else {
             alert("Errore nell'aggiornamento della quantità: " + data.message);
