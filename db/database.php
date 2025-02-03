@@ -322,12 +322,6 @@ class DatabaseHelper {
     }
 
     /* NOTIFICHE */
-    public function aggiungiNotifica($destinatario, $tipo, $messaggio) {
-        $stmt = $this->db->prepare("INSERT INTO NOTIFICA (destinatario_email, tipo, messaggio) VALUES (?, ?, ?)");
-        $stmt->bind_param('sss', $destinatario, $tipo, $messaggio);
-        return $stmt->execute();
-    }
-
     public function getNotificheUtente($email) {
         $stmt = $this->db->prepare("SELECT id, tipo, messaggio, data_notifica, letto FROM NOTIFICA WHERE destinatario_email = ? ORDER BY data_notifica DESC");
         $stmt->bind_param('s', $email);
