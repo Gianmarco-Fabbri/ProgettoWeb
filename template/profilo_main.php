@@ -29,7 +29,7 @@
             </div>
             <div class="d-flex justify-content-end gap-3 mt-4">
                 <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modificaPasswordModal" style="background-color: #0a5738;color:#FFFFFF;">Cambia password</button>
-                <button type="button" class="btn" style="background-color: #B00000;color:#FFFFFF;">Elimina account</button>
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#eliminaAccountModal" style="background-color: #B00000;color:#FFFFFF;">Elimina account</button>
                 <button type="button" id="logoutBtn" class="btn btn-warning" style="background-color:orange; color:#FFFFFF;">Logout</button>
             </div>
         </section>
@@ -165,8 +165,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>Sei sicuro di voler eliminare il tuo account? Questa azione è irreversibile.</p>
-                <button type="button" class="btn" style="background-color: #B00000;color:#FFFFFF">Elimina Account</button>
+                <p>Sei sicuro di voler eliminare il tuo account?</p>
+                <button type="button" class="btn btn-danger" id="confirmDeleteAccount">Elimina Account</button>
                 <div class="message"></div> <!-- Contenitore per i messaggi di successo o errore -->
             </div>
         </div>

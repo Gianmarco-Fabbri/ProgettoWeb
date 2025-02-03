@@ -188,6 +188,13 @@ class DatabaseHelper {
         return $stmt->execute(); 
     }
 
+    /* ELIMINA ACCOUNT CLIENTE */
+    public function eliminaAccountCliente($email) {
+        $stmt = $this->db->prepare("DELETE FROM cliente WHERE email = ?");
+        $stmt->bind_param('s', $email);
+        return $stmt->execute();
+    }
+    
     /* DATI VENDITORE */
     public function getVenditoreData($email) {
         $stmt = $this->db->prepare("
