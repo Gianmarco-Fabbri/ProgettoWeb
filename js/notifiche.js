@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => {
                 if (response.status === 401) {
                     console.warn("Utente non autenticato, reindirizzamento alla pagina di login.");
-                    window.location.href = "accedi.html"; // Reindirizza alla pagina di login
+                    window.location.href = "accedi.php"; // Reindirizza alla pagina di login
                     return;
                 }
                 if (!response.ok) throw new Error('Errore nel caricamento');

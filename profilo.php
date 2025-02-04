@@ -8,6 +8,7 @@ $templateParams["js"] = ["js/logout.js",
                          "js/modificaProfilo.js",
                          "js/eliminaAccount.js",
                          "js/modificaPassword.js"];
+$templateParams["navs"] = [["link" => "profilo.php", "name" => "Profilo"]];
 
 // Verifica se l'utente è loggato
 if (isset($_SESSION['email'])) {
