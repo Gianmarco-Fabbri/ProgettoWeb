@@ -1,7 +1,7 @@
 <?php
 require_once 'bootstrap.php';
 
-$templateParams["titolo"] = "Profilo - Benessere market";
+$templateParams["titolo"] = "Profilo - Benessere Market";
 $templateParams["nome"] = "profilo_main.php";
 $templateParams["js"] = ["js/logout.js", 
                          "js/profilo.js", 
@@ -16,9 +16,18 @@ if (isset($_SESSION['email'])) {
     $templateParams["cliente"] = $dbh->getClienteData($_SESSION['email']);  
     $templateParams["recensioni"] = $dbh->getCustomerReviews($_SESSION['email']);
     $templateParams["puntiAccumulati"] = $dbh->getCustomerPoints($_SESSION['email']);
+
+    // Determina quale template usare
+    if (!empty($templateParams["venditore"])) {
+        $templateFile = 'template/base_venditore.php';  //Il venditore visualizza il suo template specifico
+    } else {
+        $templateFile = 'template/base.php'; //Il cliente visualizza il template base
+    }
 } else {
     // Se l'utente non è loggato, reindirizza alla pagina di login
     header('Location: accedi.php');
+    exit();
 }
-require 'template/base.php';
+
+require $templateFile;
 ?>
