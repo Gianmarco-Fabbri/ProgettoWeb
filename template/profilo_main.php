@@ -32,11 +32,6 @@
                         <label class="form-label">Telefono</label>
                         <input type="text" class="form-control" value="<?php echo $templateParams["venditore"]["telefono"]; ?>" readonly>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label">Codice Prodotto</label>
-                        <input type="text" class="form-control" value="<?php echo $templateParams["venditore"]["codiceProdotto"]; ?>" readonly>
-                    </div>
-
                 <?php elseif (isset($templateParams["cliente"])): ?>
                     <!-- Dati del Cliente -->
                     <div class="mb-3">
