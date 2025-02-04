@@ -307,7 +307,26 @@ class DatabaseHelper {
         
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+    /* PRODOTTI SALUTE FILTRATI PER PREZZO */
+    public function getProdottiSaluteFiltratiPerPrezzo($minPrice, $maxPrice) {
+        $stmt = $this->db->prepare("
+            SELECT codiceProdotto, nome, prezzo, img, scontoProdotto 
+            FROM PRODOTTO 
+            WHERE categoria = 'Salute'
+            AND prezzo BETWEEN ? AND ?
+        ");
     
+        if ($stmt) {
+            $stmt->bind_param("dd", $minPrice, $maxPrice);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            return $result->fetch_all(MYSQLI_ASSOC);
+        } else {
+            return ["error" => "Errore nella query SQL"];
+        }
+    }
+
     /* CATEGORIE BELLEZZA */
     public function getBellezzaCategories() {
         $stmt = $this->db->prepare("
@@ -321,22 +340,8 @@ class DatabaseHelper {
         
         return $result->fetch_all(MYSQLI_ASSOC);
     }
-
-    /* PRODOTTI CATEGORIA BELLEZZA */
-    public function getProdottiFromBellezza() {
-        $stmt = $this->db->prepare("
-            SELECT codiceProdotto, nome, prezzo, img, scontoProdotto 
-            FROM PRODOTTO 
-            WHERE categoria = 'Bellezza'
-        ");
-        
-        $stmt->execute();
-        $result = $stmt->get_result();
-        
-        return $result->fetch_all(MYSQLI_ASSOC);
-    }
     
-    /* PRODOTTI BELLEZZA FILTRATI */
+    /* PRODOTTI BELLEZZA FILTRATI PER PREZZO */
     public function getProdottiBellezzaFiltratiPerPrezzo($minPrice, $maxPrice) {
         $stmt = $this->db->prepare("
             SELECT codiceProdotto, nome, prezzo, img, scontoProdotto 
@@ -360,7 +365,7 @@ class DatabaseHelper {
         $stmt = $this->db->prepare("
             SELECT nomeCategoria, scontoCategoria, inEvidenza 
             FROM categoria 
-            WHERE nomeCategoria LIKE '%Prfumi%'
+            WHERE nomeCategoria LIKE '%Profumi%'
         ");
         
         $stmt->execute();
@@ -369,18 +374,23 @@ class DatabaseHelper {
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    /* PRODOTTI CATEGORIA PROFUMI */
-    public function getProdottiFromProfumi() {
+    /* PRODOTTI PROFUMI FILTRATI PER PREZZO */
+    public function getProdottiProfumiFiltratiPerPrezzo($minPrice, $maxPrice) {
         $stmt = $this->db->prepare("
             SELECT codiceProdotto, nome, prezzo, img, scontoProdotto 
             FROM PRODOTTO 
             WHERE categoria = 'Profumi'
+            AND prezzo BETWEEN ? AND ?
         ");
-        
-        $stmt->execute();
-        $result = $stmt->get_result();
-        
-        return $result->fetch_all(MYSQLI_ASSOC);
+    
+        if ($stmt) {
+            $stmt->bind_param("dd", $minPrice, $maxPrice);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            return $result->fetch_all(MYSQLI_ASSOC);
+        } else {
+            return ["error" => "Errore nella query SQL"];
+        }
     }
     
     /* CATEGORIE CASA & GREEN */
@@ -409,6 +419,25 @@ class DatabaseHelper {
         $result = $stmt->get_result();
         
         return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    /* PRODOTTI CASA&GREEN FILTRATI PER PREZZO */
+    public function getProdottiCasaGreenFiltratiPerPrezzo($minPrice, $maxPrice) {
+        $stmt = $this->db->prepare("
+            SELECT codiceProdotto, nome, prezzo, img, scontoProdotto 
+            FROM PRODOTTO 
+            WHERE categoria = 'Casa & Green'
+            AND prezzo BETWEEN ? AND ?
+        ");
+    
+        if ($stmt) {
+            $stmt->bind_param("dd", $minPrice, $maxPrice);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            return $result->fetch_all(MYSQLI_ASSOC);
+        } else {
+            return ["error" => "Errore nella query SQL"];
+        }
     }
 
     /* CARRELLO */

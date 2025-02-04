@@ -10,7 +10,7 @@
                 </div>
                 <input type="range" class="form-range" id="minPriceInput" min="0" max="100" value="0">
                 <input type="range" class="form-range" id="maxPriceInput" min="0" max="100" value="100">
-                </div>
+            </div>
             
             <div class="d-flex justify-content-end">
                 <button class="btn text-secondary d-flex align-items-center"
@@ -30,7 +30,7 @@
             <div class="row row-cols-2 row-cols-md-4 g-4">
                 <div class="col text-center">
                     <!-- riferimento alla pagina che gestisce il singolo prodotto -->
-                    <a href="">
+                    <a href="">  
                         <!-- immagine prodotto dinamico + modifica ALT -->
                         <img src="" alt="" class="img-fluid">
                     </a>
