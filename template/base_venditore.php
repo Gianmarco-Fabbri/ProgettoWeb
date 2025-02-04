@@ -4,65 +4,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta charset="UTF-8"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <title>Area Venditore</title>
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"/>
+    <title><?php echo isset($templateParams["titolo"]) ? $templateParams["titolo"] : "Benessere Market"; ?></title>
 </head>
 
 <body class="d-flex flex-column min-vh-100">
+    <!-- Header -->
     <header class="bg-light py-3 px-4 d-flex justify-content-between align-items-center">
-        <a href="#">
-            <img src="../img/logo.png" alt="Logo benessere market" width="80" height="80"/> 
+        <a href="index.php">
+            <img src="img/logo.png" alt="Logo benessere market" width="80" height="80"/> 
         </a>
         <nav>
             <ul class="nav">
                 <li class="nav-item">
                     <a href="notifiche.php" class="nav-link text-success fw-bold">
-                        <img src="../img/ring.png" alt="Icona Ring" width="25"/> Notifiche
+                        <img src="img/ring.png" alt="Icona Ring" width="25"/> Notifiche
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="profilo.php" class="nav-link text-success fw-bold">
-                        <img src="../img/icon.png" alt="Icona Profilo" width="25"/> Profilo
+                        <img src="img/icon.png" alt="Icona Profilo" width="25"/> Profilo
                     </a>
                 </li>
             </ul>
         </nav>
     </header>
-    <main class="container my-5 flex-grow-1">
-        <div class="row g-4 d-flex justify-content-center">
-            <div class="col-md-6 col-lg-6">
-                <div class="p-5 border border-success bg-light rounded text-center shadow-lg">
-                    <h2 class="text-success">Gestione Prodotti</h2>
-                    <p>Gestisci il catalogo, aggiungi o modifica prodotti.</p>
-                    <a href="gestione_prodotti.php" class="btn btn-success">Vai</a>
-                </div>
-            </div>
 
-            <div class="col-md-6 col-lg-6">
-                <div class="p-5 border border-success bg-light rounded text-center shadow-lg">
-                    <h2 class="text-success">Prodotti in Offerta</h2>
-                    <p>Metti in offerta i tuoi prodotti per i clienti.</p>
-                    <a href="offerte.php" class="btn btn-success">Vai</a>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-6">
-                <div class="p-5 border border-success bg-light rounded text-center shadow-lg">
-                    <h2 class="text-success">Gestione Ordini</h2>
-                    <p>Controlla gli ordini ricevuti e il loro stato.</p>
-                    <a href="ordini_venditore.php" class="btn btn-success">Vai</a>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-6">
-                <div class="p-5 border border-success bg-light rounded text-center shadow-lg">
-                    <h2 class="text-success">Recensioni</h2>
-                    <p>Visualizza i feedback dei clienti sui tuoi prodotti.</p>
-                    <a href="recensioni.php" class="btn btn-success">Vai</a>
-                </div>
-            </div>
-        </div>
+    <!-- Main -->
+    <main>
+        <?php
+        if(isset($templateParams["nome"])){
+            require($templateParams["nome"]);
+        }
+        ?>
     </main>
+
+    <!-- Footer -->
     <footer class="bg-light text-center py-4 mt-auto">
         <div class="container">
             <div class="row">
@@ -79,7 +56,7 @@
                     <ul class="list-unstyled">
                         <li><a href="gestione_prodotti.php" class="text-success text-decoration-none">Gestione Prodotti</a></li>
                         <li><a href="ordini_venditore.php" class="text-success text-decoration-none">Gestione Ordini</a></li>
-                        <li><a href="recensioni.php" class="text-success text-decoration-none">Recensioni</a></li>
+                        <li><a href="recensioni_venditore.php" class="text-success text-decoration-none">Recensioni</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4">

@@ -6,7 +6,7 @@
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <title>Gestione Offerte</title>
+    <title>Gestione Recensioni</title>
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -34,63 +34,55 @@
 
     <!-- Main -->
     <main class="container my-5 flex-grow-1">
-        <h1 class="text-success text-center mb-4">Gestione Offerte</h1>
+        <h1 class="text-success text-center mb-4">Gestione Recensioni</h1>
 
-        <!-- Form per aggiungere un prodotto in offerta -->
-        <div class="card p-4 mb-4 shadow-sm">
-            <h3 class="text-success mb-3">Aggiungi un prodotto in offerta</h3>
-            <form>
-                <div class="mb-3">
-                    <label for="productSelect" class="form-label">Seleziona il Prodotto</label>
-                    <select class="form-select">
-                        <option selected>Seleziona un prodotto</option>
-                        <option value="1">Nome Prodotto 1</option>
-                        <option value="2">Nome Prodotto 2</option>
-                        <option value="3">Nome Prodotto 3</option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label for="discountPercentage" class="form-label">Sconto (%)</label>
-                    <input type="number" class="form-control" placeholder="Inserisci lo sconto" step="1" min="1" max="100">
-                </div>
-                <button type="submit" class="btn btn-success">Aggiungi Offerta</button>
-            </form>
+        <!-- Filtro recensioni -->
+        <div class="mb-4">
+            <label class="form-label text-success">Filtra per valutazione:</label>
+            <select class="form-select">
+                <option>Tutte</option>
+                <option>⭐⭐⭐⭐⭐ - 5 Stelle</option>
+                <option>⭐⭐⭐⭐ - 4 Stelle</option>
+                <option>⭐⭐⭐ - 3 Stelle</option>
+                <option>⭐⭐ - 2 Stelle</option>
+                <option>⭐ - 1 Stella</option>
+            </select>
         </div>
 
-        <!-- Lista Prodotti in Offerta -->
+        <!-- Lista Recensioni -->
         <div class="card p-4 shadow-sm">
-            <h3 class="text-success mb-3">Prodotti in Offerta</h3>
+            <h3 class="text-success mb-3">Recensioni Ricevute</h3>
             <table class="table table-striped">
                 <thead class="table-success">
                     <tr>
-                        <th>Immagine</th>
-                        <th>Nome</th>
-                        <th>Prezzo Originale</th>
-                        <th>Sconto</th>
-                        <th>Prezzo Scontato</th>
-                        <th>Azioni</th>
+                        <th>Cliente</th>
+                        <th>Prodotto</th>
+                        <th>Valutazione</th>
+                        <th>Commento</th>
+                        <th>Data</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><img src="../img/prodotto1.jpg" alt="Prodotto" width="50"></td>
-                        <td>Nome Prodotto</td>
-                        <td>€19.99</td>
-                        <td>20%</td>
-                        <td>€15.99</td>
-                        <td>
-                            <button class="btn btn-danger btn-sm">Rimuovi Offerta</button>
-                        </td>
+                        <td>Mario Rossi</td>
+                        <td>Crema viso bio</td>
+                        <td>⭐⭐⭐⭐⭐</td>
+                        <td>Ottima qualità, davvero consigliata!</td>
+                        <td>02/02/2025</td>
                     </tr>
                     <tr>
-                        <td><img src="../img/prodotto2.jpg" alt="Prodotto" width="50"></td>
-                        <td>Altro Prodotto</td>
-                        <td>€29.99</td>
-                        <td>15%</td>
-                        <td>€25.49</td>
-                        <td>
-                            <button class="btn btn-danger btn-sm">Rimuovi Offerta</button>
-                        </td>
+                        <td>Giulia Bianchi</td>
+                        <td>Shampoo naturale</td>
+                        <td>⭐⭐⭐⭐</td>
+                        <td>Buon prodotto, ma un po' caro.</td>
+                        <td>01/02/2025</td>
+                    </tr>
+                    <tr>
+                        <td>Luigi Verdi</td>
+                        <td>Detergente viso</td>
+                        <td>⭐⭐⭐</td>
+                        <td>Mi aspettavo di più, ma è comunque buono.</td>
+                        <td>29/01/2025</td>
                     </tr>
                 </tbody>
             </table>
@@ -114,7 +106,7 @@
                     <ul class="list-unstyled">
                         <li><a href="gestione_prodotti.html" class="text-success text-decoration-none">Gestione Prodotti</a></li>
                         <li><a href="ordini_venditore.html" class="text-success text-decoration-none">Gestione Ordini</a></li>
-                        <li><a href="recensioni.html" class="text-success text-decoration-none">Recensioni</a></li>
+                        <li><a href="recensioni_venditore.html" class="text-success text-decoration-none">Recensioni</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4">
