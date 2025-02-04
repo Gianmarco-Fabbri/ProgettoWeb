@@ -212,22 +212,7 @@ class DatabaseHelper {
         $stmt->bind_param('s', $email);
         return $stmt->execute();
     }
-    
-    /* DATI VENDITORE */
-    public function getVenditoreData($email) {
-        $stmt = $this->db->prepare("
-            SELECT email, password, telefono
-            FROM venditore 
-            WHERE email = ?
-        ");
-        
-        $stmt->bind_param('s', $email);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        
-        return $result->fetch_assoc(); 
-    }
-    
+     
     /* PRODOTTI NEL CARRELLO */
     public function getCartProducts($codiceCarrello) {
         $stmt = $this->db->prepare("
@@ -558,6 +543,20 @@ class DatabaseHelper {
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->num_rows > 0;
+    }
+
+    public function getVenditoreData($email) {
+        $stmt = $this->db->prepare("
+            SELECT email, password, telefono, codiceProdotto
+            FROM VENDITORE
+            WHERE email = ?
+        ");
+        
+        $stmt->bind_param('s', $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        return $result->fetch_assoc(); 
     }
     
 }   

@@ -6,65 +6,91 @@
 <div class="container my-5">
     <div class="row">
         <section class="col-lg-7">
-            <h2 class="fw-bold" style="color: #0a5738">Benvenuto <?php echo $templateParams["cliente"]["nome"]; ?>!</h2>
+            <h2 class="fw-bold" style="color: #0a5738">
+                Benvenuto 
+                <?php 
+                if (isset($templateParams["venditore"])) {
+                    echo $templateParams["venditore"]["email"];
+                } elseif (isset($templateParams["cliente"])) {
+                    echo $templateParams["cliente"]["nome"];
+                } else {
+                    echo "Utente";
+                }
+                ?>!
+            </h2>
+
             <div class="border rounded p-4">
                 <h3>Il tuo profilo</h3>
-                <div class="mb-3">
-                    <label for="nome" class="form-label">Nome</label>
-                    <input type="text" class="form-control nomeUtente" id="nome" value="<?php echo $templateParams['cliente']['nome']; ?>" readonly="">
-                </div>
-                <div class="mb-3">
-                    <label for="cognome" class="form-label">Cognome</label>
-                    <input type="text" class="form-control cognomeUtente" id="cognome" value="<?php echo $templateParams["cliente"]["cognome"]; ?>" readonly="">
-                </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control emailUtente" id="email" value="<?php echo $templateParams["cliente"]["email"]; ?>" readonly="">
-                </div>
-                <div class="mb-3">
-                    <label for="telefono" class="form-label">Numero di telefono</label>
-                    <input type="text" class="form-control telefonoUtente" id="telefono" value="<?php echo $templateParams["cliente"]["telefono"]; ?>" readonly="">
-                </div>
-                <button type="button" class="btn btn-light border" data-bs-toggle="modal" data-bs-target="#modificaProfiloModal">Modifica Profilo</button>
+
+                <?php if (isset($templateParams["venditore"])): ?>
+                    <!-- Dati del Venditore -->
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" value="<?php echo $templateParams["venditore"]["email"]; ?>" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Telefono</label>
+                        <input type="text" class="form-control" value="<?php echo $templateParams["venditore"]["telefono"]; ?>" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Codice Prodotto</label>
+                        <input type="text" class="form-control" value="<?php echo $templateParams["venditore"]["codiceProdotto"]; ?>" readonly>
+                    </div>
+
+                <?php elseif (isset($templateParams["cliente"])): ?>
+                    <!-- Dati del Cliente -->
+                    <div class="mb-3">
+                        <label class="form-label">Nome</label>
+                        <input type="text" class="form-control" value="<?php echo $templateParams["cliente"]["nome"]; ?>" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Cognome</label>
+                        <input type="text" class="form-control" value="<?php echo $templateParams["cliente"]["cognome"]; ?>" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" value="<?php echo $templateParams["cliente"]["email"]; ?>" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Telefono</label>
+                        <input type="text" class="form-control" value="<?php echo $templateParams["cliente"]["telefono"]; ?>" readonly>
+                    </div>
+                <?php else: ?>
+                    <p class="text-danger">Errore: dati utente non disponibili.</p>
+                <?php endif; ?>
             </div>
+
             <div class="d-flex justify-content-end gap-3 mt-4">
-                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modificaPasswordModal" style="background-color: #0a5738;color:#FFFFFF;">Cambia password</button>
-                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#eliminaAccountModal" style="background-color: #B00000;color:#FFFFFF;">Elimina account</button>
-                <button type="button" id="logoutBtn" class="btn btn-warning" style="background-color:orange; color:#FFFFFF;">Logout</button>
+                <button type="button" class="btn btn-warning" id="logoutBtn">Logout</button>
             </div>
         </section>
 
         <aside class="col-lg-5">
-            <!-- Sezione Punti Accumulati con acquisti -->
-            <div class="border rounded p-3 mb-4" style="height: 200px; overflow-y: auto; margin-top:46px;">
-                <h3>Punti accumulati</h3>
-                <ul style="list-style: none; padding: 0; font-size: 1rem;">
-                    <li class="mb-2" style="border-bottom: 1px; padding-bottom: 8px;">Punti totali: <?php echo $templateParams["puntiAccumulati"]; ?></li>
-                    <li class="text-center mt-3">
-                        <a href="carrello.php" style="display: block; background-color: #0a5738; color: white; padding: 12px; border-radius: 5px; text-align: center; text-decoration: none;">Vai al carrello per utilizzare i punti</a>
-                    </li>
-                </ul>
-            </div>
+            <?php if (isset($templateParams["cliente"])): ?>
+                <!-- Sezione Punti Accumulati -->
+                <div class="border rounded p-3 mb-4">
+                    <h3>Punti accumulati</h3>
+                    <p>Punti totali: <?php echo isset($templateParams["puntiAccumulati"]) ? $templateParams["puntiAccumulati"] : '0'; ?></p>
+                    <a href="carrello.php" class="btn btn-success">Vai al carrello per utilizzare i punti</a>
+                </div>
 
-            <!-- Sezione Recensioni -->
-            <div class="border rounded p-3" style="height: 310px; overflow-y: auto;">
-                <h3>Recensioni</h3>
-                <?php if (!empty($templateParams["recensioni"])): ?>
-                    <?php foreach ($templateParams["recensioni"] as $recensione): ?>
-                        <div class="card mb-3 shadow-sm">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <h5 class="card-title mb-0">⭐ <?php echo $recensione["stelle"]; ?>/5</h5>
-                                    <small class="text-muted">📅 <?php echo $recensione["data"]; ?></small>
+                <!-- Sezione Recensioni -->
+                <div class="border rounded p-3">
+                    <h3>Recensioni</h3>
+                    <?php if (!empty($templateParams["recensioni"])): ?>
+                        <?php foreach ($templateParams["recensioni"] as $recensione): ?>
+                            <div class="card mb-3 shadow-sm">
+                                <div class="card-body">
+                                    <h5 class="card-title">⭐ <?php echo $recensione["stelle"]; ?>/5</h5>
+                                    <p class="card-text">"<?php echo $recensione["testoRecensione"]; ?>"</p>
                                 </div>
-                                <p class="card-text mt-2">"<?php echo $recensione["testoRecensione"]; ?>"</p>
                             </div>
-                        </div>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <p class="text-muted">Nessuna recensione disponibile.</p>
-                <?php endif; ?>
-            </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <p class="text-muted">Nessuna recensione disponibile.</p>
+                    <?php endif; ?>
+                </div>
+            <?php endif; ?>
         </aside>
     </div>
 </div>

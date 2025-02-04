@@ -12,6 +12,7 @@ $templateParams["navs"] = [["link" => "profilo.php", "name" => "Profilo"]];
 
 // Verifica se l'utente è loggato
 if (isset($_SESSION['email'])) {
+    $templateParams["venditore"] = $dbh->getVenditoreData($_SESSION['email']);
     $templateParams["cliente"] = $dbh->getClienteData($_SESSION['email']);  
     $templateParams["recensioni"] = $dbh->getCustomerReviews($_SESSION['email']);
     $templateParams["puntiAccumulati"] = $dbh->getCustomerPoints($_SESSION['email']);
