@@ -10,24 +10,19 @@ $templateParams["js"] = ["js/logout.js",
                          "js/modificaPassword.js"];
 $templateParams["navs"] = [["link" => "profilo.php", "name" => "Profilo"]];
 
-// Verifica se l'utente è loggato
 if (isset($_SESSION['email'])) {
-    $templateParams["venditore"] = $dbh->getVenditoreData($_SESSION['email']);
-    $templateParams["cliente"] = $dbh->getClienteData($_SESSION['email']);  
+    if ($_SESSION["user_type"] == "venditore") {
+        $templateParams["venditore"] = $dbh->getVenditoreData($_SESSION['email']);
+    } else {
+        $templateParams["cliente"] = $dbh->getClienteData($_SESSION['email']);
+    }
+    
     $templateParams["recensioni"] = $dbh->getCustomerReviews($_SESSION['email']);
     $templateParams["puntiAccumulati"] = $dbh->getCustomerPoints($_SESSION['email']);
-
-    // Determina quale template usare
-    if (!empty($templateParams["venditore"])) {
-        $templateFile = 'template/base_venditore.php';  //Il venditore visualizza il suo template specifico
-    } else {
-        $templateFile = 'template/base.php'; //Il cliente visualizza il template base
-    }
 } else {
-    // Se l'utente non è loggato, reindirizza alla pagina di login
     header('Location: accedi.php');
     exit();
 }
 
-require $templateFile;
+require $_SESSION["user_type"] == "venditore" ? 'template/base_venditore.php' : 'template/base.php';
 ?>

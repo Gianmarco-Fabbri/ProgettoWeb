@@ -25,7 +25,7 @@
                         </div>
                     </div>
                     <div class="text-center mt-4">
-                        <button type="submit" class="btn btn-success w-100 fw-bold">Accedi</button>
+                        <button type="submit" id="accediBtn" class="btn btn-success w-100 fw-bold">Accedi</button>
                     </div>
                     <div class="text-center mt-4">
                         <p style="font-size: medium; color: #0a5738;">
