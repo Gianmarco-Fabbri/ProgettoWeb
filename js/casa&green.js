@@ -73,8 +73,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
             productContainer.innerHTML += `
                 <div class="col text-center">
-                    <a href="product.php?id=${product.codiceProdotto}">
-                        <img src="${imgSrc}" alt="${product.nome}" class="img-fluid">
+                    <a href="product.php?nome=${encodeURIComponent(product.nome)}&codiceProdotto=${encodeURIComponent(product.codiceProdotto)}&img=${encodeURIComponent(product.img)}&prezzo=${encodeURIComponent(product.prezzo)}">
+                        <img src="${imgSrc}" alt="${product.nome}" class="img-fluid" style="max-height: 200px;">
                     </a>
                     <p>${product.nome} <br> 
                         <strong>€${parseFloat(product.prezzo).toFixed(2)}</strong> (IVA inclusa)

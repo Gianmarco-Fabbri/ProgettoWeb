@@ -6,10 +6,10 @@
             <div class="mb-3">
                 <div class="d-flex justify-content-between small mb-2">
                     <label id="displayMinPrice" for="minPriceInput">€ 0</label>
-                    <label id="displayMaxPrice" for="maxPriceInput">€ 100</label>
+                    <label id="displayMaxPrice" for="maxPriceInput">€ 200</label>
                 </div>
-                <input type="range" class="form-range" id="minPriceInput" min="0" max="100" value="0">
-                <input type="range" class="form-range" id="maxPriceInput" min="0" max="100" value="100">
+                <input type="range" class="form-range" id="minPriceInput" min="0" max="200" value="0">
+                <input type="range" class="form-range" id="maxPriceInput" min="0" max="200" value="200">
             </div>
             
             <div class="d-flex justify-content-end">

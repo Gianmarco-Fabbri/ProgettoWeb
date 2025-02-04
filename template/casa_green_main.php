@@ -29,9 +29,7 @@
             <h2 class="text-success">Prodotti</h2>
             <div class="row row-cols-2 row-cols-md-4 g-4">
                 <div class="col text-center">
-                    <!-- riferimento alla pagina che gestisce il singolo prodotto -->
                     <a href="">  
-                        <!-- immagine prodotto dinamico + modifica ALT -->
                         <img src="" alt="" class="img-fluid">
                     </a>
                     <p></p>
