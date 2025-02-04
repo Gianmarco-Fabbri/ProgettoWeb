@@ -1,0 +1,46 @@
+.tracking-step-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #0a5738;
+    background-color: #f4fbf8;
+    color: #0a5738;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    
+}
+
+.line-mobile {
+    z-index: 0;
+}
+
+.tracking-step-circle-mobile {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #0a5738;
+    background-color: #f4fbf8;
+    color: #0a5738;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1; /* Porta i cerchi sopra la linea */
+    box-shadow: 0 0 0 2px #f4fbf8;
+}
+
+.btn-track {
+    background-color: #0a5738 !important;
+    color: white !important;
+    border: 2px solid #0a5738 !important;
+    transition: all 0.3s;
+}
+
+.btn-track:hover {
+    background-color: #083c26 !important;
+}
