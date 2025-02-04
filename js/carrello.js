@@ -13,18 +13,18 @@ function aggiornaQuantita(idProdotto, nuovaQuantita) {
 
             if (nuovaQuantita == 0) {
                 if (prodottoRiga) {
-                    prodottoRiga.remove(); // Rimuove l'articolo dal carrello
+                    prodottoRiga.remove();
                     console.log(`Prodotto ${idProdotto} rimosso dal DOM.`);
                 } else {
                     console.warn(`Elemento con id "cart-item-${idProdotto}" non trovato.`);
                 }
 
-                // Controlla se il carrello è vuoto
                 if (document.querySelectorAll("[id^='cart-item-']").length === 0) {
                     document.getElementById("carrello-container").innerHTML = `
                         <p class="text-center text-muted">Il carrello è vuoto.</p>
                     `;
-                    document.getElementById("asideCarrello").style.display = "none"; // Nasconde il riepilogo
+                    /* Nasconde riepilogo ordine */
+                    document.getElementById("asideCarrello").style.display = "none";
                 }
             }
 
@@ -36,10 +36,6 @@ function aggiornaQuantita(idProdotto, nuovaQuantita) {
     .catch(error => console.error("Errore:", error));
 }
 
-/**
- * Rimuove un prodotto dal carrello se la quantità è 0.
- * @param {string} idProdotto - L'ID del prodotto da rimuovere.
- */
 function rimuoviProdotto(idProdotto) {
     fetch("ajax/carrello/rimuoviProdotto.php", {
         method: "POST",
