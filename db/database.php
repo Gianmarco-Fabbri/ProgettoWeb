@@ -527,5 +527,13 @@ class DatabaseHelper {
         return $stmt->execute();
     }
     
+    public function isVenditore($email) {
+        $stmt = $this->db->prepare("SELECT email FROM VENDITORE WHERE email = ?");
+        $stmt->bind_param('s', $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->num_rows > 0;
+    }
+    
 }   
 ?>
