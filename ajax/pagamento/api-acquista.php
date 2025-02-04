@@ -4,23 +4,23 @@ require_once "../../bootstrap.php";
 $email = $_SESSION['email'] ?? null;
 $tipoPagamento = $_POST['tipoPagamento'] ?? null;
 $dataArrivo = $_POST['dataArrivo'] ?? null;
+$venditoreEmail = "venditore@example.com";
 
 if (!$email) {
     echo json_encode(["success" => false, "message" => "Utente non autenticato."]);
     exit;
-} 
-if (!$tipoPagamento) {
+} else if (!$tipoPagamento) {
     echo json_encode(["success" => false, "message" => "Dati pagamento non completi."]);
     exit;
-} 
-if (!$dataArrivo) {
+} else if (!$dataArrivo) {
     echo json_encode(["success" => false, "message" => "Data di arrivo non specificata."]);
     exit;
 }
 
-$notificaSuccess = $dbh->aggiungiNotifica($email, "Ordine Effettuato", "Hai effettuato un ordine.");
+$notificaUtente = $dbh->aggiungiNotifica($email, "Ordine Effettuato", "Hai effettuato un ordine.");
+$notificaVenditore = $dbh->aggiungiNotifica($venditoreEmail, "Nuovo Ordine", "Hai ricevuto un nuovo ordine.");
 
-if (!$notificaSuccess) {
+if (!$notificaUtente || !$notificaVenditore) {
     echo json_encode(["success" => false, "message" => "Errore durante l'aggiunta della notifica."]);
     exit;
 }

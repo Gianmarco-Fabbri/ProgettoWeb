@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
-    // Carica il riepilogo dei prodotti dal server
     fetch("ajax/pagamento/api-riepilogo.php")
         .then(response => response.json())
         .then(data => {
@@ -35,7 +34,6 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .catch(error => console.error("Errore durante il caricamento del riepilogo:", error));
 
-    // Aggiorna il totale e la data di consegna quando cambia la spedizione
     tipoSpedizione.addEventListener("change", function () {
         const tipoSpedizioneValore = tipoSpedizione.value;
 

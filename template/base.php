@@ -45,6 +45,15 @@
         </ul>
     </nav>
 
+    <nav>
+        <a href="index.php">Home</a>
+        <?php if (isset($templateParams["navs"])): ?>
+            <?php foreach ($templateParams["navs"] as $breadcrumb): ?>
+                <a href="<?php echo $breadcrumb["link"]; ?>">/ <?php echo $breadcrumb["name"]; ?></a>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </nav>
+
     <main>
         <?php
         if(isset($templateParams["nome"])){

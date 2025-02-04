@@ -5,6 +5,13 @@
     box-sizing: border-box;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+
 /* Header - Versione Responsive */
 body > header {
     display: flex;
@@ -129,6 +136,11 @@ body > nav:last-of-type a {
 
 body > nav:last-of-type a:hover {
     opacity: 0.8;
+}
+
+/* Occupa tutto lo spazio: il footer rimane fissato in basso */
+main {
+    flex-grow: 1;
 }
 
 /* Footer - Versione Responsive */
