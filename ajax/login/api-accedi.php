@@ -55,6 +55,6 @@ if (session_status() === PHP_SESSION_NONE) {
 $_SESSION['email'] = $utente['email'];
 $_SESSION['user_type']  = $tipoUtente;
 
-echo json_encode(['success' => true, 'redirect' => 'index.php', 'message' => 'Login effettuato con successo!', 'userType' => $tipoUtente]);
+echo json_encode(['success' => true, 'redirect' => $tipoUtente == 'venditore' ? 'venditore.php' : 'index.php', 'message' => 'Login effettuato con successo!', 'userType' => $tipoUtente]);
 exit();
 ?>

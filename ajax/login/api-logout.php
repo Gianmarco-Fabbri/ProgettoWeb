@@ -1,9 +1,11 @@
 <?php
-
 require_once '../../bootstrap.php';
 
-session_start();
 header("Content-Type: application/json");
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 // Controlla se la richiesta è di tipo POST
 if ($_SERVER["REQUEST_METHOD"] === "POST") {

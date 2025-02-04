@@ -212,22 +212,7 @@ class DatabaseHelper {
         $stmt->bind_param('s', $email);
         return $stmt->execute();
     }
-    
-    /* DATI VENDITORE */
-    public function getVenditoreData($email) {
-        $stmt = $this->db->prepare("
-            SELECT email, password, telefono
-            FROM venditore 
-            WHERE email = ?
-        ");
-        
-        $stmt->bind_param('s', $email);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        
-        return $result->fetch_assoc(); 
-    }
-    
+     
     /* PRODOTTI NEL CARRELLO */
     public function getCartProducts($codiceCarrello) {
         $stmt = $this->db->prepare("
@@ -600,6 +585,53 @@ class DatabaseHelper {
                                     WHERE codiceOrdine = ?");
         $stmt->bind_param('s', $codiceOrdine);
         return $stmt->execute();
+    }
+
+    public function getDataOrdine($idOrdine) {
+        $stmt = $this->db->prepare("
+            SELECT o.codiceOrdine, o.dataSpedizione, o.dataArrivo, o.statoOrdine, o.tipoPagamento, o.emailCliente 
+            FROM ordine o
+            WHERE o.codiceOrdine = ?
+            ");
+        $stmt->bind_param('s', $idOrdine);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
+    }
+
+    public function getProductsInOrdine($idOrdine) {
+        $stmt = $this->db->prepare("
+            SELECT p.codiceProdotto, p.nome, p.prezzo, co.quantita 
+            FROM composizione_ordine co
+            JOIN prodotto p ON co.codiceProdotto = p.codiceProdotto
+            WHERE co.codiceOrdine = ?
+        ");
+        $stmt->bind_param('s', $idOrdine);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+    
+    public function isVenditore($email) {
+        $stmt = $this->db->prepare("SELECT email FROM VENDITORE WHERE email = ?");
+        $stmt->bind_param('s', $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->num_rows > 0;
+    }
+
+    public function getVenditoreData($email) {
+        $stmt = $this->db->prepare("
+            SELECT email, password, telefono
+            FROM VENDITORE
+            WHERE email = ?
+        ");
+        
+        $stmt->bind_param('s', $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        return $result->fetch_assoc(); 
     }
     
 }   
