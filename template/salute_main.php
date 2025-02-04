@@ -1,28 +1,16 @@
 <div class="container mt-4">
     <div class="row">
         <aside class="col-md-3 bg-white border rounded p-3 mb-4">
-            <h2 class="text-success fs-4">Filtri</h2> 
-
-            <h3 class="fs-5">Recensioni</h3>
-            <label for="starFilter" class="visually-hidden">Filtra per recensioni:</label>
-            <select id="starFilter" class="form-select mb-3">
-                <option value="0">Tutte le recensioni</option>
-                <option value="5"><span class="text-warning">⭐⭐⭐⭐⭐</span> (5 stelle)</option>
-                <option value="4"><span class="text-warning">⭐⭐⭐⭐</span> (4 stelle)</option>
-                <option value="3"><span class="text-warning">⭐⭐⭐</span> (3 stelle)</option>
-                <option value="2"><span class="text-warning">⭐⭐</span> (2 stelle)</option>
-                <option value="1"><span class="text-warning">⭐</span> (1 stella)</option>
-            </select>        
+            <h2 class="text-success fs-4">Filtri</h2>      
             
             <h3 class="fs-5">Prezzo</h3>
             <div class="mb-3">
                 <div class="d-flex justify-content-between small mb-2">
-                    <label id="displayMinPrice" for="minPriceInput">€ -</label>
-                    <label id="displayMaxPrice" for="maxPriceInput">€ -</label>
+                    <label id="displayMinPrice" for="minPriceInput">€0</label>
+                    <label id="displayMaxPrice" for="maxPriceInput">€100</label>
                 </div>
-                <!-- min="<?php echo $sliderMin; ?>" max="<?php echo $sliderMax; ?>" value="<?php echo $sliderMin; ?>" -->
-                <input type="range" class="form-range" id="minPriceInput" min="0" max="100" value="">
-                <input type="range" class="form-range" id="maxPriceInput" min="0" max="100" value="">
+                <input type="range" class="form-range" id="minPriceInput" min="0" max="100" value="0">
+                <input type="range" class="form-range" id="maxPriceInput" min="0" max="100" value="100">
                 </div>
 
             

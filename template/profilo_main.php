@@ -74,7 +74,8 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="modificaProfiloModalLabel">Modifica il tuo profilo</h1>
+                <h4 class="modal-title fs-5" id="modificaProfiloModalLabel">Modifica il tuo profilo</h4>
+                <!-- <h2 class="modal-title fs-5" id="modificaProfiloModalLabel">Modifica il tuo profilo</h2> -->
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -163,7 +164,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="eliminaAccountLabel">Elimina Account</h5>
+                <h4 class="modal-title" id="eliminaAccountLabel">Elimina Account</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

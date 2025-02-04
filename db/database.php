@@ -308,6 +308,20 @@ class DatabaseHelper {
         
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+    /* PRODOTTI CATEGORIA SALUTE */
+    public function getProdottiFromSalute() {
+        $stmt = $this->db->prepare("
+            SELECT codiceProdotto, nome, prezzo, img, scontoProdotto 
+            FROM PRODOTTO 
+            WHERE categoria = 'Salute'
+        ");
+        
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
     
     /* CATEGORIE BELLEZZA */
     public function getBellezzaCategories() {
@@ -322,13 +336,60 @@ class DatabaseHelper {
         
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+    /* PRODOTTI CATEGORIA BELLEZZA */
+    public function getProdottiFromBellezza() {
+        $stmt = $this->db->prepare("
+            SELECT codiceProdotto, nome, prezzo, img, scontoProdotto 
+            FROM PRODOTTO 
+            WHERE categoria = 'Bellezza'
+        ");
+        
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+    
+    /* PRODOTTI BELLEZZA FILTRATI */
+    public function getProdottiBellezzaFiltratiPerPrezzo($minPrice, $maxPrice) {
+        $stmt = $this->db->prepare("
+            SELECT codiceProdotto, nome, prezzo, img, scontoProdotto 
+            FROM PRODOTTO 
+            WHERE categoria = 'Bellezza'
+            AND prezzo BETWEEN ? AND ?
+        ");
+    
+        if ($stmt) {
+            $stmt->bind_param("dd", $minPrice, $maxPrice);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            return $result->fetch_all(MYSQLI_ASSOC);
+        } else {
+            return ["error" => "Errore nella query SQL"];
+        }
+    }
     
     /* CATEGORIE PROFUMI */
     public function getProfumiCategories() {
         $stmt = $this->db->prepare("
             SELECT nomeCategoria, scontoCategoria, inEvidenza 
             FROM categoria 
-            WHERE nomeCategoria LIKE '%Profumi%'
+            WHERE nomeCategoria LIKE '%Prfumi%'
+        ");
+        
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    /* PRODOTTI CATEGORIA PROFUMI */
+    public function getProdottiFromProfumi() {
+        $stmt = $this->db->prepare("
+            SELECT codiceProdotto, nome, prezzo, img, scontoProdotto 
+            FROM PRODOTTO 
+            WHERE categoria = 'Profumi'
         ");
         
         $stmt->execute();
@@ -343,6 +404,20 @@ class DatabaseHelper {
             SELECT nomeCategoria, scontoCategoria, inEvidenza 
             FROM categoria 
             WHERE nomeCategoria LIKE '%Casa & Green%'
+        ");
+        
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    /* PRODOTTI CATEGORIA CASA&GREEN */
+    public function getProdottiFromCasaGreen() {
+        $stmt = $this->db->prepare("
+            SELECT codiceProdotto, nome, prezzo, img, scontoProdotto 
+            FROM PRODOTTO 
+            WHERE categoria = 'Casa & Green'
         ");
         
         $stmt->execute();

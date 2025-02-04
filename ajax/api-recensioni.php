@@ -33,7 +33,7 @@ $venditoreEmail = "venditore@example.com";
 
 // Genera codiceRecensione
 do {
-    $codiceRecensione = "C" . rand(1, 9999);
+    $codiceRecensione = "R" . rand(1, 9999);
     $existingReview = $dbh->getRecensione($codiceRecensione);
 } while ($existingReview);
 
