@@ -71,9 +71,9 @@ class DatabaseHelper {
     }
 
     /* AGGIUNTA RECENSIONE */
-    public function aggiungiRecensione($codiceRecensione, $testoRecensione, $stelle, $data, $emailCliente, $codiceProdotto) {
-        $stmt = $this->db->prepare("INSERT INTO recensione (codiceRecensione, testoRecensione, stelle, data, emailCliente, codiceProdotto) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param('ssisss', $codiceRecensione, $testoRecensione, $stelle, $data, $emailCliente, $codiceProdotto);
+    public function aggiungiRecensione($codiceRecensione, $testoRecensione, $stelle, $data, $emailCliente) {
+        $stmt = $this->db->prepare("INSERT INTO recensione (codiceRecensione, testoRecensione, stelle, data, emailCliente) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param('ssiss', $codiceRecensione, $testoRecensione, $stelle, $data, $emailCliente);
         $success = $stmt->execute();
         
         return $success;
@@ -157,7 +157,7 @@ class DatabaseHelper {
 
     /* RECENSIONI LASCIATE DAL CLIENTE */
     public function getCustomerReviews($email) {
-        $stmt = $this->db->prepare("SELECT codiceRecensione, testoRecensione, stelle, data, codiceProdotto FROM recensione WHERE emailCliente = ? ORDER BY data DESC");
+        $stmt = $this->db->prepare("SELECT codiceRecensione, testoRecensione, stelle, data FROM recensione WHERE emailCliente = ? ORDER BY data DESC");
         $stmt->bind_param('s', $email);
         $stmt->execute();
         $result = $stmt->get_result();

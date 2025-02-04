@@ -4,10 +4,11 @@ if (session_status() === PHP_SESSION_NONE) {
 } else {
     error_log("Sessione già attiva con ID: " . session_id());
 }
-define("UPLOAD_DIR", "./img/");
 
-require_once("utils/functions.php");
-require_once("db/database.php");
+define('UPLOAD_DIR', './img/');
+
+require_once "utils/functions.php";
+require_once "db/database.php";
 
 $dbh = new DatabaseHelper("localhost", "root", "", "benessereDB", "3306");
 

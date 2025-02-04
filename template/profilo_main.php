@@ -52,7 +52,6 @@
                 <?php if (!empty($templateParams["recensioni"])): ?>
                     <?php foreach ($templateParams["recensioni"] as $recensione): ?>
                         <div class="mb-3 border-bottom pb-2">
-                            <strong>Prodotto: <?php echo $recensione["codiceProdotto"]; ?></strong>
                             <p><?php echo $recensione["testoRecensione"]; ?></p>
                             <small>
                                 <?php echo "Stelle: " . $recensione["stelle"] . " - " . $recensione["data"]; ?>

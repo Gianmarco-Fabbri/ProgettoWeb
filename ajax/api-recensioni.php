@@ -3,7 +3,7 @@ require_once '../bootstrap.php';
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-// Avvia la sessione se non è già stata avviata
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -27,25 +27,24 @@ if (!isset($_SESSION['email'])) {
 }
 
 $emailCliente = $_SESSION['email'];
-$codProdotto = $data['codProdotto'] ?? null;
-$valutazione = $data['valutazione'] ?? null;
+$valutazione = $data['valutazione'] ?? 1; // Valutazione di default
 $testo = $data['testo'] ?? null;
 
 // Genera codiceRecensione
 do {
-    $codiceRecensione = "C" . rand(1, 9999);;
+    $codiceRecensione = "C" . rand(1, 9999);
     $existingReview = $dbh->getRecensione($codiceRecensione);
 } while ($existingReview);
 
 $dataCorrente = date('Y-m-d H:i:s');
 
-if (!$codProdotto || !$valutazione || !is_numeric($valutazione) || $valutazione < 1 || $valutazione > 5) {
+if (!$valutazione || !is_numeric($valutazione) || $valutazione < 1 || $valutazione > 5) {
     echo json_encode(['success' => false, 'message' => 'Dati non validi.']);
     exit();
 }
 
 try {
-    $result = $dbh->aggiungiRecensione($codiceRecensione, $testo, $valutazione, $dataCorrente, $emailCliente, $codProdotto);
+    $result = $dbh->aggiungiRecensione($codiceRecensione, $testo, $valutazione, $dataCorrente, $emailCliente);
     
     if ($result) {
         echo json_encode(['success' => true, 'message' => 'Recensione aggiunta con successo.']);

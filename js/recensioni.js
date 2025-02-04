@@ -9,20 +9,18 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
-    // Gestione delle stelle: al click si evidenziano quelle selezionate
+    // Gestione delle stelle
     ratingStars.forEach(star => {
         star.addEventListener("click", function () {
             const selectedValue = parseInt(this.getAttribute("data-value"));
             ratingValue.textContent = selectedValue;
             ratingInput.value = selectedValue;
 
-            // Resetta lo stile di tutte le stelle
             ratingStars.forEach(s => {
                 s.classList.remove("text-warning");
                 s.classList.add("text-secondary");
             });
 
-            // Evidenzia le stelle fino a quella selezionata
             for (let i = 0; i < selectedValue; i++) {
                 ratingStars[i].classList.remove("text-secondary");
                 ratingStars[i].classList.add("text-warning");
@@ -30,13 +28,12 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Gestione dell'invio del form
+    // Invio della recensione
     reviewForm.addEventListener("submit", async function (e) {
         e.preventDefault();
 
         const comment = document.getElementById("comment").value.trim();
         const rating = ratingInput.value;
-        const productId = reviewForm.getAttribute("data-product-id") || 123; // da sostituire con l'ID prodotto dinamico
 
         if (!comment || !rating) {
             alert("Tutti i campi sono obbligatori.");
@@ -44,7 +41,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         const reviewData = {
-            codProdotto: productId,
             valutazione: rating,
             testo: comment
         };
@@ -61,13 +57,14 @@ document.addEventListener("DOMContentLoaded", function () {
             if (result.success) {
                 alert("Recensione inviata con successo!");
                 reviewForm.reset();
-                // Reimposta la valutazione a 1
                 ratingValue.textContent = "1";
                 ratingInput.value = "1";
                 ratingStars.forEach(s => {
-                    s.classList.remove("text-warning");
-                    s.classList.add("text-secondary");
+                s.classList.remove("text-warning");
+                s.classList.add("text-secondary");
                 });
+                console.log("Reindirizzamento a:", "/ProgettoWeb/profilo.php"); // Debug
+                window.location.href = "/ProgettoWeb/profilo.php";
             } else {
                 alert(result.message);
             }
@@ -76,4 +73,12 @@ document.addEventListener("DOMContentLoaded", function () {
             alert("Errore di connessione. Riprova più tardi.");
         }
     });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const firstStar = document.querySelector(".star[data-value='1']");
+    if (firstStar) {
+        firstStar.classList.remove("text-secondary");
+        firstStar.classList.add("text-warning");
+    }
 });
