@@ -250,24 +250,21 @@ footer a:hover {
     }
 }
 
-/* Cambia il colore del pallino dello slider */
 input[type="range"]::-webkit-slider-thumb {
     background-color: #0a5738;
     border: none;
-    -webkit-appearance: none;  /* Rimuove lo stile predefinito di WebKit */
-    width: 16px; /* Personalizza la dimensione */
+    -webkit-appearance: none; 
+    width: 16px;
     height: 16px;
     border-radius: 50%;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-/* Evita l'hover blu quando si fa clic sul pallino */
 input[type="range"]::-webkit-slider-thumb:active {
-    background-color: #08442d; /* Colore più scuro quando clicchi */
+    background-color: #08442d; 
 }
 
-/* Evita il flash blu su dispositivi mobili */
 input[type="range"] {
     -webkit-tap-highlight-color: transparent;
 }
