@@ -34,7 +34,7 @@ if (!$prodotto || !$sconto) {
 if ($dbh->applicaSconto($prodotto, $sconto)) {
 
     // Notifico tutti i clienti
-    $clienti = $dbh->getTuttiClienti($prodotto);
+    $clienti = $dbh->getTuttiClienti();
 
     foreach ($clienti as $cliente) {
         $dbh->aggiungiNotifica($cliente['email'], 'sconto_prodotto', "Il prodotto $prodotto è ora in offerta con uno sconto del $sconto%!");

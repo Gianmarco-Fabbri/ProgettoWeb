@@ -526,6 +526,31 @@ class DatabaseHelper {
         $stmt->bind_param('s', $codiceOrdine);
         return $stmt->execute();
     }
+
+    public function getDataOrdine($idOrdine) {
+        $stmt = $this->db->prepare("
+            SELECT o.codiceOrdine, o.dataSpedizione, o.dataArrivo, o.statoOrdine, o.tipoPagamento, o.emailCliente 
+            FROM ordine o
+            WHERE o.codiceOrdine = ?
+            ");
+        $stmt->bind_param('s', $idOrdine);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
+    }
+
+    public function getProductsInOrdine($idOrdine) {
+        $stmt = $this->db->prepare("
+            SELECT p.codiceProdotto, p.nome, p.prezzo, co.quantita 
+            FROM composizione_ordine co
+            JOIN prodotto p ON co.codiceProdotto = p.codiceProdotto
+            WHERE co.codiceOrdine = ?
+        ");
+        $stmt->bind_param('s', $idOrdine);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
     
 }   
 ?>
