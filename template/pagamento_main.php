@@ -23,10 +23,24 @@
                 <input type="text" id="numero" class="form-control" value="50" readonly style="border-color: #0a5738">
             </div>
         </div>
-        <div class="d-flex justify-content-between align-items-center mb-4 py-2 border-top border-bottom" style="border-color: #0a5738!important">
-            <span class="h5" style="color: #0a5738">Totale:</span>
-            <span id="totale" class="h4 fw-bold" style="color: #0a5738">0.00 €</span>
+        <div class="border-top border-bottom py-3 mb-4" style="border-color: #0a5738!important">
+            <dl class="row mb-0">
+                <div class="d-flex justify-content-between align-items-center">
+                    <dt class="col-auto fw-bold">Subtotale:</dt>
+                    <dd class="col-auto text-end" id="subtotale">Caricamento...</dd>
+                </div>
+                <div class="d-flex justify-content-between align-items-center text-success">
+                    <dt class="col-auto fw-bold">Sconto punti:</dt>
+                    <dd class="col-auto text-end" id="scontoPunti">-€0.00</dd>
+                </div>
+                <hr class="my-2" style="border-color: #0a5738!important;">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h4 class="h5 fw-bold" style="color: #0a5738!important">Totale:</h4>
+                    <h4 class="h5 fw-bold" id="totale" style="color: #0a5738!important">Caricamento...</h4>
+                </div>
+            </dl>
         </div>
+
         <div class="mb-4">
             <label for="tipo-carta" style="color: #0a5738">Tipo carta</label>
             <select id="tipo-carta" class="form-select mb-3" style="border-color: #0a5738" required>

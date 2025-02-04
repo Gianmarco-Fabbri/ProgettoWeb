@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            // Popola dati ordine
             document.getElementById('order-id').textContent = data.order.codiceOrdine;
             document.getElementById('data-ordine').textContent = data.order.dataArrivo;
             document.getElementById('order-total').textContent = data.total;
@@ -23,15 +22,15 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('customer-info').innerHTML = 
                 `${data.customer.nome} ${data.customer.cognome}<br>${data.customer.telefono}`;
 
-            // Gestione steps
+            /* Step del tracking */
             const stato = parseInt(data.order.statoOrdine, 10);
             
             const updateStep = (step, date, isActive) => {
-                // Desktop
+                /* Desktop */
                 const circle = document.getElementById(`step-${step}-circle`);
                 const dateElement = document.getElementById(`step-${step}-date`);
                 
-                // Mobile
+                /* Mobile */
                 const circleMobile = document.getElementById(`step-${step}-circle-mobile`);
                 const dateElementMobile = document.getElementById(`step-${step}-date-mobile`);
 
@@ -49,7 +48,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 if(dateElementMobile) dateElementMobile.textContent = date;
             };
 
-            // Mappatura stati
             updateStep(1, stato >= 1 ? `Completato il ${data.order.dataSpedizione}` : '', stato >= 1);
             updateStep(2, stato >= 2 ? `Spedito il ${data.order.dataSpedizione}` : '', stato >= 2);
             updateStep(3, stato >= 3 ? `In transito` : '', stato >= 3);
