@@ -34,7 +34,7 @@ if ($cliente) {
     $tipoUtente = 'venditore';
 }
 
-if (empty($utente['password'] || is_null($utente['password']))) {
+if (empty($utente['password'] || $utente['password'] == null)) {
     echo json_encode([
         'success' => false,
         'message' => 'Errore: password non impostata nel database.',
@@ -52,7 +52,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-$_SESSION['email'] = $cliente['email'];
+$_SESSION['email'] = $utente['email'];
 $_SESSION['user_type']  = $tipoUtente;
 
 echo json_encode(['success' => true, 'redirect' => 'index.php', 'message' => 'Login effettuato con successo!', 'userType' => $tipoUtente]);
