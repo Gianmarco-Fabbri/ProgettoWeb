@@ -11,7 +11,7 @@
 <body class="d-flex flex-column min-vh-100">
     <!-- Header -->
     <header class="bg-light py-3 px-4 d-flex justify-content-between align-items-center">
-        <a href="index.php">
+        <a href="venditore.php">
             <img src="img/logo.png" alt="Logo benessere market" width="80" height="80"/> 
         </a>
         <nav>
