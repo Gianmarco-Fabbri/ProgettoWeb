@@ -29,6 +29,7 @@ if (!isset($_SESSION['email'])) {
 $emailCliente = $_SESSION['email'];
 $valutazione = $data['valutazione'] ?? 1; // Valutazione di default
 $testo = $data['testo'] ?? null;
+$venditoreEmail = "venditore@example.com";
 
 // Genera codiceRecensione
 do {
@@ -41,6 +42,14 @@ $dataCorrente = date('Y-m-d H:i:s');
 if (!$valutazione || !is_numeric($valutazione) || $valutazione < 1 || $valutazione > 5) {
     echo json_encode(['success' => false, 'message' => 'Dati non validi.']);
     exit();
+}
+
+$notificaUtente = $dbh->aggiungiNotifica($emailCliente, "Recensione Effettuata", "Hai effettuato una recensione.");
+$notificaVenditore = $dbh->aggiungiNotifica($venditoreEmail, "Nuova Recensione", "Hai ricevuto una nuova recensione.");
+
+if (!$notificaUtente || !$notificaVenditore) {
+    echo json_encode(["success" => false, "message" => "Errore durante l'aggiunta della notifica."]);
+    exit;
 }
 
 try {

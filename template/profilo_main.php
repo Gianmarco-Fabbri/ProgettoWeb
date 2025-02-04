@@ -51,15 +51,18 @@
                 <h3>Recensioni</h3>
                 <?php if (!empty($templateParams["recensioni"])): ?>
                     <?php foreach ($templateParams["recensioni"] as $recensione): ?>
-                        <div class="mb-3 border-bottom pb-2">
-                            <p><?php echo $recensione["testoRecensione"]; ?></p>
-                            <small>
-                                <?php echo "Stelle: " . $recensione["stelle"] . " - " . $recensione["data"]; ?>
-                            </small>
+                        <div class="card mb-3 shadow-sm">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h5 class="card-title mb-0">⭐ <?php echo $recensione["stelle"]; ?>/5</h5>
+                                    <small class="text-muted">📅 <?php echo $recensione["data"]; ?></small>
+                                </div>
+                                <p class="card-text mt-2">"<?php echo $recensione["testoRecensione"]; ?>"</p>
+                            </div>
                         </div>
                     <?php endforeach; ?>
                 <?php else: ?>
-                    <p>Nessuna recensione disponibile.</p>
+                    <p class="text-muted">Nessuna recensione disponibile.</p>
                 <?php endif; ?>
             </div>
         </aside>
