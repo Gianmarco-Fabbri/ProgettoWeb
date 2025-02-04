@@ -17,11 +17,28 @@ if (!$email) {
     exit;
 }
 
-$notificaUtente = $dbh->aggiungiNotifica($email, "Ordine Effettuato", "Hai effettuato un ordine.");
-$notificaVenditore = $dbh->aggiungiNotifica($venditoreEmail, "Nuovo Ordine", "Hai ricevuto un nuovo ordine.");
+$cart = $_SESSION['cart'] ?? [];
 
-if (!$notificaUtente || !$notificaVenditore) {
-    echo json_encode(["success" => false, "message" => "Errore durante l'aggiunta della notifica."]);
+if (empty($cart)) {
+    echo json_encode(["success" => false, "message" => "Il carrello è vuoto."]);
+    exit;
+}
+
+$totale = 0;
+foreach ($cart as $idProdotto => $quantita) {
+    $prezzoProdotto = $dbh->getPrezzoProdotto($idProdotto);
+    if ($prezzoProdotto !== null) {
+        $totale += $prezzoProdotto * $quantita;
+    }
+}
+
+if ($totale <= 0) {
+    echo json_encode(["success" => false, "message" => "Errore: Totale ordine non valido."]);
+    exit;
+}
+
+if (!$dbh->resetPuntiToCliente($email)) {
+    echo json_encode(["success" => false, "message" => "Errore nel reset dei punti."]);
     exit;
 }
 
@@ -32,9 +49,25 @@ if (!$result['success']) {
     exit;
 }
 
+if (!$dbh->addPuntiToCliente($email, $totale)) {
+    echo json_encode(["success" => false, "message" => "Errore nell'aggiunta dei punti."]);
+    exit;
+}
+
+$notificaUtente = $dbh->aggiungiNotifica($email, "Ordine Effettuato", "Hai effettuato un ordine.");
+$notificaVenditore = $dbh->aggiungiNotifica($venditoreEmail, "Nuovo Ordine", "Hai ricevuto un nuovo ordine.");
+
+if (!$notificaUtente || !$notificaVenditore) {
+    echo json_encode(["success" => false, "message" => "Errore durante l'aggiunta della notifica."]);
+    exit;
+}
+
+unset($_SESSION['cart']);
+
 echo json_encode([
     "success" => true,
-    "message" => "Ordine completato con successo!",
-    "codiceOrdine" => $result["codiceOrdine"]
+    "message" => "Ordine completato con successo! Punti aggiornati.",
+    "codiceOrdine" => $result["codiceOrdine"],
+    "puntiAggiunti" => $totale
 ]);
 ?>

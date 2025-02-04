@@ -1,4 +1,3 @@
-// Funzione per estrarre i parametri dalla query string
 function getProdottoDataFromURL() {
     const params = new URLSearchParams(window.location.search);
     return {

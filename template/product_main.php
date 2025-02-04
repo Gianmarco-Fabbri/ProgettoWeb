@@ -40,10 +40,6 @@
                     <button id="addToCartButton" class="btn btn-success d-block w-100 mb-3 py-3 shadow-sm hover-scale">
                         AGGIUNGI AL CARRELLO
                     </button>
-                    <div class="d-flex justify-content-between mb-4">
-                        <a href="#" class="text-decoration-none text-success fw-bold hover-underline">Aggiungi alla lista dei desideri</a>
-                        <a href="#" class="text-decoration-none text-success fw-bold hover-underline">Aggiungi alla lista di confronto</a>
-                    </div>
                     <div class="border-top pt-3">
                         <p class="mb-1 fw-bold">Destinazione:</p>
                         <div class="d-flex justify-content-between align-items-center">

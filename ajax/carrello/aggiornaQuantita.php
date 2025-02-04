@@ -3,7 +3,6 @@ session_start();
 error_log("Richiesta ricevuta in aggiornaQuantita.php");
 
 try {
-    // Recupera i dati dalla richiesta POST
     $idProdotto = $_POST['idProdotto'] ?? null;
     $quantita = intval($_POST['quantita'] ?? 0);
 
@@ -11,7 +10,7 @@ try {
         throw new Exception("Dati mancanti o non validi.");
     }
 
-    // Aggiorna il carrello
+    /* Aggiornamento carrello */
     if ($quantita > 0) {
         $_SESSION['cart'][$idProdotto] = $quantita;
         echo json_encode(["success" => true, "message" => "Quantità aggiornata"]);

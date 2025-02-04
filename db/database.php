@@ -152,8 +152,10 @@ class DatabaseHelper {
         $stmt->bind_param('s', $email);
         $stmt->execute();
         $result = $stmt->get_result();
-        return $result->fetch_assoc()['puntiAccumulati'] ?? 0;
+        $row = $result->fetch_assoc();
+        return isset($row['puntiAccumulati']) ? intval($row['puntiAccumulati']) : 0;
     }
+    
 
     /* RECENSIONI LASCIATE DAL CLIENTE */
     public function getCustomerReviews($email) {
@@ -662,6 +664,17 @@ class DatabaseHelper {
         
         return $result->fetch_assoc(); 
     }
-    
+
+    public function addPuntiToCliente($email, $punti) {
+        $stmt = $this->db->prepare("UPDATE cliente SET puntiAccumulati = puntiAccumulati + ? WHERE email = ?");
+        $stmt->bind_param('is', $punti, $email);
+        return $stmt->execute();
+    }
+
+    public function resetPuntiToCliente($email) {
+        $stmt = $this->db->prepare("UPDATE cliente SET puntiAccumulati = 0 WHERE email = ?");
+        $stmt->bind_param('s',$email);
+        return $stmt->execute();
+    }
 }   
 ?>

@@ -48,6 +48,8 @@ $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
 
         <aside class="col-lg-4" id="asideCarrello" <?php if (empty($cart)) echo 'style="display: none;"'; ?>>
             <div class="card p-3 shadow-sm sticky-top">
+                <p>Punti accumulati: <span id="puntiAccumulati">Caricamento...</span></p>
+
                 <h3 class="h5 mb-3">Riepilogo ordine</h3>
 
                 <?php if (!empty($cart)): ?>
@@ -60,13 +62,13 @@ $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
                                 $subtotale += $prezzoProdotto * $quantita;
                             }
                         }
-                        $sconto = 1.52;
+                        $sconto = 0.00;
                         $totale = $subtotale - $sconto < 0 ? 0 : $subtotale - $sconto;
                         ?>
                         <dt class="col-6">Subtotale:</dt>
-                        <dd class="col-6 text-end" id="subtotale">€<?php echo number_format($subtotale, 2); ?></dd>
+                        <dd class="col-6 text-end" id="subtotale" data-value="<?php echo $subtotale; ?>">€<?php echo number_format($subtotale, 2); ?></dd>
                         <dt class="col-6 text-success">Sconto punti:</dt>
-                        <dd class="col-6 text-end text-success">-€<?php echo number_format($sconto, 2); ?></dd>
+                        <dd class="col-6 text-end text-success" id="scontoPunti">-€0.00</dd>
                     </dl>
                     <h4 class="h5 mb-3" style="color: #0a5738!important">Totale: <span id="totale">€<?php echo number_format($totale, 2); ?></span></h4>
                     <div class="d-grid gap-2">
@@ -88,3 +90,33 @@ $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
 
     </section>
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    caricaPuntiUtente();
+});
+
+function caricaPuntiUtente() {
+    fetch('ajax/carrello/api-get_punti.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                let puntiAccumulati = data.punti;
+                let sconto = puntiAccumulati / 100;
+
+                document.getElementById("puntiAccumulati").textContent = puntiAccumulati;
+                document.getElementById("scontoPunti").textContent = "€" + sconto.toFixed(2);
+
+                let subtotale = parseFloat(document.getElementById("subtotale").dataset.value);
+                let totale = subtotale - sconto;
+                if (totale < 0) totale = 0;
+
+                document.getElementById("totale").textContent = "€" + totale.toFixed(2);
+            } else {
+                console.error("Errore nel recupero punti:", data.error);
+            }
+        })
+        .catch(error => console.error("Errore nella richiesta AJAX:", error));
+}
+</script>
+
