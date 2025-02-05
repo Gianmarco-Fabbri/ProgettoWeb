@@ -25,29 +25,29 @@
                 <?php if (isset($templateParams["venditore"])): ?>
                     <!-- Dati del Venditore -->
                     <div class="mb-3">
-                        <label class="form-label">Email</label>
+                        <label for="email" class="form-label">Email</label>
                         <input type="email" id="email" class="form-control" value="<?php echo $templateParams["venditore"]["email"]; ?>" readonly>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Telefono</label>
+                        <label for="telefono" class="form-label">Telefono</label>
                         <input type="text" id="telefono" class="form-control" value="<?php echo $templateParams["venditore"]["telefono"]; ?>" readonly>
                     </div>
                 <?php elseif (isset($templateParams["cliente"])): ?>
                     <!-- Dati del Cliente -->
                     <div class="mb-3">
-                        <label class="form-label">Nome</label>
+                        <label for="nome" class="form-label">Nome</label>
                         <input type="text" id="nome" class="form-control" value="<?php echo $templateParams["cliente"]["nome"]; ?>" readonly>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Cognome</label>
+                        <label for="cognome" class="form-label">Cognome</label>
                         <input type="text" id="cognome" class="form-control" value="<?php echo $templateParams["cliente"]["cognome"]; ?>" readonly>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Email</label>
+                        <label for="email" class="form-label">Email</label>
                         <input type="email" id="email" class="form-control" value="<?php echo $templateParams["cliente"]["email"]; ?>" readonly>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Telefono</label>
+                        <label for="telefono" class="form-label">Telefono</label>
                         <input type="text" id="telefono" class="form-control" value="<?php echo $templateParams["cliente"]["telefono"]; ?>" readonly>
                     </div>
                 <?php else: ?>
