@@ -26,36 +26,39 @@
                     <!-- Dati del Venditore -->
                     <div class="mb-3">
                         <label class="form-label">Email</label>
-                        <input type="email" class="form-control" value="<?php echo $templateParams["venditore"]["email"]; ?>" readonly>
+                        <input type="email" id="email" class="form-control" value="<?php echo $templateParams["venditore"]["email"]; ?>" readonly>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Telefono</label>
-                        <input type="text" class="form-control" value="<?php echo $templateParams["venditore"]["telefono"]; ?>" readonly>
+                        <input type="text" id="telefono" class="form-control" value="<?php echo $templateParams["venditore"]["telefono"]; ?>" readonly>
                     </div>
                 <?php elseif (isset($templateParams["cliente"])): ?>
                     <!-- Dati del Cliente -->
                     <div class="mb-3">
                         <label class="form-label">Nome</label>
-                        <input type="text" class="form-control" value="<?php echo $templateParams["cliente"]["nome"]; ?>" readonly>
+                        <input type="text" id="nome" class="form-control" value="<?php echo $templateParams["cliente"]["nome"]; ?>" readonly>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Cognome</label>
-                        <input type="text" class="form-control" value="<?php echo $templateParams["cliente"]["cognome"]; ?>" readonly>
+                        <input type="text" id="cognome" class="form-control" value="<?php echo $templateParams["cliente"]["cognome"]; ?>" readonly>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Email</label>
-                        <input type="email" class="form-control" value="<?php echo $templateParams["cliente"]["email"]; ?>" readonly>
+                        <input type="email" id="email" class="form-control" value="<?php echo $templateParams["cliente"]["email"]; ?>" readonly>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Telefono</label>
-                        <input type="text" class="form-control" value="<?php echo $templateParams["cliente"]["telefono"]; ?>" readonly>
+                        <input type="text" id="telefono" class="form-control" value="<?php echo $templateParams["cliente"]["telefono"]; ?>" readonly>
                     </div>
                 <?php else: ?>
                     <p class="text-danger">Errore: dati utente non disponibili.</p>
                 <?php endif; ?>
+                <button type="button" class="btn btn-light border" data-bs-toggle="modal" data-bs-target="#modificaProfiloModal">Modifica Profilo</button>
             </div>
 
             <div class="d-flex justify-content-end gap-3 mt-4">
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modificaPasswordModal" style="background-color: #0a5738;color:#FFFFFF;">Cambia password</button>
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#eliminaAccountModal" style="background-color: #B00000;color:#FFFFFF;">Elimina account</button>
                 <button type="button" class="btn btn-warning" id="logoutBtn">Logout</button>
             </div>
         </section>
@@ -63,7 +66,7 @@
         <aside class="col-lg-5">
             <?php if (isset($templateParams["cliente"])): ?>
                 <!-- Sezione Punti Accumulati -->
-                <div class="border rounded p-3 mb-4">
+                <div class="border rounded p-3 mb-4 mt-5">
                     <h3>Punti accumulati</h3>
                     <p>Punti totali: <?php echo isset($templateParams["puntiAccumulati"]) ? $templateParams["puntiAccumulati"] : '0'; ?></p>
                     <a href="carrello.php" class="btn btn-success">Vai al carrello per utilizzare i punti</a>

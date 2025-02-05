@@ -10,6 +10,10 @@ $templateParams["js"] = ["js/logout.js",
                          "js/modificaPassword.js"];
 $templateParams["navs"] = [["link" => "profilo.php", "name" => "Profilo"]];
 
+if (!array_key_exists("user_type", $_SESSION)) {
+    $_SESSION["user_type"] = null; 
+}
+
 if (isset($_SESSION['email'])) {
     if ($_SESSION["user_type"] == "venditore") {
         $templateParams["venditore"] = $dbh->getVenditoreData($_SESSION['email']);

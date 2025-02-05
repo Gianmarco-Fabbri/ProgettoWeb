@@ -1,7 +1,7 @@
 <?php
 require_once '../../bootstrap.php';
-header("Content-Type: application/json");
 
+header("Content-Type: application/json");
 
 if (!isset($_SESSION["email"])) {
     echo json_encode(["error" => "Utente non autenticato"]);
