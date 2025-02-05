@@ -56,7 +56,7 @@
                     <ul class="list-unstyled">
                         <li><a href="gestione_prodotti.php" class="text-success text-decoration-none">Gestione Prodotti</a></li>
                         <li><a href="ordini_venditore.php" class="text-success text-decoration-none">Gestione Ordini</a></li>
-                        <li><a href="recensioni_venditore.php" class="text-success text-decoration-none">Recensioni</a></li>
+                        <li><a href="venditoreRecensioni.php" class="text-success text-decoration-none">Recensioni</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4">

@@ -15,14 +15,7 @@ if (!isset($_SESSION['email'])) {
 $venditoreEmail = $_SESSION['email'];
 
 try {
-    // Aggiungi un log per verificare che l'email venga passata correttamente
-    error_log("Email del venditore: " . $venditoreEmail);
-
-    $recensioni = $dbh->getRecensioni();
-
-    // Debug per vedere se il database restituisce risultati
-    error_log("Recensioni trovate: " . print_r($recensioni, true));
-
+    $recensioni = $dbh->getRecensioniVenditore();
     if ($recensioni) {
         echo json_encode($recensioni);
     } else {
