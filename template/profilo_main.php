@@ -10,7 +10,7 @@
                 Benvenuto 
                 <?php 
                 if (isset($templateParams["venditore"])) {
-                    echo $templateParams["venditore"]["email"];
+                    echo "Venditore";
                 } elseif (isset($templateParams["cliente"])) {
                     echo $templateParams["cliente"]["nome"];
                 } else {
@@ -93,7 +93,8 @@
     </div>
 </div>
 
-<!-- Modale: modifica profilo -->
+<!-- Modale: Modifica Profilo (Solo per i Clienti) -->
+<?php if ($_SESSION["user_type"] === "cliente"): ?>
 <div class="modal fade" id="modificaProfiloModal" tabindex="-1" aria-labelledby="modificaProfiloModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -125,6 +126,7 @@
         </div>
     </div>
 </div>
+<?php endif; ?>
 
 <!-- Cambia Password -->
 <div class="modal fade" id="modificaPasswordModal" tabindex="-1" aria-labelledby="modificaPasswordLabel" aria-hidden="true">
@@ -181,7 +183,6 @@
         </div>
     </div>
 </div>
-
 
 <!-- Elimina Account -->
 <div class="modal fade" id="eliminaAccountModal" tabindex="-1" aria-labelledby="eliminaAccountLabel" aria-hidden="true">

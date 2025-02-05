@@ -15,10 +15,18 @@ async function fetchDatiProfilo() {
         }
 
         const data = await response.json();
-        document.getElementById("nome").value = data.nome;
-        document.getElementById("cognome").value = data.cognome;
-        document.getElementById("email").value = data.email;
-        document.getElementById("telefono").value = data.telefono;
+
+        // Controlla se gli elementi esistono prima di assegnare i valori
+        if (document.getElementById("editNome")) document.getElementById("editNome").value = data.nome || "";
+        if (document.getElementById("editCognome")) document.getElementById("editCognome").value = data.cognome || "";
+        if (document.getElementById("email")) document.getElementById("email").value = data.email || "";
+        if (document.getElementById("editTelefono")) document.getElementById("editTelefono").value = data.telefono || "";
+
+
+        // document.getElementById("nome").value = data.nome;
+        // document.getElementById("cognome").value = data.cognome;
+        // document.getElementById("email").value = data.email;
+        // document.getElementById("telefono").value = data.telefono;
 
     } catch (error) {
         console.error("Errore di connessione o fetch:", error);
