@@ -55,7 +55,7 @@
                     <h5 class="text-success">Area Venditore</h5>
                     <ul class="list-unstyled">
                         <li><a href="gestione_prodotti.php" class="text-success text-decoration-none">Gestione Prodotti</a></li>
-                        <li><a href="ordini_venditore.php" class="text-success text-decoration-none">Gestione Ordini</a></li>
+                        <li><a href="venditoreOrdini.php" class="text-success text-decoration-none">Gestione Ordini</a></li>
                         <li><a href="venditoreRecensioni.php" class="text-success text-decoration-none">Recensioni</a></li>
                     </ul>
                 </div>

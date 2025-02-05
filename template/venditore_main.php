@@ -20,7 +20,7 @@
                 <div class="p-5 border border-success bg-light rounded text-center shadow-lg">
                     <h2 class="text-success">Gestione Ordini</h2>
                     <p>Controlla gli ordini ricevuti e il loro stato.</p>
-                    <a href="ordini_venditore.php" class="btn btn-success">Vai</a>
+                    <a href="venditoreOrdini.php" class="btn btn-success">Vai</a>
                 </div>
             </div>
 
