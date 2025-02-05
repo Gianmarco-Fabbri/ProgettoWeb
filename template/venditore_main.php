@@ -12,7 +12,7 @@
                 <div class="p-5 border border-success bg-light rounded text-center shadow-lg">
                     <h2 class="text-success">Prodotti in Offerta</h2>
                     <p>Metti in offerta i tuoi prodotti per i clienti.</p>
-                    <a href="offerte.php" class="btn btn-success">Vai</a>
+                    <a href="venditoreOfferte.php" class="btn btn-success">Vai</a>
                 </div>
             </div>
 
