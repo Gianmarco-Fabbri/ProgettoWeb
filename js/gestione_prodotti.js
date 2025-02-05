@@ -28,7 +28,7 @@ async function caricaProdotti() {
             tabellaProdotti.innerHTML += `
                 <tr>
                     <td>${prodotto.codiceProdotto}</td>
-                    <td><img src="../img/${prodotto.img}" alt="${prodotto.nome}" width="50"></td>
+                    <td><img src="img/${prodotto.img}" alt="${prodotto.nome}" width="50"></td>
                     <td>${prodotto.nome}</td>
                     <td>${prodotto.descrizione}</td>
                     <td>€${prodotto.prezzo}</td>
@@ -56,6 +56,7 @@ async function aggiungiProdotto() {
         });
 
         const result = await response.json();
+        console.log("Risposta API:", result);
         if (result.success) {
             alert("Prodotto aggiunto con successo!");
             document.getElementById("aggiungiProdottoForm").reset();
