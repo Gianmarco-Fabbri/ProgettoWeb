@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                     `).join("")}
                 </div>
             `;
-
+            
             const statiOrdine = [
                 "Elaborazione Ordine",
                 "Partenza Magazzino",
