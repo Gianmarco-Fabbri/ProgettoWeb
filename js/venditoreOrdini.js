@@ -1,86 +1,93 @@
 document.addEventListener("DOMContentLoaded", async function () {
     console.log("Script venditoreOrdini.js avviato!");
 
+    const ordiniContainer = document.getElementById("ordiniContainer");
+    if (!ordiniContainer) {
+        console.error("Errore: Il contenitore degli ordini non è stato trovato.");
+        return;
+    }
+
     try {
         const response = await fetch("ajax/venditore/api-venditoreOrdini.php");
-
-        if (!response.ok) {
-            throw new Error(`HTTP Error! Status: ${response.status}`);
-        }
-
+        if (!response.ok) throw new Error(`HTTP Error! Status: ${response.status}`);
+        
         const data = await response.json();
         console.log("Dati ordini ricevuti:", data);
-
-        const ordiniContainer = document.getElementById("ordiniContainer");
-
-        if (!ordiniContainer) {
-            console.error("Errore: Il contenitore degli ordini non è stato trovato.");
-            return;
-        }
-
         ordiniContainer.innerHTML = ""; // Pulisce il contenuto precedente
 
         if (data.length === 0) {
-            ordiniContainer.innerHTML = `<p class="text-center fs-4 text-muted">Nessun ordine ricevuto finora.</p>`;
+            ordiniContainer.innerHTML = `
+                <div class="col-12 text-center py-5">
+                    <div class="alert alert-success" style="background-color: #f4fbf8; border-color: #0a5738;">
+                        <h2 class="alert-heading" style="color: #0a5738;">Nessun ordine effettuato</h2>
+                        <p style="color: #0a5738;">Inizia a fare acquisti nel nostro negozio!</p>
+                        <a href="index.php" class="btn btn-success" style="background-color: #0a5738; border-color: #0a5738;">
+                            Ritorna alla Home
+                        </a>
+                    </div>
+                </div>`;
             return;
         }
 
+        const statiOrdine = [
+            "Elaborazione Ordine", "Partenza Magazzino", "Transito Magazzino", "In Consegna", "Consegnato"
+        ];
+        
         data.forEach(ordine => {
-            const ordineCard = document.createElement("div");
-            ordineCard.classList.add("card", "mb-3", "shadow-sm", "p-3");
-
-            // Genera l'elenco dei prodotti acquistati
-            let prodottiHTML = `
-                <div class="d-flex flex-column flex-md-row align-items-center gap-3">
-                    ${ordine.prodotti.map((prodotto, index, array) => `
-                            <img src="img/${prodotto.img}" alt="${prodotto.nome}" class="img-fluid rounded" style="max-height: 200px;">
-                            <div class="d-flex flex-column">
-                                <strong class="fs-5">${prodotto.nome}</strong>
-                                <span class="text-muted">Quantità: ${prodotto.quantita}</span>
-                                <span class="fw-bold text-success">€${prodotto.prezzo}</span>
-                            </div>
-                        ${index < array.length - 1 ? '<hr class="w-100">' : ''}
-                    `).join("")}
-                </div>
-            `;
+            let stato = statiOrdine[ordine.statoOrdine] || "Sconosciuto";
             
-            const statiOrdine = [
-                "Elaborazione Ordine",
-                "Partenza Magazzino",
-                "Transito Magazzino",
-                "In Consegna",
-                "Consegnato"
-            ];
-
-            let selectOptions = statiOrdine.map(stato => 
-                `<option value="${stato}" ${ordine.statoOrdine === stato ? 'selected' : ''}>${stato}</option>`
-            ).join("");
-
-            ordineCard.innerHTML = `
-                <div class="card-body">
-                    <h5 class="card-title text-success">Ordine #${ordine.codiceOrdine}</h5>
-                    <p class="card-text"><strong>Cliente:</strong> ${ordine.emailCliente}</p>
-                    <p class="card-text"><strong>Prodotti:</strong></p>
-                    <ul>${prodottiHTML}</ul>
-                    <p class="card-text"><strong>Pagamento:</strong> ${ordine.tipoPagamento}</p>
-
-                    <label for="stato-${ordine.codiceOrdine}" class="fw-bold">Stato:</label>
-                    <select id="stato-${ordine.codiceOrdine}" class="form-select stato-ordine" data-codice="${ordine.codiceOrdine}">
-                        ${selectOptions}
-                    </select>
-                </div>
-            `;
-
-            ordiniContainer.appendChild(ordineCard);
+            const cardHTML = `
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card h-100 border-success shadow-sm">
+                        <div class="card-body">
+                            <h2 class="card-title text-success fs-5 fs-md-4" style="color: #0a5738!important;">
+                                Ordine #${ordine.codiceOrdine}
+                            </h2>
+                            <p class="text-muted mb-1">Cliente: ${ordine.emailCliente}</p>
+                            <p class="text-muted mb-1">Pagamento: ${ordine.tipoPagamento}</p>
+                            <ul class="list-unstyled">
+                                ${ordine.prodotti.map(prodotto => `
+                                    <li>
+                                        <img src="img/${prodotto.img}" alt="${prodotto.nome}" class="img-fluid rounded" style="max-height: 50px;">
+                                        ${prodotto.nome} (x${prodotto.quantita}) - €${prodotto.prezzo}
+                                    </li>
+                                `).join("")}
+                            </ul>
+                            <hr>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge rounded-pill" style="background-color: #0a5738; color: #f4fbf8;">
+                                    ${stato}
+                                </span>
+                                <select class="form-select stato-ordine" data-codice="${ordine.codiceOrdine}">
+                                    ${statiOrdine.map(statoOption => `
+                                        <option value="${statoOption}" ${ordine.statoOrdine === statoOption ? 'selected' : ''}>${statoOption}</option>
+                                    `).join("")}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent border-success">
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-outline-success shadow-sm" type="button"
+                                        style="border-color: #0a5738; color: #0a5738;"
+                                        onmouseover="this.style.backgroundColor='#0a5738'; this.style.color='#f4fbf8';"
+                                        onmouseout="this.style.backgroundColor='transparent'; this.style.color='#0a5738';"
+                                        onclick="window.location.href='tracking.php?ordine=${ordine.codiceOrdine}'">
+                                    Traccia ordine
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+            
+            ordiniContainer.innerHTML += cardHTML;
         });
 
-        // Aggiunge event listener ai select per aggiornare lo stato dell'ordine
+        // Event listener per aggiornare lo stato dell'ordine
         document.querySelectorAll(".stato-ordine").forEach(select => {
             select.addEventListener("change", async function () {
                 const codiceOrdine = this.getAttribute("data-codice");
                 const statoStringa = this.value;
-
-                // Mappa gli stati a valori TINYINT
+                
                 const statiOrdineMap = {
                     "Elaborazione Ordine": 0,
                     "Partenza Magazzino": 1,
@@ -90,7 +97,6 @@ document.addEventListener("DOMContentLoaded", async function () {
                 };
 
                 const nuovoStato = statiOrdineMap[statoStringa];
-
                 console.log("Aggiornamento stato ordine:", { codiceOrdine, nuovoStato });
 
                 try {
@@ -99,10 +105,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({ codiceOrdine, statoOrdine: nuovoStato })
                     });
-
                     const result = await updateResponse.json();
-                    console.log("Risultato aggiornamento:", result);
-
                     if (result.success) {
                         alert("Stato ordine aggiornato con successo!");
                     } else {
@@ -114,9 +117,8 @@ document.addEventListener("DOMContentLoaded", async function () {
                 }
             });
         });
-
     } catch (error) {
         console.error("Errore nel caricamento degli ordini:", error);
-        document.getElementById("ordiniContainer").innerHTML = `<p class="text-danger text-center">Errore nel recupero degli ordini.</p>`;
+        ordiniContainer.innerHTML = `<p class="text-danger text-center">Errore nel recupero degli ordini.</p>`;
     }
 });
