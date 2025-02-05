@@ -743,5 +743,44 @@ class DatabaseHelper {
         $stmt->execute();
         return $stmt->get_result()->num_rows > 0;
     }
+
+    // Recupera i prodotti che non sono ancora in offerta
+    public function getProdottiSenzaOfferta() {
+        $stmt = $this->db->prepare("SELECT codiceProdotto, nome FROM prodotto WHERE inOfferta = 0");
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    // Recupera i prodotti attualmente in offerta
+    public function getProdottiInOfferta() {
+        $stmt = $this->db->prepare("
+            SELECT p.codiceProdotto, p.nome, p.img, p.prezzo, p.scontoProdotto
+            FROM prodotto p
+            WHERE p.inOfferta = 1
+        ");
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    // Aggiunge un prodotto in offerta
+    public function aggiungiOfferta($productId, $discount) {
+        $stmt = $this->db->prepare("UPDATE prodotto SET inOfferta = 1, scontoProdotto = ? WHERE codiceProdotto = ?");
+        $stmt->bind_param('ds', $discount, $productId);
+        $success = $stmt->execute();
+        
+        return $success;
+    }
+
+    // Rimuove un prodotto dall'offerta
+    public function rimuoviOfferta($productId) {
+        $stmt = $this->db->prepare("UPDATE prodotto SET inOfferta = 0, scontoProdotto = 0 WHERE codiceProdotto = ?");
+        $stmt->bind_param('s', $productId);
+        $success = $stmt->execute();
+        
+        return $success;
+    }
+
+
 }   
 ?>

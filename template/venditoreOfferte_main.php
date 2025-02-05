@@ -1,62 +1,48 @@
- <!-- Main -->
- <div class="container my-5 flex-grow-1">
-        <h1 class="text-success text-center mb-4">Gestione Offerte</h1>
+<!-- Main -->
+<div class="container my-5 flex-grow-1">
+    <h1 class="text-success text-center mb-4">Gestione Offerte</h1>
 
-        <!-- Form per aggiungere un prodotto in offerta -->
-        <div class="card p-4 mb-4 shadow-sm">
-            <h3 class="text-success mb-3">Metti in saldo un prodotto!</h3>
-            <form>
-                <div class="mb-3">
-                    <label for="productSelect" class="form-label">Seleziona il Prodotto</label>
-                    <select class="form-select">
-                        <option selected>Seleziona un prodotto</option>
-                        <!-- METTERE TUTTI PRODOTTI ??? -->
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label for="discountPercentage" class="form-label">Sconto (%)</label>
-                    <input type="number" class="form-control" placeholder="Inserisci lo sconto" step="1" min="1" max="100">
-                </div>
-                <button type="submit" class="btn btn-success">Aggiungi Offerta</button>
-            </form>
+    <!-- Form per aggiungere un prodotto in offerta -->
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8 col-sm-12">
+            <div class="card p-4 mb-4 shadow-sm">
+                <h3 class="text-success mb-3">Metti in saldo un prodotto!</h3>
+                <form id="addOfferForm">
+                    <div class="mb-3">
+                        <label for="productSelect" class="form-label">Seleziona il Prodotto</label>
+                        <select class="form-select" id="productSelect">
+                            <option selected>Seleziona un prodotto</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="discountPercentage" class="form-label">Sconto (espresso in €)</label>
+                        <input type="number" class="form-control" id="discountPercentage" placeholder="Inserisci lo sconto" step="1" min="1" max="100">
+                    </div>
+                    <button type="submit" class="btn btn-success w-100">Aggiungi Offerta</button>
+                </form>
+            </div>
         </div>
+    </div>
 
-        <!-- Lista Prodotti in Offerta -->
-        <div class="card p-4 shadow-sm">
-            <h3 class="text-success mb-3">Prodotti in Offerta</h3>
-            <table class="table table-striped">
-                <thead class="table-success">
-                    <tr>
-                        <th>Immagine</th>
-                        <th>Nome</th>
-                        <th>Prezzo Originale</th>
-                        <th>Sconto</th>
-                        <th>Prezzo Scontato</th>
-                        <th>Azioni</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><img src="../img/prodotto1.jpg" alt="Prodotto" width="50"></td>
-                        <td>Nome Prodotto</td>
-                        <td>€19.99</td>
-                        <td>20%</td>
-                        <td>€15.99</td>
-                        <td>
-                            <button class="btn btn-danger btn-sm">Rimuovi Offerta</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><img src="../img/prodotto2.jpg" alt="Prodotto" width="50"></td>
-                        <td>Altro Prodotto</td>
-                        <td>€29.99</td>
-                        <td>15%</td>
-                        <td>€25.49</td>
-                        <td>
-                            <button class="btn btn-danger btn-sm">Rimuovi Offerta</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+    <!-- Lista Prodotti in Offerta -->
+    <div class="card p-4 shadow-sm">
+        <h3 class="text-success mb-3">Prodotti in Offerta</h3>
+        <table class="table">
+            <thead class="table-success d-none d-md-table-header">
+                <tr>
+                    <th>Immagine</th>
+                    <th>Nome</th>
+                    <th class="d-none d-md-table-cell">Prezzo Originale</th>
+                    <th>Sconto</th>
+                    <th class="d-none d-md-table-cell">Prezzo Scontato</th>
+                    <th>Azioni</th>
+                </tr>
+            </thead>
+            <tbody id="offersTableBody">
+                <tr>
+                    <td colspan="6" class="text-center text-muted">Nessun prodotto in offerta</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
