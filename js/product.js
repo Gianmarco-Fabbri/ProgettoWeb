@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
         formData.append('idProdotto', idProdotto);
         formData.append('quantita', quantita);
 
-        fetch('ajax/carrello/aggiungiProdotto.php', {
+        fetch('ajax/carrello/api-aggiungi_prodotto.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: formData.toString()

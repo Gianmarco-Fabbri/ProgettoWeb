@@ -1,5 +1,5 @@
 function aggiornaQuantita(idProdotto, nuovaQuantita) {
-    fetch("ajax/carrello/aggiornaQuantita.php", {
+    fetch("ajax/carrello/api-aggiorna_quantita.php", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams({ "idProdotto": idProdotto, "quantita": nuovaQuantita })
@@ -36,29 +36,11 @@ function aggiornaQuantita(idProdotto, nuovaQuantita) {
     .catch(error => console.error("Errore:", error));
 }
 
-function rimuoviProdotto(idProdotto) {
-    fetch("ajax/carrello/rimuoviProdotto.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams({ "idProdotto": idProdotto }).toString()
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            document.getElementById(`article-${idProdotto}`).remove();
-            aggiornaSubtotale();
-        } else {
-            alert("Errore nella rimozione del prodotto: " + data.message);
-        }
-    })
-    .catch(error => console.error("Errore:", error));
-}
-
 /**
  * Aggiorna il subtotale e il totale nel DOM.
  */
 function aggiornaSubtotale() {
-    fetch("ajax/carrello/calcolaSubtotale.php")
+    fetch("ajax/carrello/api-subtotale.php")
         .then(response => response.json())
         .then(data => {
             if (data.success) {
@@ -76,12 +58,11 @@ function aggiornaSubtotale() {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-    // Listener per lo svuotamento del carrello
     const svuotaCarrelloBtn = document.getElementById("svuotaCarrelloBtn");
     if (svuotaCarrelloBtn) {
         svuotaCarrelloBtn.addEventListener("click", function() {
             if (confirm("Sei sicuro di voler svuotare il carrello?")) {
-                fetch('ajax/carrello/svuotaCarrello.php', {
+                fetch('ajax/carrello/api-svuota_carrello.php', {
                     method: 'POST'
                 })
                 .then(response => response.json())
@@ -124,3 +105,30 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    caricaPuntiUtente();
+});
+
+function caricaPuntiUtente() {
+    fetch('ajax/carrello/api-get_punti.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                let puntiAccumulati = data.punti;
+                let sconto = puntiAccumulati / 100;
+
+                document.getElementById("puntiAccumulati").textContent = puntiAccumulati;
+                document.getElementById("scontoPunti").textContent = "€" + sconto.toFixed(2);
+
+                let subtotale = parseFloat(document.getElementById("subtotale").dataset.value);
+                let totale = subtotale - sconto;
+                if (totale < 0) totale = 0;
+
+                document.getElementById("totale").textContent = "€" + totale.toFixed(2);
+            } else {
+                console.error("Errore nel recupero punti:", data.error);
+            }
+        })
+        .catch(error => console.error("Errore nella richiesta AJAX:", error));
+}

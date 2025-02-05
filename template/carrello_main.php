@@ -91,32 +91,3 @@ $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
     </section>
 </div>
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    caricaPuntiUtente();
-});
-
-function caricaPuntiUtente() {
-    fetch('ajax/carrello/api-get_punti.php')
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                let puntiAccumulati = data.punti;
-                let sconto = puntiAccumulati / 100;
-
-                document.getElementById("puntiAccumulati").textContent = puntiAccumulati;
-                document.getElementById("scontoPunti").textContent = "€" + sconto.toFixed(2);
-
-                let subtotale = parseFloat(document.getElementById("subtotale").dataset.value);
-                let totale = subtotale - sconto;
-                if (totale < 0) totale = 0;
-
-                document.getElementById("totale").textContent = "€" + totale.toFixed(2);
-            } else {
-                console.error("Errore nel recupero punti:", data.error);
-            }
-        })
-        .catch(error => console.error("Errore nella richiesta AJAX:", error));
-}
-</script>
-
