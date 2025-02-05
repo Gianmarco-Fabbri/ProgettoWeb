@@ -28,7 +28,7 @@
                 <div class="p-5 border border-success bg-light rounded text-center shadow-lg">
                     <h2 class="text-success">Recensioni</h2>
                     <p>Visualizza i feedback dei clienti sui tuoi prodotti.</p>
-                    <a href="../html/recensioni_venditore.php" class="btn btn-success">Vai</a>
+                    <a href="venditoreRecensioni.php" class="btn btn-success">Vai</a>
                 </div>
             </div>
         </div>
