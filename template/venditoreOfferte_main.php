@@ -1,18 +1,16 @@
  <!-- Main -->
- <main class="container my-5 flex-grow-1">
+ <div class="container my-5 flex-grow-1">
         <h1 class="text-success text-center mb-4">Gestione Offerte</h1>
 
         <!-- Form per aggiungere un prodotto in offerta -->
         <div class="card p-4 mb-4 shadow-sm">
-            <h3 class="text-success mb-3">Aggiungi un prodotto in offerta</h3>
+            <h3 class="text-success mb-3">Metti in saldo un prodotto!</h3>
             <form>
                 <div class="mb-3">
                     <label for="productSelect" class="form-label">Seleziona il Prodotto</label>
                     <select class="form-select">
                         <option selected>Seleziona un prodotto</option>
-                        <option value="1">Nome Prodotto 1</option>
-                        <option value="2">Nome Prodotto 2</option>
-                        <option value="3">Nome Prodotto 3</option>
+                        <!-- METTERE TUTTI PRODOTTI ??? -->
                     </select>
                 </div>
                 <div class="mb-3">
@@ -61,4 +59,4 @@
                 </tbody>
             </table>
         </div>
-    </main>
+</div>
