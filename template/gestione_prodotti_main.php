@@ -45,7 +45,6 @@
         </div>
 
         <!-- Lista Prodotti -->
-        <!-- Lista Prodotti -->
 <div class="card p-4 shadow-sm">
     <h3 class="text-success mb-3">Prodotti in catalogo</h3>
 

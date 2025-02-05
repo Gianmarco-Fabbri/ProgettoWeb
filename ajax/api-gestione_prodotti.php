@@ -16,8 +16,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $prezzo = $_POST["prezzo"];
         $categoria = $_POST["categoria"];
         $dataAggiunta = date("Y-m-d"); // Data automatica
-        $numeroRecensioni = 0; // Sempre 0
-        $inOfferta = 0; // Sempre 0
+        $numeroRecensioni = 0; // Inizialmente a 0
+        $inOfferta = 0; // Inizialmente a 0
 
         // Generazione codice prodotto univoco
         $codiceProdotto = generaCodiceProdotto($dbh);
