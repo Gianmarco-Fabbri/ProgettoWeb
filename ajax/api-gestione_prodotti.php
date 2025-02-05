@@ -23,13 +23,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $codiceProdotto = generaCodiceProdotto($dbh);
 
         // Gestione immagine (se presente)
-        $immaginePath = null;
-        if (isset($_FILES["immagine"]) && $_FILES["immagine"]["error"] == 0) {
-            $uploadDir = "../img/";
-            $immagineNome = basename($_FILES["immagine"]["name"]);
+        $immaginePath = "img/default.png"; // Immagine di default se non viene caricata
+        if (isset($_FILES["img"]) && $_FILES["img"]["error"] == 0) {
+            $uploadDir = "";
+            $immagineNome = basename($_FILES["img"]["name"]);
             $immaginePath = $uploadDir . $immagineNome;
-            move_uploaded_file($_FILES["immagine"]["tmp_name"], $immaginePath);
+            move_uploaded_file($_FILES["img"]["tmp_name"], $immaginePath);
         }
+
 
         // Inserimento nel database
         $result = $dbh->aggiungiProdotto($codiceProdotto, $nome, $descrizione, $prezzo, $dataAggiunta, $numeroRecensioni, $categoria, $inOfferta, $immaginePath);
