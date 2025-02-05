@@ -676,5 +676,36 @@ class DatabaseHelper {
         $stmt->bind_param('s',$email);
         return $stmt->execute();
     }
+
+    public function aggiungiProdotto($codiceProdotto, $nome, $descrizione, $prezzo, $dataAggiunta, $numeroRecensioni, $categoria, $inOfferta, $immaginePath) {
+        $stmt = $this->db->prepare("
+            INSERT INTO prodotto (codiceProdotto, nome, descrizione, prezzo, dataAggiunta, numeroRecensioni, categoria, inOfferta, img)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ");
+        
+        $stmt->bind_param('sssdsssis', $codiceProdotto, $nome, $descrizione, $prezzo, $dataAggiunta, $numeroRecensioni, $categoria, $inOfferta, $immaginePath);
+        return $stmt->execute();
+    }
+
+    // Funzione per eliminare un prodotto dal database
+    public function eliminaProdotto($codiceProdotto) {
+        $stmt = $this->db->prepare("DELETE FROM prodotto WHERE codiceProdotto = ?");
+        $stmt->bind_param('s', $codiceProdotto);
+        return $stmt->execute();
+    }
+
+    // Funzione per ottenere la lista dei prodotti
+    public function getProdotti() {
+        $result = $this->db->query("SELECT * FROM prodotto");
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    // Funzione per verificare se un codice prodotto esiste già
+    public function verificaCodiceProdotto($codiceProdotto) {
+        $stmt = $this->db->prepare("SELECT codiceProdotto FROM prodotto WHERE codiceProdotto = ?");
+        $stmt->bind_param('s', $codiceProdotto);
+        $stmt->execute();
+        return $stmt->get_result()->num_rows > 0;
+    }
 }   
 ?>
