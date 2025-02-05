@@ -544,23 +544,24 @@ class DatabaseHelper {
         $result = $stmt->get_result();  
         return $result->fetch_all(MYSQLI_ASSOC);
     }
-    // public function getOrdiniVenditore($venditoreEmail) {
-    //     $stmt = $this->db->prepare("
-    //         SELECT o.codiceOrdine, o.dataOrdine, o.dataSpedizione, o.dataArrivo, o.tipoPagamento, o.emailCliente, o.statoOrdine, 
-    //            p.nome AS nomeProdotto, co.quantita
-    //         FROM ordine o
-    //         JOIN composizione_ordine co ON o.codiceOrdine = co.codiceOrdine
-    //         JOIN prodotto p ON co.codiceProdotto = p.codiceProdotto
-    //         JOIN venditore v ON v.codiceProdotto = p.codiceProdotto
-    //         WHERE v.email = ?
-    //         ORDER BY o.dataOrdine DESC
-    //     ");
     
-    //     $stmt->bind_param('s', $venditoreEmail);
-    //     $stmt->execute();
-    //     $result = $stmt->get_result();    
-    //     return $result->fetch_all(MYSQLI_ASSOC);
-    // }
+    public function aggiornaStatoOrdineVenditore($codiceOrdine, $statoOrdine) {
+        $stmt = $this->db->prepare("UPDATE ordine SET statoOrdine = ? WHERE codiceOrdine = ?");    
+         
+        if (!$stmt) {
+            error_log("Errore nella preparazione della query: " . $this->db->error);
+            return false;
+        }
+
+        $stmt->bind_param("ss", $statoOrdine, $codiceOrdine);
+        $stmt->execute();   
+        $success = $stmt->execute();
+        if (!$success) {
+            error_log("Errore nell'esecuzione della query: " . $stmt->error);
+        }
+        return $success;
+    }
+    
     
     public function buyOrderByCliente($email, $tipoPagamento, $dataArrivo) {
         $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
@@ -667,7 +668,7 @@ class DatabaseHelper {
 
     public function getProductsInOrdine($idOrdine) {
         $stmt = $this->db->prepare("
-            SELECT p.codiceProdotto, p.nome, p.prezzo, co.quantita 
+            SELECT p.codiceProdotto, p.nome, p.prezzo, p.img, co.quantita 
             FROM composizione_ordine co
             JOIN prodotto p ON co.codiceProdotto = p.codiceProdotto
             WHERE co.codiceOrdine = ?

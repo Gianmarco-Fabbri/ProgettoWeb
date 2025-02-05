@@ -15,6 +15,10 @@ if (!isset($_SESSION['email'])) {
 
 try {
     $ordini = $dbh->getOrdini();
+    foreach ($ordini as &$ordine) {
+        // Recupera i prodotti associati a ciascun ordine
+        $ordine["prodotti"] = $dbh->getProductsInOrdine($ordine["codiceOrdine"]);
+    }
     echo json_encode($ordini);
 } catch (Exception $e) {
     error_log('Errore nel recupero degli ordini: ' . $e->getMessage());
