@@ -11,14 +11,9 @@
                 <?php 
                 if (isset($templateParams["venditore"])) {
                     echo "Venditore";
-                } 
-                elseif (isset($templateParams["cliente"]) && is_array($templateParams["cliente"])) {
-                    // Se esiste e non è null, stampo il nome (o un fallback se manca)
-                    echo isset($templateParams["cliente"]["nome"]) 
-                         ? $templateParams["cliente"]["nome"] 
-                         : "Utente";
-                } 
-                else {
+                } elseif (isset($templateParams["cliente"])) {
+                    echo $templateParams["cliente"]["nome"];
+                } else {
                     echo "Utente";
                 }
                 ?>!
@@ -30,46 +25,34 @@
                 <?php if (isset($templateParams["venditore"])): ?>
                     <!-- Dati del Venditore -->
                     <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" id="email" class="form-control" 
-                               value="<?php echo $templateParams["venditore"]["email"]; ?>" readonly>
+                       h2label for="email" class="form-label">Email</label>
+                        <input type="email" id="email" class="form-control" value="<?php echo $templateParams["venditore"]["email"]; ?>" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="telefono" class="form-label">Telefono</label>
-                        <input type="text" id="telefono" class="form-control" 
-                               value="<?php echo $templateParams["venditore"]["telefono"]; ?>" readonly>
+                        <input type="text" id="telefono" class="form-control" value="<?php echo $templateParams["venditore"]["telefono"]; ?>" readonly>
                     </div>
-
-                <?php elseif (isset($templateParams["cliente"]) && is_array($templateParams["cliente"])): ?>
+                <?php elseif (isset($templateParams["cliente"])): ?>
                     <!-- Dati del Cliente -->
                     <div class="mb-3">
                         <label for="nome" class="form-label">Nome</label>
-                        <input type="text" id="nome" class="form-control" 
-                               value="<?php echo $templateParams["cliente"]["nome"] ?? ''; ?>" 
-                               readonly>
+                        <input type="text" id="nome" class="form-control" value="<?php echo $templateParams["cliente"]["nome"]; ?>" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="cognome" class="form-label">Cognome</label>
-                        <input type="text" id="cognome" class="form-control" 
-                               value="<?php echo $templateParams["cliente"]["cognome"] ?? ''; ?>" 
-                               readonly>
+                        <input type="text" id="cognome" class="form-control" value="<?php echo $templateParams["cliente"]["cognome"]; ?>" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" id="email" class="form-control" 
-                               value="<?php echo $templateParams["cliente"]["email"] ?? ''; ?>" 
-                               readonly>
+                        <input type="email" id="email" class="form-control" value="<?php echo $templateParams["cliente"]["email"]; ?>" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="telefono" class="form-label">Telefono</label>
-                        <input type="text" id="telefono" class="form-control" 
-                               value="<?php echo $templateParams["cliente"]["telefono"] ?? ''; ?>" 
-                               readonly>
+                        <input type="text" id="telefono" class="form-control" value="<?php echo $templateParams["cliente"]["telefono"]; ?>" readonly>
                     </div>
                 <?php else: ?>
                     <p class="text-danger">Errore: dati utente non disponibili.</p>
                 <?php endif; ?>
-
                 <?php if (isset($templateParams["cliente"]) && $_SESSION["user_type"] === "cliente"): ?>
                     <button type="button" class="btn btn-light border" data-bs-toggle="modal" data-bs-target="#modificaProfiloModal">Modifica Profilo</button>
                 <?php endif; ?>
@@ -85,11 +68,11 @@
         </section>
 
         <aside class="col-lg-5">
-            <?php if (isset($templateParams["cliente"]) && is_array($templateParams["cliente"])): ?>
+            <?php if (isset($templateParams["cliente"])): ?>
                 <!-- Sezione Punti Accumulati -->
                 <div class="border rounded p-3 mb-4 mt-5">
                     <h3>Punti accumulati</h3>
-                    <p>Punti totali: <?php echo $templateParams["puntiAccumulati"] ?? '0'; ?></p>
+                    <p>Punti totali: <?php echo isset($templateParams["puntiAccumulati"]) ? $templateParams["puntiAccumulati"] : '0'; ?></p>
                     <a href="carrello.php" class="btn btn-success">Vai al carrello per utilizzare i punti</a>
                 </div>
 
@@ -100,7 +83,7 @@
                         <?php foreach ($templateParams["recensioni"] as $recensione): ?>
                             <div class="card mb-3 shadow-sm">
                                 <div class="card-body">
-                                    <h5 class="card-title">⭐ <?php echo $recensione["stelle"]; ?>/5</h5>
+                                    <h4 class="card-title">⭐ <?php echo $recensione["stelle"]; ?>/5</h4>
                                     <p class="card-text">"<?php echo $recensione["testoRecensione"]; ?>"</p>
                                 </div>
                             </div>
@@ -126,18 +109,15 @@
                 <form id="modificaProfiloForm">
                     <div class="mb-3">
                         <label for="editNome" class="form-label">Nome</label>
-                        <input type="text" class="form-control" id="editNome" 
-                               value="<?php echo $templateParams["cliente"]["nome"] ?? ''; ?>">
+                        <input type="text" class="form-control" id="editNome" value="<?php echo $templateParams["cliente"]['nome']; ?>">
                     </div>
                     <div class="mb-3">
                         <label for="editCognome" class="form-label">Cognome</label>
-                        <input type="text" class="form-control" id="editCognome" 
-                               value="<?php echo $templateParams["cliente"]["cognome"] ?? ''; ?>">
+                        <input type="text" class="form-control" id="editCognome" value="<?php echo $templateParams["cliente"]['cognome']; ?>">
                     </div>
                     <div class="mb-3">
                         <label for="editTelefono" class="form-label">Telefono</label>
-                        <input type="text" class="form-control" id="editTelefono" 
-                               value="<?php echo $templateParams["cliente"]["telefono"] ?? ''; ?>">
+                        <input type="text" class="form-control" id="editTelefono" value="<?php echo $templateParams["cliente"]['telefono']; ?>">
                     </div>
                 </form>
             </div>
@@ -167,8 +147,8 @@
                         <label for="passwordAttuale" class="form-label">Password Attuale</label>
                         <div class="input-group">
                             <input type="password" class="form-control" id="passwordAttuale" name="passwordAttuale" required>
-                            <button class="btn btn-outline-secondary d-flex align-items-center px-3" 
-                                    type="button" onclick="toggleVisibility('passwordAttuale', 'togglePasswordAttuale')">
+                            <button class="btn btn-outline-secondary d-flex align-items-center px-3" type="button" 
+                                    onclick="toggleVisibility('passwordAttuale', 'togglePasswordAttuale')">
                                 <img src="img/eye_close.png" id="togglePasswordAttuale" alt="Mostra/Nascondi Password" width="20">
                             </button>
                         </div>
@@ -179,8 +159,8 @@
                         <label for="nuovaPassword" class="form-label">Nuova Password</label>
                         <div class="input-group">
                             <input type="password" class="form-control" id="nuovaPassword" name="nuovaPassword" required>
-                            <button class="btn btn-outline-secondary d-flex align-items-center px-3" 
-                                    type="button" onclick="toggleVisibility('nuovaPassword', 'togglePasswordNuova')">
+                            <button class="btn btn-outline-secondary d-flex align-items-center px-3" type="button" 
+                                    onclick="toggleVisibility('nuovaPassword', 'togglePasswordNuova')">
                                 <img src="img/eye_close.png" id="togglePasswordNuova" alt="Mostra/Nascondi Password" width="20">
                             </button>
                         </div>
@@ -191,8 +171,8 @@
                         <label for="confermaNuovaPassword" class="form-label">Conferma Nuova Password</label>
                         <div class="input-group">
                             <input type="password" class="form-control" id="confermaNuovaPassword" name="confermaNuovaPassword" required>
-                            <button class="btn btn-outline-secondary d-flex align-items-center px-3" 
-                                    type="button" onclick="toggleVisibility('confermaNuovaPassword', 'togglePasswordConferma')">
+                            <button class="btn btn-outline-secondary d-flex align-items-center px-3" type="button" 
+                                    onclick="toggleVisibility('confermaNuovaPassword', 'togglePasswordConferma')">
                                 <img src="img/eye_close.png" id="togglePasswordConferma" alt="Mostra/Nascondi Password" width="20">
                             </button>
                         </div>
