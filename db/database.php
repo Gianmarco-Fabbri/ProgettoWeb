@@ -606,8 +606,8 @@ class DatabaseHelper {
             $this->db->begin_transaction();
 
             $stmt = $this->db->prepare("
-                INSERT INTO ordine (codiceOrdine, dataOrdine, dataSpedizione, dataArrivo, tipoPagamento, emailCliente)
-                VALUES (?, NOW(), NOW(), ?, ?, ?)
+                INSERT INTO ordine (codiceOrdine, dataOrdine, dataSpedizione, dataArrivo, tipoPagamento, emailCliente, statoOrdine)
+                VALUES (?, NOW(), NOW(), ?, ?, ?, 1)
             ");
             $stmt->bind_param("ssss", $idOrdine, $dataArrivo, $tipoPagamento, $email);
             $stmt->execute();
