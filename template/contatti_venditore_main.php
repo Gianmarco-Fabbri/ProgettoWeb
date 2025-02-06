@@ -24,7 +24,7 @@
                     </li>
                     <li class="list-group-item border-0 bg-transparent">
                         <h3 class="text-dark fw-semibold d-flex align-items-center">
-                            <img src="../img/instagram.png" alt="Instagram logo" width="24" height="24" class="me-2"> 
+                            <img src="img/instagram.png" alt="Instagram logo" width="24" height="24" class="me-2"> 
                             Instagram:
                         </h3>                            
                         Seguici su <a href="https://www.instagram.com/benessere_market" 
