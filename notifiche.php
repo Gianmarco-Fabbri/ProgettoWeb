@@ -6,5 +6,5 @@ $templateParams["nome"] = "template/notifiche_main.php";
 $templateParams["js"] = ["js/notifiche.js"];
 $templateParams["navs"] = [["link" => "notifiche.php", "name" => "Notifiche"]];
 
-require 'template/base.php';
+require $_SESSION["user_type"] == "venditore" ? 'template/base_venditore.php' : 'template/base.php';
 ?>
