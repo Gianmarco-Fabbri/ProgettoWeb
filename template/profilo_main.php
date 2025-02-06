@@ -25,7 +25,7 @@
                 <?php if (isset($templateParams["venditore"])): ?>
                     <!-- Dati del Venditore -->
                     <div class="mb-3">
-                       h2label for="email" class="form-label">Email</label>
+                        <label for="email" class="form-label">Email</label>
                         <input type="email" id="email" class="form-control" value="<?php echo $templateParams["venditore"]["email"]; ?>" readonly>
                     </div>
                     <div class="mb-3">
