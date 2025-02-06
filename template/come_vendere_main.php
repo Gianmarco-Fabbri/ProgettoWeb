@@ -1,6 +1,6 @@
 <div class="container my-5">
     <section class="bg-white p-4 rounded shadow-sm border">
-        <h1 class="fw-bold text-success text-center">Come acquistare</h1>
+        <h1 class="fw-bold text-success text-center">Come vendere</h1>
         
         <p class="text-center fs-5 text-dark">
             Per vendere un prodotto su Benessere Market, segui questi semplici passaggi:
@@ -8,7 +8,7 @@
 
         <ol class="list-group list-group-flush">
             <li class="list-group-item text-dark">
-                1. <strong>Accedi</strong> e clicca su <strong>Gestione prodottiGestione></strong>.
+                1. <strong>Accedi</strong> e clicca su <strong>Gestione prodotti</strong>.
             </li>
             <li class="list-group-item text-dark">
                 2. Inserisci i <strong>dettagli</strong> del prodotto che desideri aggiungere.
