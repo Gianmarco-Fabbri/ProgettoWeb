@@ -51,7 +51,6 @@ class DatabaseHelper {
                                            scontoProdotto 
                                     FROM PRODOTTO 
                                     WHERE inOfferta = 1 
-                                    AND img NOT LIKE '%novità%' 
                                     LIMIT ?");
         
         $stmt->bind_param('i', $n);
