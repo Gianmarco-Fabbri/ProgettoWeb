@@ -46,9 +46,9 @@
                 <div class="col-md-4">
                     <h5 class="text-success">Benessere Market</h5>
                     <ul class="list-unstyled">
-                        <li><a href="chi_siamo.php" class="text-success text-decoration-none">Chi siamo</a></li>
-                        <li><a href="contatti.php" class="text-success text-decoration-none">Contatti</a></li>
-                        <li><a href="brand.php" class="text-success text-decoration-none">Brand</a></li>
+                        <li><a href="chi_siamo_venditore.php" class="text-success text-decoration-none">Chi siamo</a></li>
+                        <li><a href="contatti_venditore.php" class="text-success text-decoration-none">Contatti</a></li>
+                        <li><a href="brand_venditore.php" class="text-success text-decoration-none">Brand</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4">
@@ -63,8 +63,8 @@
                     <h5 class="text-success">Informazioni</h5>
                     <ul class="list-unstyled">
                         <li><a href="come_vendere.php" class="text-success text-decoration-none">Come vendere</a></li>
-                        <li><a href="privacy_policy.php" class="text-success text-decoration-none">Privacy Policy</a></li>
-                        <li><a href="cookie_policy.php" class="text-success text-decoration-none">Cookie Policy</a></li>
+                        <li><a href="privacy_policy_venditore.php" class="text-success text-decoration-none">Privacy Policy</a></li>
+                        <li><a href="cookie_policy_venditore.php" class="text-success text-decoration-none">Cookie Policy</a></li>
                     </ul>
                 </div>
             </div>
