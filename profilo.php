@@ -14,7 +14,11 @@ if (!array_key_exists("user_type", $_SESSION)) {
 }
 
 if ($_SESSION["user_type"] === "cliente") {
-    $templateParams["js"] = ["js/modificaProfilo.js"];
+    $templateParams["js"] = ["js/logout.js", 
+                             "js/profilo.js", 
+                             "js/eliminaAccount.js",
+                             "js/modificaPassword.js",
+                             "js/modificaProfilo.js"];
 }
 
 if (isset($_SESSION['email'])) {

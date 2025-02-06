@@ -3,9 +3,9 @@ require_once '../../bootstrap.php';
 
 header("Content-Type: application/json; charset=UTF-8");
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+// if (session_status() === PHP_SESSION_NONE) {
+//     session_start();
+// }
 
 // Verifica se l'utente è loggato
 if (!isset($_SESSION["email"])) {
