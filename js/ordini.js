@@ -52,6 +52,7 @@ document.addEventListener("DOMContentLoaded", function() {
                                                 <li>Arrivo: ${order[3]}</li>
                                             </ul>
                                         </div>
+                                        
                                     </div>
                                 </div>
                                 <div class="card-footer bg-transparent border-success">

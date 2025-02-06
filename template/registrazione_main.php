@@ -66,26 +66,6 @@
             <div id="message-box" class="alert d-none"></div>
             </div>
         </section>
-        <aside class="col-lg-6 col-md-8 d-flex">
-            <div class="card p-4 shadow-sm border-0 bg-light w-100 h-100 text-center">
-                <div class="mb-3">
-                    <img src="img/newsletter.png" alt="Icona Newsletter" class="img-fluid" width="80">
-                    <h2 class="text-success fw-bold mt-2">Iscriviti alla Newsletter</h2>
-                </div>
-                <p class="text-dark">
-                    Rimani aggiornato sulle ultime offerte e prodotti per la tua routine di benessere.
-                </p>
-                <div class="d-flex align-items-center justify-content-center gap-2 mb-3">
-                    <input type="checkbox" id="newsletter" name="newsletter">
-                    <label for="newsletter" class="text-dark">Ricevi novità sui prodotti</label>
-                </div>
-                <h3 class="text-success fw-bold">Vantaggi di essere registrati:</h3>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item border-0">✓ Tracking degli ordini</li>
-                    <li class="list-group-item border-0">✓ Scrivere recensioni</li>
-                    <li class="list-group-item border-0">✓ Accumulo punti fedeltà</li>
-                </ul>
-            </div>
-        </aside>
+        
     </div>
 </div>
