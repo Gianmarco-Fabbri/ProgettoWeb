@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     notificaElement.innerHTML = `
                         <div class="d-flex justify-content-between align-items-start">
                             <div class="ms-2 me-auto">
-                                <div class="fw-bold">${notifica.tipo.replace(/_/g, ' ')}</div>
+                                <div class="fw-bold"><h2> ${notifica.tipo.replace(/_/g, ' ')} </h2></div>
                                 ${notifica.messaggio}
                                 <div class="text-muted mt-1 small">
                                     ${new Date(notifica.data_notifica).toLocaleDateString('it-IT', {

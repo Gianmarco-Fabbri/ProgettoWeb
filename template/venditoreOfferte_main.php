@@ -6,7 +6,7 @@
     <div class="row justify-content-center">
         <div class="col-lg-6 col-md-8 col-sm-12">
             <div class="card p-4 mb-4 shadow-sm">
-                <h3 class="text-success mb-3">Metti in saldo un prodotto!</h3>
+                <h2 class="text-success mb-3">Metti in saldo un prodotto!</h2>
                 <form id="addOfferForm">
                     <div class="mb-3">
                         <label for="productSelect" class="form-label">Seleziona il Prodotto</label>
@@ -26,7 +26,7 @@
 
     <!-- Lista Prodotti in Offerta -->
     <div class="card p-4 shadow-sm">
-        <h3 class="text-success mb-3">Prodotti in Offerta</h3>
+        <h2 class="text-success mb-3">Prodotti in Offerta</h2>
         <table class="table">
             <thead class="table-success d-none d-md-table-header">
                 <tr>
