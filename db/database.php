@@ -207,6 +207,38 @@ class DatabaseHelper {
         return $stmt->execute(); 
     }
 
+    /* MODIFICA PASSWORD VENDITORE */
+    public function updatePasswordVenditore($email, $passwordAttuale, $nuovaPassword) {
+        // Recupera l'hash della password dal database
+        $stmt = $this->db->prepare("SELECT password FROM venditore WHERE email = ?");
+        $stmt->bind_param('s', $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $user = $result->fetch_assoc();
+    
+        // Se l'utente non esiste, ritorna false
+        if (!$user || !isset($user['password'])) {
+            return false;
+        }
+    
+        $passwordSalvata = $user['password'];
+        $passwordAttualeHashata = hash("sha256", $passwordAttuale);
+    
+        // Se la password attuale è sbagliata, ritorna false
+        if ($passwordAttualeHashata !== $passwordSalvata) {
+            return false;
+        }
+    
+        // Genera il nuovo hash con SHA2
+        $nuovaPasswordHashata = hash("sha256", $nuovaPassword);
+    
+        // Prepara la query per aggiornare la password
+        $stmt = $this->db->prepare("UPDATE venditore SET password = ? WHERE email = ?");
+        $stmt->bind_param('ss', $nuovaPasswordHashata, $email);
+        
+        return $stmt->execute(); 
+    }
+
     /* ELIMINA ACCOUNT CLIENTE */
     public function eliminaAccountCliente($email) {
         $stmt = $this->db->prepare("DELETE FROM cliente WHERE email = ?");

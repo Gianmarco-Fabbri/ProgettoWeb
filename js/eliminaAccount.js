@@ -7,13 +7,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         fetch("ajax/profilo/api-eliminaAccount.php", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({})
-        })
-        fetch("ajax/profilo/api-eliminaAccount.php", {
-            method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({})
         })

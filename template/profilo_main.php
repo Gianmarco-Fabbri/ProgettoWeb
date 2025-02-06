@@ -56,13 +56,13 @@
                 <?php if (isset($templateParams["cliente"]) && $_SESSION["user_type"] === "cliente"): ?>
                     <button type="button" class="btn btn-light border" data-bs-toggle="modal" data-bs-target="#modificaProfiloModal">Modifica Profilo</button>
                 <?php endif; ?>
-
-                <!-- <button type="button" class="btn btn-light border" data-bs-toggle="modal" data-bs-target="#modificaProfiloModal">Modifica Profilo</button> -->
             </div>
 
             <div class="d-flex justify-content-end gap-3 mt-4">
                 <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modificaPasswordModal" style="background-color: #0a5738;color:#FFFFFF;">Cambia password</button>
-                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#eliminaAccountModal" style="background-color: #B00000;color:#FFFFFF;">Elimina account</button>
+                <?php if (isset($templateParams["cliente"]) && $_SESSION["user_type"] === "cliente"): ?> 
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#eliminaAccountModal" style="background-color: #B00000;color:#FFFFFF;">Elimina account</button>
+                <?php endif; ?>
                 <button type="button" class="btn btn-warning" id="logoutBtn">Logout</button>
             </div>
         </section>
@@ -97,14 +97,12 @@
     </div>
 </div>
 
-<!-- Modale: Modifica Profilo (Solo per i Clienti) -->
-<?php if (isset($templateParams["cliente"]) && ($_SESSION["user_type"] === "cliente")): ?>
+<!-- Modale: Modifica Profilo  -->
 <div class="modal fade" id="modificaProfiloModal" tabindex="-1" aria-labelledby="modificaProfiloModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title fs-5" id="modificaProfiloModalLabel">Modifica il tuo profilo</h4>
-                <!-- <h2 class="modal-title fs-5" id="modificaProfiloModalLabel">Modifica il tuo profilo</h2> -->
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -130,7 +128,6 @@
         </div>
     </div>
 </div>
-<?php endif; ?>
 
 <!-- Cambia Password -->
 <div class="modal fade" id="modificaPasswordModal" tabindex="-1" aria-labelledby="modificaPasswordLabel" aria-hidden="true">

@@ -1,13 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const modificaProfiloModal = document.getElementById("modificaProfiloModal");
-
-    if (!modificaProfiloModal) {
-        console.warn("Modifica Profilo Modal non trovato, interrompo l'esecuzione.");
-        return;
-    }
-    
-    fetchDatiProfilo();
-
+document.addEventListener("DOMContentLoaded", function() {    
     document.getElementById("salvaModificheBtn").addEventListener("click", function() {
         salvaModificheProfilo();
     });
