@@ -806,7 +806,7 @@ class DatabaseHelper {
 
     // Rimuove un prodotto dall'offerta
     public function rimuoviOfferta($productId) {
-        $stmt = $this->db->prepare("UPDATE prodotto SET inOfferta = 0, scontoProdotto = 0 WHERE codiceProdotto = ?");
+        $stmt = $this->db->prepare("UPDATE prodotto SET inOfferta = 0, scontoProdotto = NULL WHERE codiceProdotto = ?");
         $stmt->bind_param('s', $productId);
         $success = $stmt->execute();
         

@@ -29,10 +29,33 @@
             <h2 class="text-success">Prodotti</h2>
             <div class="row row-cols-2 row-cols-md-4 g-4">
                 <div class="col text-center">
-                    <a href="">  
-                        <img src="" alt="" class="img-fluid">
+                    <a href="product.php">  
+                        <img src="img/kit1.png" alt="Kit skin care" class="img-fluid">
                     </a>
-                    <p></p>
+                    <p>Kit skincare <br /> €19.99 (IVA inclusa)</p>
+                </div>
+                <div class="col text-center">
+                    <!-- riferimento alla pagina che gestisce il singolo prodotto -->
+                    <a href="product.php"> 
+                        <img src="img/kit2.png" alt="Kit dopobarba" class="img-fluid">
+                    </a>
+                    <p>Kit dopobarba<br /> €15.99 (IVA inclusa)</p>
+                </div>
+                <div class="col text-center">
+                    <!-- riferimento alla pagina che gestisce il singolo prodotto -->
+                    <a href="product.php">  
+                        <!-- immagine prodotto dinamico + modifica ALT -->
+                        <img src="img/kit3.png" alt="Kit balsami" class="img-fluid">
+                    </a>
+                    <p>Kit balsami <br /> €9.99 (IVA inclusa)</p>
+                </div>
+                <div class="col text-center">
+                    <!-- riferimento alla pagina che gestisce il singolo prodotto -->
+                    <a href="product.php">  
+                        <!-- immagine prodotto dinamico + modifica ALT -->
+                        <img src="img/kit4.png" alt="Kit maschere viso" class="img-fluid">
+                    </a>
+                    <p>Kit maschere viso<br /> €19.99 (IVA inclusa)</p>
                 </div>
             </div>
         </section>
