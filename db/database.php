@@ -818,7 +818,7 @@ class DatabaseHelper {
         $stmt = $this->db->prepare("UPDATE prodotto 
                                     SET nome = ?, descrizione = ?, prezzo = ?, categoria = ?, img = ? 
                                     WHERE codiceProdotto = ?");
-        $stmt->bind_param('ssdssi', $nome, $descrizione, $prezzo, $categoria, $immaginePath, $codiceProdotto);
+        $stmt->bind_param('ssdsss', $nome, $descrizione, $prezzo, $categoria, $immaginePath, $codiceProdotto);
         $stmt->execute();
         return $stmt->affected_rows > 0;
     }

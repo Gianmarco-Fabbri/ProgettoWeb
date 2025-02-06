@@ -52,6 +52,8 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+session_regenerate_id(true); // <-- RIGENERA L'ID
+
 $_SESSION['email'] = $utente['email'];
 $_SESSION['user_type']  = $tipoUtente;
 

@@ -48,6 +48,7 @@ try {
     $insertSuccess = $dbh->createCliente($firstName, $lastName, $username, $email, $hashedPassword, $phone, $cartCode);
     if ($insertSuccess) {
         $_SESSION['email'] = $email; // login automatico
+        $_SESSION['user_type'] = 'cliente';
         echo json_encode(['success' => true, 'message' => 'Registrazione completata con successo!']);
     } else {
         echo json_encode(['success' => false, 'message' => 'Errore durante la registrazione.']);

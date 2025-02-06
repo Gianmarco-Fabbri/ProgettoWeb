@@ -9,6 +9,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 // Controlla se la richiesta è di tipo POST
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $_SESSION = [];
     session_unset();
     session_destroy();
     echo json_encode(["message" => "Logout effettuato con successo"]);
