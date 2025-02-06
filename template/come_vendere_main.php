@@ -2,9 +2,9 @@
     <section class="bg-white p-4 rounded shadow-sm border">
         <h1 class="fw-bold text-success text-center">Come vendere</h1>
         
-        <p class="text-center fs-5 text-dark">
+        <h2 class="h3 text-center fs-5 text-dark">
             Per vendere un prodotto su Benessere Market, segui questi semplici passaggi:
-        </p>
+        </h2>
 
         <ol class="list-group list-group-flush">
             <li class="list-group-item text-dark">
