@@ -68,7 +68,7 @@
                 <tbody id="tabellaProdotti">
                     <tr>
                         <td>P23</td>
-                        <td><img src="../img/prodotto1.jpg" alt="Prodotto" width="50"></td>
+                        <td><img src="img/kit1.png" alt="Prodotto" width="50"></td>
                         <td>Nome Prodotto</td>
                         <td>Descrizione breve del prodotto</td>
                         <td>€19.99</td>
@@ -80,7 +80,7 @@
                     </tr>
                     <tr>
                         <td>P24</td>
-                        <td><img src="../img/prodotto2.jpg" alt="Prodotto" width="50"></td>
+                        <td><img src="img/kit2.png" alt="Prodotto" width="50"></td>
                         <td>Altro Prodotto</td>
                         <td>Descrizione breve del prodotto</td>
                         <td>€29.99</td>

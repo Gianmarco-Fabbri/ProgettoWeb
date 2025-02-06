@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                     <div class="alert alert-success" style="background-color: #f4fbf8; border-color: #0a5738;">
                         <h2 class="alert-heading" style="color: #0a5738;">Nessun ordine effettuato</h2>
                         <p style="color: #0a5738;">Inizia a fare acquisti nel nostro negozio!</p>
-                        <a href="index.php" class="btn btn-success" style="background-color: #0a5738; border-color: #0a5738;">
+                        <a href="venditore.php" class="btn btn-success" style="background-color: #0a5738; border-color: #0a5738;">
                             Ritorna alla Home
                         </a>
                     </div>
@@ -63,17 +63,6 @@ document.addEventListener("DOMContentLoaded", async function () {
                                         <option value="${statoOption}" ${ordine.statoOrdine === statoOption ? 'selected' : ''}>${statoOption}</option>
                                     `).join("")}
                                 </select>
-                            </div>
-                        </div>
-                        <div class="card-footer bg-transparent border-success">
-                            <div class="d-grid gap-2">
-                                <button class="btn btn-outline-success shadow-sm" type="button"
-                                        style="border-color: #0a5738; color: #0a5738;"
-                                        onmouseover="this.style.backgroundColor='#0a5738'; this.style.color='#f4fbf8';"
-                                        onmouseout="this.style.backgroundColor='transparent'; this.style.color='#0a5738';"
-                                        onclick="window.location.href='tracking.php?ordine=${ordine.codiceOrdine}'">
-                                    Traccia ordine
-                                </button>
                             </div>
                         </div>
                     </div>
