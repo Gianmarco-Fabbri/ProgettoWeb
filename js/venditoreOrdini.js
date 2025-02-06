@@ -78,11 +78,11 @@ document.addEventListener("DOMContentLoaded", async function () {
                 const statoStringa = this.value;
                 
                 const statiOrdineMap = {
-                    "Elaborazione Ordine": 0,
-                    "Partenza Magazzino": 1,
-                    "Transito Magazzino": 2,
-                    "In Consegna": 3,
-                    "Consegnato": 4
+                    "Elaborazione Ordine": 1,
+                    "Partenza Magazzino": 2,
+                    "Transito Magazzino": 3,
+                    "In Consegna": 4,
+                    "Consegnato": 5
                 };
 
                 const nuovoStato = statiOrdineMap[statoStringa];

@@ -26,7 +26,7 @@ $codiceOrdine = $data['codiceOrdine'];
 $statoOrdine = $data['statoOrdine'];
 
 try {
-    $ordine = $dbh->getDataOrdine($codiceOrdine);  
+    $ordine = $dbh->getDataOrdine($codiceOrdine);
     if (!$ordine) {
         throw new Exception("Ordine non trovato nel database.");
     }

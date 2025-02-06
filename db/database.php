@@ -574,7 +574,7 @@ class DatabaseHelper {
         $stmt->execute();   
         $result = $stmt->get_result();  
         return $result->fetch_all(MYSQLI_ASSOC);
-    }
+    } 
     
     public function aggiornaStatoOrdineVenditore($codiceOrdine, $statoOrdine) {
         $stmt = $this->db->prepare("UPDATE ordine SET statoOrdine = ? WHERE codiceOrdine = ?");    
