@@ -50,7 +50,7 @@ $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
             <div class="card p-3 shadow-sm sticky-top">
                 <p>Punti accumulati: <span id="puntiAccumulati">Caricamento...</span></p>
 
-                <h3 class="h5 mb-3">Riepilogo ordine</h3>
+                <h2 class="h5 mb-3">Riepilogo ordine</h2>
 
                 <?php if (!empty($cart)): ?>
                     <dl class="row small mb-3">
