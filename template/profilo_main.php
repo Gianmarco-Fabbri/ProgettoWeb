@@ -53,7 +53,11 @@
                 <?php else: ?>
                     <p class="text-danger">Errore: dati utente non disponibili.</p>
                 <?php endif; ?>
-                <button type="button" class="btn btn-light border" data-bs-toggle="modal" data-bs-target="#modificaProfiloModal">Modifica Profilo</button>
+                <?php if (isset($templateParams["cliente"]) && $_SESSION["user_type"] === "cliente"): ?>
+                    <button type="button" class="btn btn-light border" data-bs-toggle="modal" data-bs-target="#modificaProfiloModal">Modifica Profilo</button>
+                <?php endif; ?>
+
+                <!-- <button type="button" class="btn btn-light border" data-bs-toggle="modal" data-bs-target="#modificaProfiloModal">Modifica Profilo</button> -->
             </div>
 
             <div class="d-flex justify-content-end gap-3 mt-4">
@@ -94,7 +98,7 @@
 </div>
 
 <!-- Modale: Modifica Profilo (Solo per i Clienti) -->
-<?php if ($_SESSION["user_type"] === "cliente"): ?>
+<?php if (isset($templateParams["cliente"]) && ($_SESSION["user_type"] === "cliente")): ?>
 <div class="modal fade" id="modificaProfiloModal" tabindex="-1" aria-labelledby="modificaProfiloModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
