@@ -36,7 +36,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 
                 const ordini = ordiniData.ordini;
                 ordini.forEach(order => {
-                    let stato = (order[2]) ? "Spedito" : "In elaborazione";
                     
                     const cardHTML = `
                         <div class="col-12 col-md-6 col-lg-4">
@@ -52,14 +51,6 @@ document.addEventListener("DOMContentLoaded", function() {
                                                 <li>Spedizione: ${order[2]}</li>
                                                 <li>Arrivo: ${order[3]}</li>
                                             </ul>
-                                        </div>
-                                        <div class="col-12">
-                                            <hr>
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <span class="badge rounded-pill" style="background-color: #0a5738; color: #f4fbf8;">
-                                                    ${stato}
-                                                </span>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
