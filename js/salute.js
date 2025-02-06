@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     </a>
                     <p>${product.nome} <br> 
                         <strong>€${parseFloat(product.prezzo).toFixed(2)}</strong> (IVA inclusa)
-                        ${product.scontoProdotto ? `<br><span class="text-danger">Sconto: ${product.scontoProdotto}%</span>` : ""}
+                        ${product.scontoProdotto ? `<br><span class="text-danger">Sconto:€${product.scontoProdotto}</span>` : ""}
                     </p>
                 </div>
             `;
